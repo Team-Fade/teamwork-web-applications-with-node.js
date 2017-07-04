@@ -1,0 +1,33 @@
+{
+  "name": "teamwork-web-applications-with-node.js",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "gulp server",
+    "dev": "./node_modules/.bin/nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Fade/teamwork-web-applications-with-node.js.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Team-Fade/teamwork-web-applications-with-node.js/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
