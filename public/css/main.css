@@ -1,3 +1,57 @@
-h1 {
-    color: blue;
+html,
+body {
+    margin: 0;
+    padding: 0;    
+}
+
+#header {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#navbar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#logo h1 {
+    margin-top: 3%;
+    font-size: 5.5rem;
+    color: black;
+}
+
+#navbar-home {
+    background-color: #0F1626;
+}
+
+#navbar-about {
+    background-color: #AB987A;
+}
+
+#navbar-ranking {
+    background-color: #FF533D;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    padding: 0.85%;
+}
+
+ul li p {
+    color: #F5F5F5;
+    font-size: 23px;
+    text-decoration-style: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul li:hover {
+    opacity: 0.75;
 }
