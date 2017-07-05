@@ -1,15 +1,15 @@
 mixin nav
-    nav(class='container' id="navbar")
-        ul
-            a(href='/')        
-                li(class="col-md-3" id="navbar-home")
+    nav(class="col-md-9" id="navbar")
+        ul                    
+            li(class="col-md-4" id="navbar-home")
+                a(href='/')
                     p(class="text-center")
                         | Home
-            a(href='/about')                
-                li(class="col-md-3" id="navbar-about")                  
+            li(class="col-md-4" id="navbar-about")   
+                a(href='/about')
                     p(class="text-center")
-                        | About
-            a(href='/ranking')
-                li(class="col-md-3" id="navbar-ranking")
+                        | About           
+            li(class="col-md-4" id="navbar-ranking")
+                a(href='/ranking')
                     p(class="text-center")
                         | Ranking
