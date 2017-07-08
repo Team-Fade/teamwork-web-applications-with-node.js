@@ -6,8 +6,10 @@ const attach = (app) => {
 
     router
         .get('/', (res, req) => navigationController.getHomePage(res, req))
-        .get('/about', (res, req) => navigationController.getAboutUsPage(res, req))
-        .get('/ranking', (res, req) => navigationController.getRankingListPage(res, req));
+        .get('/about', (res, req) =>
+            navigationController.getAboutUsPage(res, req))
+        .get('/ranking', (res, req) =>
+            navigationController.getRankingListPage(res, req));
 
     app.use(router);
 };
