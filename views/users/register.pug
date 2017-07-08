@@ -2,20 +2,20 @@ extend ../common/_master
 
 block body
     link(rel='stylesheet', href='../../public/css/users/register.css', type='text/css' )
-    form(id='sign-in-form')
+    form(id='sign-in-form' action="/register" method="POST")
         div(class='form-group')
             label(for='username' class='col-2 col-form-label')
                 |Username
-            input(type='text' class='form-control' id='username' aria-describedby='usernameHelp' placeholder='Enter username')
+            input(name='username' type='text' class='form-control' id='username' aria-describedby='usernameHelp' placeholder='Enter username')
         div(class='form-group')
             label(for='email' class="col-2 col-form-label")
                 |Email
-            input(type='email' class='form-control' id='email' aria-describedby="emailHelp" placeholder="Enter email")
+            input(name='email' type='email' class='form-control' id='email' aria-describedby="emailHelp" placeholder="Enter email")
             small(id="emailHelp" class="form-text text-muted")
                 |We'll never share your email with anyone else
         div(class='form-group')
             label(for='password' class='col-2 col-form-label')
                 |Password
-            input(type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password')
+            input(name='password' type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password')
         button(type='sumbit' class='btn btn-danger' id='register-btn')
                 |Register
