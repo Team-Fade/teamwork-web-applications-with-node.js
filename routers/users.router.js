@@ -7,7 +7,7 @@ const attachUsers = (app) => {
      router
         .get('/signin', (res, req) => usersController.getSignInPage(res, req))
         .get('/register',
-            (res, req) => usersController.getSignInPage(res, req));
+            (res, req) => usersController.getRegisterPage(res, req));
     app.use(router);
 };
 

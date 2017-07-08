@@ -1,0 +1,15 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+#sign-in-form{
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    margin-left: 40%;
+    margin-top: 5%;
+} 
+#register-btn{
+    background-color: #FF533D;
+    margin-left: 25%;
+}

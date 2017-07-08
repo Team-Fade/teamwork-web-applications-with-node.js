@@ -1,0 +1,22 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+#sign-in-form{
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    margin-left: 40%;
+    margin-top: 5%;
+}
+#sign-in-btn{
+    margin-left: 5%;    
+    background-color: #0F1626;
+}
+#or-span{
+    margin-left: 5%;
+}
+#register-btn{
+    background-color: #FF533D;
+    margin-left: 5%;
+}
