@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
+const isAuthenticated = require('../utils/isAuthenticated');
+
 // Hashing password function
 
 const configureAuthentification = (app, { users }) => {
@@ -49,8 +51,12 @@ const configureAuthentification = (app, { users }) => {
     }));
 
     passport.serializeUser((user, done) => {
-        const id = user._id;
-        done(null, id);
+        const userInfo = {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+        };
+        done(null, userInfo);
     });
 
     passport.deserializeUser((id, done) => {
@@ -58,6 +64,8 @@ const configureAuthentification = (app, { users }) => {
             done(err, user);
         });
     });
+
+    app.use(isAuthenticated);
 };
 
 module.exports = configureAuthentification;
