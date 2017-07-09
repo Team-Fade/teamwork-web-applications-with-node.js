@@ -2,20 +2,20 @@ extend ../common/_master
 
 block body
     link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )
-    form(id='sign-in-form')
+    form(id='login-form' action='/login' method='POST')
         div(class='form-group')
             label(for='username' class='col-2 col-form-label')
                 |Username
-            input(type='text' class='form-control' id='username' aria-describedby='usernameHelp' placeholder='Enter username')
+            input(name='username' type='text' class='form-control' id='username' aria-describedby='usernameHelp' placeholder='Enter username')
         div(class='form-group')
             label(for='password' class='col-2 col-form-label')
                 |Password
-            input(type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password')
+            input(name='password' type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password')
         button(type='submit' class='btn btn-primary' id='sign-in-btn')
-            |Sign in
+            |Login
         span(id='or-span')
             |or
         button(type='sumbit' class='btn btn-danger' id='register-btn')
-                |Register
+            |Register
         
         
