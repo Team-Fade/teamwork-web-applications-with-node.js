@@ -13,3 +13,7 @@ html, body{
     background-color: #FF533D;
     margin-left: 25%;
 }
+#register-btn a {
+    color: white;
+    text-decoration: none
+}

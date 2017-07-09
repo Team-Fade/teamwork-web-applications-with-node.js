@@ -20,3 +20,7 @@ html, body{
     background-color: #FF533D;
     margin-left: 5%;
 }
+#register-btn a {
+    color: white;
+    text-decoration: none
+}
