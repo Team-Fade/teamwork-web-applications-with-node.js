@@ -1,7 +1,7 @@
 {
   "name": "teamwork-web-applications-with-node.js",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "start": "gulp server",
     "dev": "./node_modules/.bin/nodemon server.js"
@@ -18,7 +18,9 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
+    "browser-sync": "^2.18.12",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.3.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
     "express-messages": "^1.0.1",
