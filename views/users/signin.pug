@@ -2,7 +2,7 @@ extend ../common/_master
 
 block body
     link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )
-    form(id='sign-in-form')
+    form(id='sign-in-form' action="/sign-in" method="POST")
         div(class='form-group')
             label(for='username' class='col-2 col-form-label')
                 |Username
@@ -15,7 +15,8 @@ block body
             |Sign in
         span(id='or-span')
             |or
-        button(type='sumbit' class='btn btn-danger' id='register-btn')
-                |Register
+        button(class='btn btn-danger' id='register-btn')
+                a(href="/register")
+                    |Register
         
         
