@@ -8,8 +8,8 @@ const navigationController = {
     getRankingListPage(req, res) {
         return res.render('navigation/ranking');
     },
-    getSignInPage(req, res) {
-        return res.render('users/signin');
+    getLoginPage(req, res) {
+        return res.render('users/login');
     },
     getRegisterPage(req, res) {
         return res.render('users/register');

@@ -3,9 +3,12 @@ const attach = (app, router, data) => {
         require('../controllers/authentication.controller')(data);
 
     router
-        .post('/login', (res, req) => authController.login(res, req))
-        .post('/register', (res, req) => authController.register(res, req))
-        .post('/logout', (res, req) => authController.logout(res, req));
+        .post('/login', (req, res, next) =>
+            authController.login(req, res, next))
+        .post('/register', (res, req) =>
+            authController.register(res, req))
+        .get('/logout', (res, req) =>
+            authController.logout(res, req));
 
     app.use(router);
 };

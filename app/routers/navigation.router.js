@@ -8,8 +8,8 @@ const attach = (app, router, data) => {
         (res, req) => navigationController.getAboutUsPage(res, req))
         .get('/ranking',
         (res, req) => navigationController.getRankingListPage(res, req))
-        .get('/signin',
-        (res, req) => navigationController.getSignInPage(res, req))
+        .get('/login',
+        (res, req) => navigationController.getLoginPage(res, req))
         .get('/register',
         (res, req) => navigationController.getRegisterPage(res, req));
 
