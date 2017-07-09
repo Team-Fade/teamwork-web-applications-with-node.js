@@ -1,16 +1,20 @@
 const passport = require('passport');
+const userValidator = require('../../utils/validator').user;
 
 const authenticationController = (data) => {
     return {
         register(req, res) {
             const user = req.body;
 
-            // Validate
+            // Validate item
+            if (!userValidator(user)) {
+                res.redirect('/error');
+                return;
+            }
 
-            return data.users
-                .create(user)
+            data.users.create(user)
                 .then((dbItem) => {
-                    return res.redirect('/' + dbItem.id);
+                    return res.redirect('/');
                 })
                 .catch((err) => {
                     // connect-flash
