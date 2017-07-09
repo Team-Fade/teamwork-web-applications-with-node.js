@@ -5,23 +5,32 @@ const authenticationController = (data) => {
         register(req, res) {
             const user = req.body;
 
-            // Validate item
+            // Validate
 
-            return data.users.create(user)
+            return data.users
+                .create(user)
                 .then((dbItem) => {
                     return res.redirect('/' + dbItem.id);
                 })
                 .catch((err) => {
                     // connect-flash
                     req.flash('error', err);
-                    console.log(err);
                     return res.redirect('/error');
                 });
-            // passport.authenticate('local', {
-            //     successRedirect: '/',
-            //     failureRedirect: '/register',
-            //     failureFlash: true,
-            // });
+        },
+        login(req, res, next) {
+            const authenticate = passport.authenticate('local', {
+                successRedirect: '/',
+                failureRedirect: '/login',
+                failureFlash: true,
+            });
+
+            authenticate(req, res, next);
+        },
+        logout(req, res) {
+            req.session.destroy((err) => {
+                res.redirect('/');
+            });
         },
     };
 };
