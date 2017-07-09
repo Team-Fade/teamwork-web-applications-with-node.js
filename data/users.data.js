@@ -12,21 +12,29 @@ class UsersData extends BaseData {
     //     return super._isModelValid(model);
     // }
 
-    // checkPassword(username, password) {
-    //     this.collection
-    //         .findOne({
-    //             username,
-    //         })
-    //         .then((user) => {
-    //             if (!user) {
-    //                 throw new Error('Invalid user');
-    //             }
-    //             if (user.password !== password) {
-    //                 throw new Error('Invalid password');
-    //             }
+     validPassword(username, password) {
+        this.collection
+            .findOne({
+                username,
+            })
+            .then((user) => {
+                if (!user) {
+                    throw new Error('Invalid user');
+                }
+                if (user.password !== password) {
+                    throw new Error('Invalid password');
+                }
 
-    //             return true;
-    //         });
+                return true;
+            });
+    }
+
+    // validPassword(password) {
+    //     if (User.password !== password) {
+    //         throw new Error('Invalid password');
+    //     }
+
+    //     return true;
     // }
 }
 

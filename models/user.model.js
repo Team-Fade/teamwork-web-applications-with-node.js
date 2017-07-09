@@ -9,7 +9,6 @@ class User {
         const viewModel = new User();
         Object.keys(model)
             .forEach((property) => {
-                console.log(property);
                 viewModel[property] = model[property];
             });
 
