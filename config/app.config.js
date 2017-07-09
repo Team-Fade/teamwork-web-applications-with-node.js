@@ -4,11 +4,10 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const authentificationConfig = require('./auth.config');
+const configureAuthentification = require('./auth.config');
 
-const configureApp = (app) => {
-    authentificationConfig.configureAuthentification(app);
-
+const configureApp = (app, data) => {
+    configureAuthentification(app, data);
     app.set('view engine', 'pug');
 
     app.use(bodyParser.json());

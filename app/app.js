@@ -4,7 +4,7 @@ const { appConfig } = require('../config');
 const init = (data) => {
     const app = express();
 
-    appConfig.configureApp(app);
+    appConfig.configureApp(app, data);
 
     require('./routers')
         .attachRoutes(app, data);
