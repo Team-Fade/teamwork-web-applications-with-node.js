@@ -4,6 +4,30 @@ body {
     padding: 0;
 }
 
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    padding: 1.1%;
+}
+
+ul li a {
+    color: #F5F5F5;
+    font-size: 1.7rem;
+    text-decoration-style: none;
+    display: block;
+    height: 100%;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #F5F5F5;
+}
+
+li:hover {
+    opacity: 0.75;
+}
 
 #header {
     margin: 0;
@@ -43,28 +67,18 @@ body {
     background-color: #FF533D;
 }
 
-ul {
-    list-style-type: none;
+#navbar-logout {
+    background-color: gray;
 }
 
-ul li {
-    padding: 1.1%;
+#navbar-logout a {
+    font-size: 2.4rem;
 }
 
-ul li a {
-    color: #F5F5F5;
-    font-size: 1.7rem;
-    text-decoration-style: none;
-    display: block;
-    height: 100%;
+#navbar-profile {
+    background-color: darkgreen;    
 }
 
-a:hover {
-    text-decoration: none;
-    color: #F5F5F5;
+#navbar-profile a, #navbar-logout a{
+    color: white;    
 }
-
-li:hover {
-    opacity: 0.75;
-}
-
