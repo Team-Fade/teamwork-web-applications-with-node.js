@@ -26,10 +26,6 @@ class BaseData {
     }
 
     create(model) {
-        // if (!this._isModelValid(model)) {
-        //     return Promise.reject('Invalid model');
-        // }
-
         return this.collection.insert(model)
             .then(() => {
                 return this.modelClass.toViewModel(model);
@@ -39,10 +35,6 @@ class BaseData {
     _getCollectionName() {
         return this.modelClass.name.toLowerCase() + 's';
     }
-
-    // _isModelValid(model) {
-    //     return this.validator.isValid(model);
-    // }
 }
 
 module.exports = BaseData;

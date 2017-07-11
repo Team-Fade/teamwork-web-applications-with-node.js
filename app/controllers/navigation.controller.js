@@ -1,7 +1,7 @@
 const navigationController = {
     getHomePage(req, res) {
         return res.render('navigation/home', {
-            isAuthenticated: req.user,
+            isLogged: req.user,
         });
     },
     getAboutUsPage(req, res) {

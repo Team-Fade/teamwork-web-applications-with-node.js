@@ -1,13 +1,12 @@
 const passport = require('passport');
-const userValidator = require('../../utils/validator').user;
+const validator = require('../../utils/validator');
 
 const authenticationController = (data) => {
     return {
         register(req, res) {
             const user = req.body;
-
             // Validate item
-            if (!userValidator(user)) {
+            if (!validator.validateUser(user)) {
                 res.redirect('/error');
                 return;
             }

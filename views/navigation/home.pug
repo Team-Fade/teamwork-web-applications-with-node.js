@@ -5,7 +5,7 @@ block body
     div(id="home-nav")
         a(href="/browse-events" id="browse-events-btn")
             |Browse Events
-        unless isAuthenticated 
+        unless isLogged 
             a(href="/login" id="sign-in-btn")
                 |Sign In
     

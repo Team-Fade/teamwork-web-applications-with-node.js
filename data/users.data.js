@@ -6,16 +6,10 @@ class UsersData extends BaseData {
         super(db, User);
     }
 
-    // _isModelValid(model) {
-    //     // Custom validation
-
-    //     return super._isModelValid(model);
-    // }
-
-     validPassword(username, password) {
+     isValidPassword(username, password) {
         this.collection
             .findOne({
-                username,
+                'username': username,
             })
             .then((user) => {
                 if (!user) {
@@ -28,14 +22,6 @@ class UsersData extends BaseData {
                 return true;
             });
     }
-
-    // validPassword(password) {
-    //     if (User.password !== password) {
-    //         throw new Error('Invalid password');
-    //     }
-
-    //     return true;
-    // }
 }
 
 module.exports = UsersData;
