@@ -6,16 +6,26 @@ block body
         div(class='form-group')
             label(for='username' class='col-2 col-form-label')
                 |Username
-            input(name='username' type='text' class='form-control' id='username' aria-describedby='usernameHelp' placeholder='Enter username')
+            input(name='username' type='text' class='form-control' id='username' aria-describedby='usernameHelp' placeholder='Username' minlength="4" required)
+        div(class='form-group')
+            label(for='firstName' class='col-2 col-form-label')
+                |First name
+            input(name='firstName' type='text' class='form-control' id='firstName' aria-describedby='firstNameHelp' placeholder='First name' required)
+        div(class='form-group')
+            label(for='lastName' class='col-2 col-form-label')
+                |Last name
+            input(name='lastName' type='text' class='form-control' id='lastName' aria-describedby='lastNameHelp' placeholder='Last name' required)
+        div(class='form-group')
+            label(for='city' class='col-2 col-form-label')
+                |City
+            input(name='city' type='text' class='form-control' id='city' aria-describedby='cityHelp' placeholder='City' required)
         div(class='form-group')
             label(for='email' class="col-2 col-form-label")
                 |Email
-            input(name='email' type='email' class='form-control' id='email' aria-describedby="emailHelp" placeholder="Enter email")
-            small(id="emailHelp" class="form-text text-muted")
-                |We'll never share your email with anyone else
+            input(name='email' type='email' class='form-control' id='email' aria-describedby="emailHelp" placeholder="Enter email" required)
         div(class='form-group')
             label(for='password' class='col-2 col-form-label')
                 |Password
-            input(name='password' type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password')
+            input(name='password' type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password' minlength="6" required)
         button(type='sumbit' class='btn btn-danger' id='register-btn')
                 |Register

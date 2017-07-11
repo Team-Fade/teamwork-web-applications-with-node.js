@@ -54,6 +54,10 @@ const configureAuthentification = (app, { users }) => {
         const userInfo = {
             id: user._id,
             username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            city: user.city,
+            imageUrl: user.imageUrl ? user.imageUrl : 'https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png',
             email: user.email,
         };
         done(null, userInfo);
