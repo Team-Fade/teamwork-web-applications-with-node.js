@@ -1,9 +1,6 @@
 const navigationController = {
     getHomePage(req, res) {
-        return res.render('navigation/home', {
-            isAuthenticated: req.user,
-            username: req.user ? req.user.username : null,
-        });
+        return res.render('navigation/home');
     },
     getAboutUsPage(req, res) {
         return res.render('navigation/about');

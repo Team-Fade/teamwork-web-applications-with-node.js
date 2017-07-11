@@ -1,7 +1,7 @@
 const usersController = {
     getProfilePage: (req, res) => {
         return res.render('users/profile', {
-            user: req.user,
+            user: res.locals.user,
         });
     },
 };

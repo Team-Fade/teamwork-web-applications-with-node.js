@@ -1,4 +1,4 @@
-mixin nav
+mixin nav()
     nav(class="col-md-12" id="navbar")
         ul                    
             li(class="col-md-3" id="navbar-home")
@@ -13,11 +13,11 @@ mixin nav
                 a(href='/ranking')
                     p(class="text-center")
                         | Top Events
-            if isAuthenticated
+            if user
                 li(class="col-md-2" id="navbar-profile")
                     a(href='/user/profile')
                         p(class="text-center")
-                            =username
+                            =user.username
                 li(class="col-md-1 text-center" id="navbar-logout")
                     a(href='/logout')
                         span(class="glyphicon glyphicon-log-out" aria-hidden="true")
