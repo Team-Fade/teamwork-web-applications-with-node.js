@@ -4,9 +4,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
+const verifyHashedPassword = require('../utils/hashPassword').verifyHashedPassword;
 const isAuthenticated = require('../utils/isAuthenticated');
-
-// Hashing password function
 
 const configureAuthentification = (app, { users }) => {
     passport.use(new Strategy(
@@ -21,7 +20,10 @@ const configureAuthentification = (app, { users }) => {
                             { message: 'Incorrect username.' });
                     }
 
-                    if (user.password !== password) {
+                    if (!verifyHashedPassword(
+                        password,
+                        user.password['key'],
+                        user.password['passwordHash'])) {
                         return done(null, false,
                             { message: 'Incorrect password.' });
                     }

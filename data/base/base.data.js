@@ -1,3 +1,5 @@
+const generateHashedPassword = require('../../utils/hashPassword').generateHashedPassword
+
 class BaseData {
     constructor(db, modelClass, validator) {
         this.db = db;
@@ -5,6 +7,10 @@ class BaseData {
         this.validator = validator;
         this.collectionName = this._getCollectionName();
         this.collection = this.db.collection(this.collectionName);
+    }
+
+    _getCollectionName() {
+        return this.modelClass.name.toLowerCase() + 's';
     }
 
     getAll() {
@@ -26,14 +32,13 @@ class BaseData {
     }
 
     create(model) {
+        if (model.password !== null) {
+            model.password = generateHashedPassword(model.password);
+        }
         return this.collection.insert(model)
             .then(() => {
                 return this.modelClass.toViewModel(model);
             });
-    }
-
-    _getCollectionName() {
-        return this.modelClass.name.toLowerCase() + 's';
     }
 }
 
