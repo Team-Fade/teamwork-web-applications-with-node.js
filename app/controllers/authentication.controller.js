@@ -24,7 +24,7 @@ const authenticationController = (data) => {
         },
         login(req, res, next) {
             const authenticate = passport.authenticate('local', {
-                successRedirect: '/',
+                successRedirect: '/user/profile',
                 failureRedirect: '/login',
                 failureFlash: true,
             });

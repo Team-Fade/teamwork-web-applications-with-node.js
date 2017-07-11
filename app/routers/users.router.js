@@ -1,7 +1,11 @@
 const usersController = require('../controllers/users.controller');
 
 const attach = (app, router, data) => {
-    app.use(router);
+    router
+        .get('/profile',
+            (res, req) => usersController.getProfilePage(res, req))
+
+    app.use('/user', router);
 };
 
 module.exports = {
