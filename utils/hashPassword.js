@@ -6,33 +6,34 @@ const genRandomString = (length) => {
         .slice(0, length);
 };
 
-const sha512 = (password, key) => {
-    const hash = crypto.createHmac('sha512', key);
+const sha512 = (password, salt) => {
+    const hash = crypto.createHmac('sha512', salt);
     hash.update(password);
     const value = hash.digest('hex');
 
     return {
-        key: key,
+        salt: salt,
         passwordHash: value,
     };
 };
 
 const generateHashedPassword = (userPassword) => {
-    const key = genRandomString(16);
-    const passwordData = sha512(userPassword, key);
+    const salt = genRandomString(16);
+    const passwordData = sha512(userPassword, salt);
 
     return passwordData;
 };
 
-const verifyHashedPassword = (inputPassword, key, hashedPasswordInDatabase) => {
-    const loggingHashedPassword = sha512(inputPassword, key).passwordHash;
+const verifyHashedPassword =
+    (inputPassword, salt, hashedPasswordInDatabase) => {
+        const loggingHashedPassword = sha512(inputPassword, salt).passwordHash;
 
-    if (loggingHashedPassword === hashedPasswordInDatabase) {
-        return true;
-    }
+        if (loggingHashedPassword === hashedPasswordInDatabase) {
+            return true;
+        }
 
-    return false;
-};
+        return false;
+    };
 
 module.exports = {
     generateHashedPassword,
