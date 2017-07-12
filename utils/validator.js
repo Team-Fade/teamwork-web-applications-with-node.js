@@ -1,5 +1,5 @@
 const validator = {
-    validateUser: (user) => {
+    isValidUser: (user) => {
         if (!user.username ||
             typeof user.username !== 'string' ||
             user.username.length < 4) {
@@ -17,7 +17,7 @@ const validator = {
 
         return true;
     },
-    validateEvent: (event) => {
+    isValidEvent: (event) => {
 
     },
 };
