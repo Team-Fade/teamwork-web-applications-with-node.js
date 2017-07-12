@@ -5,20 +5,20 @@ const authenticationController = (data) => {
     return {
         register(req, res) {
             const user = req.body;
-            // Validate item
-            if (!validator.validateUser(user)) {
+
+            if (!validator.isValidUser(user)) {
                 res.redirect('/error');
                 return;
             }
 
-            data.users.create(user)
+            data.users.add(user)
                 .then((dbItem) => {
                     return res.redirect('/');
                 })
                 .catch((err) => {
                     // connect-flash
                     req.flash('error', err);
-                    return res.redirect('/error');
+                    return res.redirect('/register');
                 });
         },
         login(req, res, next) {
