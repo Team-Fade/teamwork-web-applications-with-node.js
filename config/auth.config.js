@@ -3,9 +3,9 @@ const { Strategy } = require('passport-local');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-
-const verifyHashedPassword = require('../utils/hashPassword').verifyHashedPassword;
 const isAuthenticated = require('../utils/isAuthenticated');
+const verifyHashedPassword
+    = require('../utils/hashPassword').verifyHashedPassword;
 
 const configureAuthentification = (app, { users }) => {
     passport.use(new Strategy(
@@ -19,11 +19,10 @@ const configureAuthentification = (app, { users }) => {
                         return done(null, false,
                             { message: 'Incorrect username.' });
                     }
-
                     if (!verifyHashedPassword(
                         password,
-                        user.password['key'],
-                        user.password['passwordHash'])) {
+                        user.password.salt,
+                        user.password.passwordHash)) {
                         return done(null, false,
                             { message: 'Incorrect password.' });
                     }
