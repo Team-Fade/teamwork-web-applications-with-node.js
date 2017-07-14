@@ -2,10 +2,18 @@ extend ../common/_master
 
 block body
     link(rel='stylesheet', href='../../public/css/home.css', type='text/css' )
-    div(id="home-nav")
-        a(href="/browse-events" id="browse-events-btn")
+    div(class="text-center" id="home-text")
+        p
+            | If you don't want to miss the latest tech conf
+        p
+            | or just want to attend the most epic parties
+        p
+            | we've got you covered
+    div(class="row" id="home-nav")
+        a(class="col-md-3 text-center" href="/browse-events" id="browse-events-btn-left")
             |Browse Events
-        unless user 
-            a(href="/login" id="sign-in-btn")
+        unless user
+            p(class="col-md-1 text-center")
+                |or
+            a(class="col-md-3 text-center" href="/login" id="sign-in-btn")
                 |Sign In
-    

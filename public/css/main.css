@@ -2,37 +2,34 @@ html,
 body {
     margin: 0;
     padding: 0;
+    height: 100%;    
+    min-height: 100%;
 }
 
 ul {
     list-style-type: none;
 }
-
-ul li {
-    padding: 1.1%;
+ul li{
+    margin-top: 3%;
 }
-
 ul li a {
-    color: #F5F5F5;
+    color: #F4F4EF;
     font-size: 1.7rem;
     text-decoration-style: none;
-    display: block;
+    display: block;  
     height: 100%;
+     
 }
-
+ 
 a:hover {
     text-decoration: none;
-    color: #F5F5F5;
-}
-
-li:hover {
-    opacity: 0.75;
+    color: #ACBEBE;
 }
 
 #header {
     margin: 0;
     padding: 0;
-
+    background-color: #20232A;
 }
 
 #navbar {
@@ -44,41 +41,20 @@ li:hover {
     margin: 0;
     padding: 0;
 }
-
-#logo {
-    margin: 0;
-    padding: 0;    
-}  
-
-#logo > p {
-    font-size: 2.4em;
-    color: #0F1626;
-}
-
-#navbar-home {
-    background-color: #0F1626;
-}
-
-#navbar-about {
-    background-color: #AB987A;
-}
-
-#navbar-ranking {
-    background-color: #FF533D;
-}
-
-#navbar-logout {
-    background-color: gray;
-}
-
+ 
 #navbar-logout a {
-    font-size: 2.4rem;
+    font-size: 1.7rem;
 }
-
-#navbar-profile {
-    background-color: darkgreen;    
-}
-
+ 
 #navbar-profile a, #navbar-logout a{
-    color: white;    
+    color: #F4F4EF;    
+}
+
+ 
+#footer{     
+    position: absolute;
+    bottom: 0%;
+    height: 5%;
+    width: 100%;
+    background-color: #20232A;
 }

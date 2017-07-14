@@ -13,11 +13,10 @@ block body
             label(for='password' class='col-2 col-form-label')
                 |Password
             input(name='password' type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password')
-        button(type='submit' class='btn btn-primary' id='sign-in-btn')
+        button(type='submit' class='btn' id='sign-in-btn')
             |Login
         span(id='or-span')
             |or
-        button(class='btn btn-danger' type="button" onclick="window.location.href='/register'" id='register-btn')
-                a(href="/register")
-                    |Register
+        button(class='btn' type="button" onclick="window.location.href='/register'" id='register-btn')
+            |Register
         

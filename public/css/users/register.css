@@ -10,10 +10,9 @@ html, body{
     margin-top: 5%;
 } 
 #register-btn{
-    background-color: #FF533D;
+    background-color: #A01D26;
     margin-left: 25%;
-}
-#register-btn a {
     color: white;
-    text-decoration: none
+    text-decoration: none;
 }
+ 
