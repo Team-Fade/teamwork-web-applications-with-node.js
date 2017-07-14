@@ -1,0 +1,13 @@
+.event-card {
+    width: 20rem;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+.card-block a {
+    background-color: #20232A;
+    color: #F4F4EF;
+}
+.card-block a:hover {
+    color: #F4F4EF;
+    text-decoration: none;
+}

@@ -2,8 +2,9 @@ html,
 body {
     margin: 0;
     padding: 0;
-    height: 100%;    
-    min-height: 100%;
+}
+body{
+    padding-bottom: 5%;
 }
 
 ul {
@@ -50,11 +51,11 @@ a:hover {
     color: #F4F4EF;    
 }
 
- 
-#footer{     
-    position: absolute;
+  
+#footer{
+    position: fixed;
     bottom: 0%;
-    height: 5%;
-    width: 100%;
+    height: 5%;     
     background-color: #20232A;
-}
+} 
+

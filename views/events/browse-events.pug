@@ -1,5 +1,121 @@
 extend ../common/_master
 
 block body
-    h1 
-        |Browse events
+    link(rel='stylesheet', href='../../public/css/browse-events.css', type='text/css')
+    div(class="container-fluid row col-md-12" id="wrapper")
+        div(class="col-md-3" id="left")
+            div(class="input-group container-fluid row" id="location-picker") 
+                div(class="col-md-4")             
+                    div(class="input-group-btn")
+                        button(type="button" class="btn btn-secondary dropdown-toggle mybtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                            |Pick location   
+                div(class="col-md-8")
+                    input(type="text" class="form-control" aria-label="Text input with dropdown button")   
+                div(class="dropdown-menu" id="dropdown")
+                    a(class="dropdown-item" href="#") 
+                        |Sofia
+                    a(class="dropdown-item" href="#") 
+                        |Plovdiv
+                    a(class="dropdown-item" href="#") 
+                        |Burgas
+            div(class="input-group container-fluid row" id="category-picker") 
+                div(class="col-md-3")             
+                    div(class="input-group-btn")
+                        button(type="button" class="btn btn-secondary dropdown-toggle mybtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                            |Category   
+                div(class="col-md-9")
+                    input(type="text" class="form-control" aria-label="Text input with dropdown button")   
+                div(class="dropdown-menu" id="dropdown")
+                    a(class="dropdown-item" href="#") 
+                        |TechConf
+                    a(class="dropdown-item" href="#") 
+                        |Parties
+                    a(class="dropdown-item" href="#") 
+                        |Cultural            
+            div(class="input-group container-fluid row" id="searchbox")
+                div(class="col-md-3")
+                    div(class="input-group-btn")              
+                        button(class="btn btn-secondary mybtn" type="button")
+                            |Search
+                div(class="col-md-9")
+                    input(type="text" class="form-control" placeholder="Search for...")                
+        div(class="col-md-9" id="right")
+            div(class="container-fluid row")
+                div(class="col-md-4")
+                    div(class="card event-card")
+                        img(class="card-img-top" src="..." alt="Image")
+                        div(class="card-block")
+                                h4(class="card-title")
+                                        |Event name
+                                p(class="card-text")
+                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
+                                a(href="#" class="btn")
+                                        |View Event 
+                div(class="col-md-4")
+                    div(class="card event-card")
+                        img(class="card-img-top" src="..." alt="Image")
+                        div(class="card-block")
+                                h4(class="card-title")
+                                        |Event name
+                                p(class="card-text")
+                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
+                                a(href="#" class="btn")
+                                        |View Event    
+                div(class="col-md-4")
+                    div(class="card event-card")
+                        img(class="card-img-top" src="..." alt="Image")
+                        div(class="card-block")
+                                h4(class="card-title")
+                                        |Event name
+                                p(class="card-text")
+                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
+                                a(href="#" class="btn")
+                                        |View Event
+            div(class="container-fluid row")
+                div(class="col-md-4")
+                    div(class="card event-card")
+                        img(class="card-img-top" src="..." alt="Image")
+                        div(class="card-block")
+                                h4(class="card-title")
+                                        |Event name
+                                p(class="card-text")
+                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
+                                a(href="#" class="btn")
+                                        |View Event 
+                div(class="col-md-4")
+                    div(class="card event-card")
+                        img(class="card-img-top" src="..." alt="Image")
+                        div(class="card-block")
+                                h4(class="card-title")
+                                        |Event name
+                                p(class="card-text")
+                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
+                                a(href="#" class="btn")
+                                        |View Event    
+                div(class="col-md-4")
+                    div(class="card event-card")
+                        img(class="card-img-top" src="..." alt="Image")
+                        div(class="card-block")
+                                h4(class="card-title")
+                                        |Event name
+                                p(class="card-text")
+                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
+                                a(href="#" class="btn")
+                                        |View Event 
+            nav(aria-label="Page navigation example" id="paginationid")
+                ul(class="pagination")
+                    li(class="page-item")
+                        a(class="page-link" href="#")
+                            |Previous
+                    li(class="page-item")
+                        a(class="page-link" href="#")
+                            |1
+                    li(class="page-item")
+                        a(class="page-link" href="#")
+                            |2
+                    li(class="page-item")
+                        a(class="page-link" href="#")
+                            |3
+                    li(class="page-item")
+                        a(class="page-link" href="#")
+                            |Next     
