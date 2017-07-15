@@ -6,6 +6,9 @@ const authenticationController = (data) => {
         register(req, res) {
             const user = req.body;
 
+            // Sets the default profile picture
+            user.imageUrl = 'https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png';
+
             if (!validator.isValidUser(user)) {
                 res.redirect('/error');
                 return;

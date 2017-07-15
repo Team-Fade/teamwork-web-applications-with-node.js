@@ -1,10 +1,16 @@
-const usersController = require('../controllers/users.controller');
-
 const attach = (app, router, data) => {
-    router
-        .get('/profile',
-            (res, req) => usersController.getProfilePage(res, req));
+    const usersController = require('../controllers/users.controller')(data);
 
+    router
+        .get('/profile', (req, res) => {
+            usersController.getProfilePage(req, res);
+        })
+        .get('/profile/edit', (req, res) => {
+            usersController.getProfileEditPage(req, res);
+        })
+        .post('/profile/edit', (req, res) => {
+            usersController.editProfilePage(req, res);
+        });
     app.use('/user', router);
 };
 

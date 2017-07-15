@@ -32,6 +32,15 @@ class BaseData {
                 return this.modelClass.toViewModel(model);
             });
     }
+
+    edit(filter, options) {
+        return this.collection.findOneAndUpdate(filter, options, {
+                new: true,
+            })
+            .then((model) => {
+                return this.modelClass.toViewModel(model);
+            });
+    }
 }
 
 module.exports = BaseData;
