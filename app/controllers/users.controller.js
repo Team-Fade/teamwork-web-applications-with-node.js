@@ -22,8 +22,8 @@ const usersController = (data) => {
                 $set: updatedUser,
             }, {
                 new: true,
-            }).then((userData) => {
-                req.logIn(userData.value, (err) => {
+            }).then(() => {
+                req.logIn(updatedUser, (err) => {
                     if (err) throw err;
                     res.redirect('/user/profile');
                 });
