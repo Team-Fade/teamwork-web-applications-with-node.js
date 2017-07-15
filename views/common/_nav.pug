@@ -1,23 +1,24 @@
 mixin nav()
-    nav(class="col-md-8" id="navbar")
+    nav(class="col-md-12" id="navbar")
         ul                    
-            li(class="col-md-3 text-center" id="navbar-home")
+            li(class="col-md-2 text-center" id="navbar-home")
                 a(href='/')
                    | Home
-            li(class="col-md-3 text-center" id="navbar-about")   
+            li(class="col-md-2 text-center" id="navbar-about")   
                 a(href='/about')
                     | About us         
-            li(class="col-md-3 text-center" id="navbar-ranking")
+            li(class="col-md-2 text-center" id="navbar-ranking")
                 a(href='/ranking')
                     | Top Events
             if user
-                li(class="col-md-2 text-center" id="navbar-profile")
+                li(class="col-md-2 col-md-offset-3 text-center" id="navbar-profile")
                     a(href='/user/profile')
-                            =user.username
+                        =user.username
                 li(class="col-md-1 text-center" id="navbar-logout")
                     a(href='/logout')
                         span(class="glyphicon glyphicon-log-out" aria-hidden="true")
+                        | Logout
             else
-                li(class="col-md-3 text-center" id="navbar-profile")                
+                li(class="col-md-2 col-md-offset-4 text-center" id="navbar-profile")                
                     a(href='/login')
                         | Login
