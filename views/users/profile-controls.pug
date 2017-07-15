@@ -1,0 +1,25 @@
+extend ../common/_master
+
+block body
+    link(rel='stylesheet', href='../../public/css/users/profile-controls.css', type='text/css' )
+    #profile-container.col-xs-12.col-sm-6.col-sm-offset-3.col-md-6.col-md-offset-3
+        .well.well-sm
+            .row
+                .col-sm-6.col-md-4
+                    img.img-rounded.img-responsive(src=user.imageUrl, alt=user.username)                
+                .col-sm-6.col-md-8.text-center
+                    h4#name
+                        span#first-name= user.firstName + ' '
+                        span#last-name= user.lastname                        
+                    h4#username
+                        = user.username
+                    i.glyphicon.glyphicon-map-marker
+                        = user.city
+                    br
+                    i.glyphicon.glyphicon-envelope
+                        = user.email
+                    br
+                    
+                    form(action="/user/profile/edit")
+                        button.btn.btn-primary
+                            | Edit 

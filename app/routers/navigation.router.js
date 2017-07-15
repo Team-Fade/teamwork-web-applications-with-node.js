@@ -3,15 +3,15 @@ const navigationController = require('../controllers/navigation.controller');
 const attach = (app, router, data) => {
     router
         .get('/',
-        (res, req) => navigationController.getHomePage(res, req))
+            (res, req) => navigationController.getHomePage(res, req))
         .get('/about',
-        (res, req) => navigationController.getAboutUsPage(res, req))
+            (res, req) => navigationController.getAboutUsPage(res, req))
         .get('/ranking',
-        (res, req) => navigationController.getRankingListPage(res, req))
+            (res, req) => navigationController.getRankingListPage(res, req))
         .get('/login',
-        (res, req) => navigationController.getLoginPage(res, req))
+            (res, req) => navigationController.getLoginPage(res, req))
         .get('/register',
-        (res, req) => navigationController.getRegisterPage(res, req));
+            (res, req) => navigationController.getRegisterPage(res, req));
 
     app.use(router);
 };

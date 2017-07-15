@@ -1,0 +1,27 @@
+extend ../common/_master
+
+block body
+    link(rel='stylesheet', href='../../public/css/events/create-event.css', type='text/css')
+    form(id='create-event-form' action='/create-event' method='POST')
+        div(class='form-group')
+            label(for='event-name' class='col-2 col-form-label')
+                |Event name:
+            input(name='event-name' type='text' class='form-control' id='event-name' aria-describedby='event-name-help' placeholder='Write the event title here..' minlength="4" required)
+        div(class='form-group')
+            label(for='event-location' class='col-2 col-form-label')
+                |Event location:
+            input(name='event-location' type='text' class='form-control' id='event-location' aria-describedby='event-location-help' placeholder='Write the location name here..' minlength="4" required)
+        div(class='form-group')
+            label(for='event-type' class='col-2 col-form-label')
+                |Event type:
+            input(name='event-type' type='text' class='form-control' id='event-type' aria-describedby='event-type' placeholder='Write the event type here..' minlength="4" required)
+        div(class='form-group')
+            label(for='event-description' class='col-2 col-form-label')
+                |Event description:
+            input(name='event-description' type='text' class='form-control' id='event-description' aria-describedby='event-description' placeholder='Write the event description here..' minlength="4" required)
+        div(class='form-group')
+            label(for='event-date' class='col-2 col-form-label')
+                |Event date:
+            input(name='event-date' type='text' class='form-control' id='event-date' aria-describedby='event-date' placeholder='Write the event date here..' minlength="4" required)
+        button(type='sumbit' class='btn' id='create-event-btn')
+                |Create event
