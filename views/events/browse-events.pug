@@ -38,68 +38,18 @@ block body
                         button(class="btn btn-secondary mybtn" type="button")
                             |Search
                 div(class="col-md-9")
-                    input(type="text" class="form-control" placeholder="Search for...")                
+                    input(type="text" class="form-control" placeholder="Search for...")
         div(class="col-md-9" id="right")
             div(class="container-fluid row")
+            each event in events
                 div(class="col-md-4")
                     div(class="card event-card")
                         img(class="card-img-top" src="..." alt="Image")
                         div(class="card-block")
                                 h4(class="card-title")
-                                        |Event name
+                                        |#{event.eventName}
                                 p(class="card-text")
-                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
-                                a(href="#" class="btn")
-                                        |View Event 
-                div(class="col-md-4")
-                    div(class="card event-card")
-                        img(class="card-img-top" src="..." alt="Image")
-                        div(class="card-block")
-                                h4(class="card-title")
-                                        |Event name
-                                p(class="card-text")
-                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
-                                a(href="#" class="btn")
-                                        |View Event    
-                div(class="col-md-4")
-                    div(class="card event-card")
-                        img(class="card-img-top" src="..." alt="Image")
-                        div(class="card-block")
-                                h4(class="card-title")
-                                        |Event name
-                                p(class="card-text")
-                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
-                                a(href="#" class="btn")
-                                        |View Event
-            div(class="container-fluid row")
-                div(class="col-md-4")
-                    div(class="card event-card")
-                        img(class="card-img-top" src="..." alt="Image")
-                        div(class="card-block")
-                                h4(class="card-title")
-                                        |Event name
-                                p(class="card-text")
-                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
-                                a(href="#" class="btn")
-                                        |View Event 
-                div(class="col-md-4")
-                    div(class="card event-card")
-                        img(class="card-img-top" src="..." alt="Image")
-                        div(class="card-block")
-                                h4(class="card-title")
-                                        |Event name
-                                p(class="card-text")
-                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
-                                a(href="#" class="btn")
-                                        |View Event    
-                div(class="col-md-4")
-                    div(class="card event-card")
-                        img(class="card-img-top" src="..." alt="Image")
-                        div(class="card-block")
-                                h4(class="card-title")
-                                        |Event name
-                                p(class="card-text")
-                                        |This event is event and stuff and blabla and DSA and Node and Whatever</p>
+                                        |#{event.eventDescription}
                                 a(href="#" class="btn")
                                         |View Event 
             nav(aria-label="Page navigation example" id="paginationid")

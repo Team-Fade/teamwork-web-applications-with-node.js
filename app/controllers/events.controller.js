@@ -1,7 +1,11 @@
 const eventsController = (data) => {
     return {
         getBrowseEventsPage(req, res) {
-            return res.render('events/browse-events');
+            data.events.getAllItems({}, {})
+                .then((events) => {
+                    return res.render('events/browse-events',
+                        { events: events });
+                });
         },
         getCreateEventPage(req, res) {
             // Only logged user can create event
@@ -19,7 +23,7 @@ const eventsController = (data) => {
             data.events.collection
                 .findOne(
                 { 'eventName': event.eventName, 'author': event.author },
-                (_, existingEvent) => {
+                (error, existingEvent) => {
                     if (existingEvent) {
                         req.flash('error',
                             `Event with this name and ... already exists!`);
@@ -27,15 +31,23 @@ const eventsController = (data) => {
                         return res.redirect('/create-event');
                     }
 
-                    // TODO: I ll finish this later :)
-
                     // Add event in events collection
-                    data.events.add(event);
+                    return data.events.add(event)
+                        .then((_) => {
+                            // Add event in user createdEvents
+                            data.users.edit(
+                                { username: event.author },
+                                { $addToSet: { createdEvents: event } },
+                                {
+                                    upsert: false,
+                                    multi: false,
+                                });
 
-                    // Add event in user createdEvents
-                    data.users.findUserByUsername(event.author)
-                        .then((dbUser) => {
-                            console.log(dbUser);
+                            return res.redirect('/profile');
+                        })
+                        .catch((err) => {
+                            req.flash('error', err);
+                            return res.redirect('/create-event');
                         });
                 });
         },
