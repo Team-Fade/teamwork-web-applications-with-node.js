@@ -1,11 +1,15 @@
-const eventsController = require('../controllers/events.controller');
-
 const attach = (app, router, data) => {
+    const eventsController = require('../controllers/events.controller')(data);
+
     router
         .get('/browse-events',
-            (res, req) => eventsController.getBrowseEventsPage(res, req))
+        (res, req) => eventsController.getBrowseEventsPage(res, req))
         .get('/create-event',
-            (res, req) => eventsController.getCreateEventPage(res, req));
+        (res, req) => eventsController.getCreateEventPage(res, req))
+        .post('/create-event',
+        (req, res) => {
+            eventsController.createEvent(req, res);
+        });
 
     app.use(router);
 };
