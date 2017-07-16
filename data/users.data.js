@@ -17,6 +17,13 @@ class UsersData extends BaseData {
         return super.add(user);
     }
 
+    findUserByUsername(username) {
+        return this.collection.findOne({ 'username': username })
+            .then((user) => {
+                return user;
+            });
+    }
+
     validateUserPassword(username, password, done) {
     }
 }
