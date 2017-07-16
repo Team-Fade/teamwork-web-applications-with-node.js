@@ -11,7 +11,7 @@ class BaseData {
         return this.modelClass.name.toLowerCase() + 's';
     }
 
-    getAll(filter, options) {
+    getAllItems(filter, options) {
         const result = this.collection
             .find(filter, options)
             .toArray();
@@ -35,8 +35,8 @@ class BaseData {
 
     edit(filter, options) {
         return this.collection.findOneAndUpdate(filter, options, {
-                new: true,
-            })
+            new: true,
+        })
             .then((model) => {
                 return this.modelClass.toViewModel(model);
             });

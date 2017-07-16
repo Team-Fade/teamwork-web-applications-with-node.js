@@ -21,6 +21,7 @@ const authenticationController = ({ users }) => {
 
                         return res.redirect('/register');
                     }
+
                     // Sets the default profile picture
                     user.imageUrl = 'https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png';
 
