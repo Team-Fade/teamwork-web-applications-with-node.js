@@ -9,7 +9,6 @@ class Event {
         const viewModel = new Event();
         Object.keys(model)
             .forEach((property) => {
-                console.log(property);
                 viewModel[property] = model[property];
             });
 
