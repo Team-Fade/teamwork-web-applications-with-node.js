@@ -44,13 +44,13 @@ block body
             each event in events
                 div(class="col-md-4")
                     div(class="card event-card")
-                        img(class="card-img-top" src="..." alt="Image")
+                        //- img(class="card-img-top" src="..." alt="Image")
                         div(class="card-block")
                                 h4(class="card-title")
                                         |#{event.eventName}
                                 p(class="card-text")
                                         |#{event.eventDescription}
-                                a(href="#" class="btn")
+                                a(href=`/browse-events/${event._id}` class="btn")
                                         |View Event 
             nav(aria-label="Page navigation example" id="paginationid")
                 ul(class="pagination")

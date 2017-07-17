@@ -1,5 +1,18 @@
 const eventsController = (data) => {
     return {
+        getViewEventPage(req, res, next) {
+            const eventId = req.params.id;
+            if (eventId) {
+                console.log(eventId);
+                return data.events.getById(eventId)
+                    .then((event) => {
+                        return res.render('events/event-view',
+                            { event: event });
+                    });
+            }
+
+            return next();
+        },
         getBrowseEventsPage(req, res) {
             data.events.getAllItems({}, {})
                 .then((events) => {

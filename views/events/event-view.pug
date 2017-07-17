@@ -1,0 +1,15 @@
+extend ../common/_master
+
+block body
+        link(rel='stylesheet', href='../../public/css/ranking.css', type='text/css' )
+        div(class="container-fluid row")
+                div(class="col-md-4")
+                    div(class="card event-card")
+                        //- img(class="card-img-top" src="..." alt="Image")
+                        div(class="card-block")
+                                h4(class="card-title")
+                                        |#{event.eventName}
+                                p(class="card-text")
+                                        |
+                                a(href="#" class="btn")
+                                        |Participate

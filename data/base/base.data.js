@@ -1,3 +1,5 @@
+const ObjectId = require('mongodb').ObjectId;
+
 class BaseData {
     constructor(db, modelClass, validator) {
         this.db = db;
@@ -11,7 +13,17 @@ class BaseData {
         return this.modelClass.name.toLowerCase() + 's';
     }
 
+    getById(id) {
+        // Add error if not found
+        return this.collection
+            .findOne({ '_id': new ObjectId(id) })
+            .then((item) => {
+                return this.modelClass.toViewModel(item);
+            });
+    }
+
     getAllItems(filter, options) {
+        // Add error if not found
         const result = this.collection
             .find(filter, options)
             .toArray();
