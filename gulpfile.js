@@ -1,16 +1,16 @@
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 
-gulp.task('server', () => {
-    const app = require('./server');
 
-    app.start();
-});
+// gulp.task('server', () => {    
+// const app = require('./server');
+//     app.start();
+// });
 
-gulp.task('dev', ['server'], () => {
+gulp.task('dev', [], () => {
     return nodemon({
         ext: 'js',
-        tasks: ['server'],
+        // tasks: ['server'],
         script: 'server.js',
     });
 });

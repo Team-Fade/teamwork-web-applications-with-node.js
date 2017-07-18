@@ -3,7 +3,7 @@ const { dbConfig } = require('./config');
 
 const successMessage = `Server is running on localhost//:${serverConfig.port}`;
 
-const start = () => {
+const start = (function() {
     return Promise.resolve()
         .then(() => require('./db').init(dbConfig.connectionString))
         .then((db) => require('./data').init(db))
@@ -13,7 +13,7 @@ const start = () => {
                 () =>
                     console.log(successMessage));
         });
-};
+}());
 
 module.exports = {
     start,
