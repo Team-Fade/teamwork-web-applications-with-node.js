@@ -2,70 +2,37 @@ extend ../common/_master
 
 block main
     link(rel='stylesheet', href='../../public/css/events/browse-events.css', type='text/css')
-    div(class="container-fluid row col-md-12" id="wrapper")
-        div(class="col-md-3" id="left")
-            div(class="input-group container-fluid row" id="location-picker") 
-                div(class="col-md-4")             
-                    div(class="input-group-btn")
-                        button(type="button" class="btn btn-secondary dropdown-toggle mybtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-                            |Pick location   
-                div(class="col-md-8")
-                    input(type="text" class="form-control" aria-label="Text input with dropdown button")   
-                div(class="dropdown-menu" id="dropdown")
-                    a(class="dropdown-item" href="#") 
-                        |Sofia
-                    a(class="dropdown-item" href="#") 
-                        |Plovdiv
-                    a(class="dropdown-item" href="#") 
-                        |Burgas
-            div(class="input-group container-fluid row" id="category-picker") 
-                div(class="col-md-3")             
-                    div(class="input-group-btn")
-                        button(type="button" class="btn btn-secondary dropdown-toggle mybtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-                            |Category   
-                div(class="col-md-9")
-                    input(type="text" class="form-control" aria-label="Text input with dropdown button")   
-                div(class="dropdown-menu" id="dropdown")
-                    a(class="dropdown-item" href="#") 
-                        |TechConf
-                    a(class="dropdown-item" href="#") 
-                        |Parties
-                    a(class="dropdown-item" href="#") 
-                        |Cultural            
-            div(class="input-group container-fluid row" id="searchbox")
-                div(class="col-md-3")
-                    div(class="input-group-btn")              
-                        button(class="btn btn-secondary mybtn" type="button")
-                            |Search
-                div(class="col-md-9")
-                    input(type="text" class="form-control" placeholder="Search for...")
-        div(class="col-md-9" id="right")
-            div(class="container-fluid row")
-            each event in events
-                div(class="col-md-4")
-                    div(class="card event-card")
-                        //- img(class="card-img-top" src="..." alt="Image")
-                        div(class="card-block")
-                                h4(class="card-title")
-                                        |#{event.eventName}
-                                p(class="card-text")
-                                        |#{event.eventDescription}
-                                a(href=`/browse-events/${event._id}` class="btn")
-                                        |View Event 
-            nav(aria-label="Page navigation example" id="paginationid")
-                ul(class="pagination")
-                    li(class="page-item")
-                        a(class="page-link" href="#")
-                            |Previous
-                    li(class="page-item")
-                        a(class="page-link" href="#")
-                            |1
-                    li(class="page-item")
-                        a(class="page-link" href="#")
-                            |2
-                    li(class="page-item")
-                        a(class="page-link" href="#")
-                            |3
-                    li(class="page-item")
-                        a(class="page-link" href="#")
-                            |Next     
+    div(class="row")
+        div(class="col s3")
+            div(class="row")
+                div(class="col s12")
+                    div(class="row")
+                        div(class="input-field col s12")
+                            i(class="material-icons prefix")|textsms    
+                            input(type="text" id="eventName" class="autocomplete")
+                            label(for="searchEventName")
+                                |Search event by name:
+            div(class="row")
+                div(class="col s12")
+                    div(class="row")
+                        div(class="input-field col s12")
+                            i(class="material-icons prefix")|location_on    
+                            input(type="text" id="eventLocation" class="autocomplete")
+                            label(for="searchEventLocation")
+                                |Search event by location:
+            div(class="row")
+                div(class="col s12")
+                    div(class="row")
+                        div(class="input-field col s12")    
+                            i(class="material-icons prefix")|find_replace
+                            input(type="text" id="eventType" class="autocomplete")
+                            label(for="searchEventType")
+                                |Search event by type:
+            div(class="row")
+                div(class="col s12")
+                    div(class="row")
+                        div(class="input-field col s12")
+                            i(class="material-icons prefix")|date_range                                                        
+                            input(type="date" placeholder="Pick a date:" class="datepicker")
+    script(src="../../public/js/events/browse.events.js")
+
