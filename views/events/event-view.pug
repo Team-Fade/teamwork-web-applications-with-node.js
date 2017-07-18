@@ -2,6 +2,7 @@ extend ../common/_master
 
 block body
         link(rel='stylesheet', href='../../public/css/ranking.css', type='text/css' )
+        script(src="../../public/js/event.view.ajax.js")
         div(class="container-fluid row")
                 div(class="col-md-4")
                     div(class="card event-card")
@@ -11,5 +12,6 @@ block body
                                         |#{event.eventName}
                                 p(class="card-text")
                                         |
-                                a(href="#" class="btn")
+                                a#join-link(href="#" class="btn")
                                         |Participate
+                != messages()
