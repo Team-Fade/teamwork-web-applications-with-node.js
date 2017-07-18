@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 
 
-// gulp.task('server', () => {    
+// gulp.task('server', () => {
 // const app = require('./server');
 //     app.start();
 // });

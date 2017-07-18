@@ -1,18 +1,1 @@
-html, body{
-    margin: 0;
-    padding: 0;
-}
-#register-form{
-    margin: 0;
-    padding: 0;
-    width: 15%;
-    margin-left: 40%;
-    margin-top: 5%;
-} 
-#register-btn{
-    background-color: #A01D26;
-    margin-left: 25%;
-    color: white;
-    text-decoration: none;
-}
  

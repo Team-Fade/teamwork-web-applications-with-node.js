@@ -1,19 +1,33 @@
 include _header
+include _footer
 
 <!DOCTYPE html>
 html(lang="en")
 head
+    
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    link(rel='stylesheet', href="/libs/bootstrap/dist/css/bootstrap.min.css")
-    link(rel='stylesheet', href="../../public/css/main.css")
-    script(src='/libs/jquery/dist/jquery.js')
+    meta(http-equiv="X-UA-Compatible", content="ie=edge") 
+    
     block styles
+    //- Google fonts
+    link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    //- Materialize    
+    link(rel="stylesheet" href="/libs/materialize-css/dist/css/materialize.min.css")
+    link(rel="stylesheet" href="../../public/css/main.css")
+
     block head_scripts
+    //- jQuery and Materialize js
+    script(src='/libs/jquery/dist/jquery.js')
+    script(src='/libs/materialize-css/dist/js/materialize.min.js')    
+
     title Team Fade
-block header
+
+header
+    block header
     +header()
-block body
-block footer
-    div(class="container-fluid col-md-12 fixed-bottom" id="footer")
+main
+    block main     
+footer
+    block header
+    +footer()

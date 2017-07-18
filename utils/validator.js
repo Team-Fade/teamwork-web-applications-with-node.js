@@ -1,5 +1,5 @@
 const validator = {
-    // TODO: Update the validator
+    // Warning: TODO: Update the validator
     isValidUser: (user) => {
         if (!user.username ||
             typeof user.username !== 'string' ||

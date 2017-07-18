@@ -1,60 +1,9 @@
-html,
-body {
-    margin: 0;
-    padding: 0;
-}
-body{
-    padding-bottom: 5%;
-}
+ body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
 
-ul {
-    list-style-type: none;
+main {
+   flex: 1 0 auto;
 }
-ul li{
-    margin-top: 3%;
-}
-ul li a {
-    color: #F4F4EF;
-    font-size: 1.7rem;
-    text-decoration-style: none;
-    display: block;  
-    height: 100%;
-     
-}
- 
-a:hover {
-    text-decoration: none;
-    color: #ACBEBE;
-}
-
-#header {
-    margin: 0;
-    padding: 0;
-    background-color: #20232A;
-}
-
-#navbar {
-    margin: 0;
-    padding: 0;
-
-}
-#navbar ul{
-    margin: 0;
-    padding: 0;
-}
- 
-#navbar-logout a {
-    font-size: 1.7rem;
-}
- 
-#navbar-profile a, #navbar-logout a{
-    color: #F4F4EF;    
-}
-
-#footer{
-    position: fixed;
-    bottom: 0%;
-    height: 5%;     
-    background-color: #20232A;
-} 
-
