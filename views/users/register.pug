@@ -3,30 +3,36 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/users/register.css', type='text/css' )
     != messages()
-    form(id='register-form' action='/register' method='POST')
-        div(class='form-group')
-            label(for='username' class='col-2 col-form-label')
-                |Username
-            input(name='username' type='text' class='form-control' id='username' aria-describedby='usernameHelp' placeholder='Username' minlength="4" required)
-        div(class='form-group')
-            label(for='firstName' class='col-2 col-form-label')
-                |First name
-            input(name='firstName' type='text' class='form-control' id='firstName' aria-describedby='firstNameHelp' placeholder='First name' required)
-        div(class='form-group')
-            label(for='lastName' class='col-2 col-form-label')
-                |Last name
-            input(name='lastName' type='text' class='form-control' id='lastName' aria-describedby='lastNameHelp' placeholder='Last name' required)
-        div(class='form-group')
-            label(for='city' class='col-2 col-form-label')
-                |City
-            input(name='city' type='text' class='form-control' id='city' aria-describedby='cityHelp' placeholder='City' required)
-        div(class='form-group')
-            label(for='email' class="col-2 col-form-label")
-                |Email
-            input(name='email' type='email' class='form-control' id='email' aria-describedby="emailHelp" placeholder="Enter email" required)
-        div(class='form-group')
-            label(for='password' class='col-2 col-form-label')
-                |Password
-            input(name='password' type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password' minlength="6" required)
-        button(type='sumbit' class='btn ' id='register-btn')
+    div(class="row")
+        form(id='register-form' class="col s4" action='/register' method='POST')            
+            div(class="input-field col s6")
+                input(name="username" id="username" type="text" class="validate")
+                label(for="username")
+                    |Username: 
+        
+            div(class="input-field col s6")
+                input(name="password" id="password" type="password" class="validate")
+                label(for="password")
+                    |Password:       
+            
+            div(class="input-field col s6")
+                input(name="firstName" id="firstName" type="text" class="validate")
+                label(for="firstName")
+                    |First Name:                               
+        
+            div(class="input-field col s6")
+                input(name="lastName" id="lastName" type="text" class="validate")
+                label(for="lastName")
+                    |Last Name:   
+        
+            div(class="input-field col s6")
+                input(name="city" id="city" type="text" class="validate")
+                label(for="city")
+                    |City:
+        
+            div(class="input-field col s6")
+                input(name="email" id="email" type="email" class="validate")
+                label(for="email")
+                    |Email:                             
+            button(type='sumbit' class='btn deep-orange' id='register-btn')
                 |Register

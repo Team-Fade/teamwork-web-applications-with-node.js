@@ -4,19 +4,21 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )
     != messages()
-    form(id='login-form' action='/login' method='POST')
-        div(class='form-group')
-            label(for='username' class='col-2 col-form-label')
-                |Username
-            input(name='username' type='text' class='form-control' id='username' aria-describedby='usernameHelp' placeholder='Enter username')
-        div(class='form-group')
-            label(for='password' class='col-2 col-form-label')
-                |Password
-            input(name='password' type='password' class='form-control' id='password' aria-describedby='passwordHelp' placeholder='Enter password')
-        button(type='submit' class='btn' id='sign-in-btn')
-            |Login
-        span(id='or-span')
-            |or
-        button(class='btn' type="button" onclick="window.location.href='/register'" id='register-btn')
-            |Register
+    div(class="row")
+        form(id="login-form" class="col s12" action='/login' method='POST')
+            div(class="row")
+                div(class="input-field col")
+                    input(name="username" id="username" type="text" class="validate")
+                    label(for="username")
+                        |Username:
+            div(class="row")
+                div(class="input-field col")
+                    input(name='password' id="password" type="password" class="validate")
+                    label(for="password")
+                        |Password
+            div(class="row buttons")            
+                button(type='submit' class='btn deep-orange' id='sign-in-btn')
+                    |Login
+                button(class='btn deep-orange' type="button" onclick="window.location.href='/register'" id='register-btn')
+                    |Register
         
