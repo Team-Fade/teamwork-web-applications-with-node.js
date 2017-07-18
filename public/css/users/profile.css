@@ -1,0 +1,11 @@
+#profile-container{
+    margin-left: 30%;
+    margin-top: 5%;
+}
+
+#profile-buttons{
+    margin-top: 12%;
+}
+#profile-buttons .btn{
+    margin-top: 2%;
+}

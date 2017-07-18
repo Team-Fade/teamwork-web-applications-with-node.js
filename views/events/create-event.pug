@@ -1,27 +1,54 @@
 extend ../common/_master
 
-block main
+block main 
     link(rel='stylesheet', href='../../public/css/events/create-event.css', type='text/css')
-    form(id='create-event-form' action='/create-event' method='POST')
-        div(class='form-group')
-            label(for='eventName' class='col-2 col-form-label')
-                |Event name:
-            input(name='eventName' type='text' class='form-control' id='event-name' aria-describedby='event-name-help' placeholder='Write the event title here..' minlength="4" required)
-        div(class='form-group')
-            label(for='eventLocation' class='col-2 col-form-label')
-                |Event location:
-            input(name='eventLocation' type='text' class='form-control' id='event-location' aria-describedby='event-location-help' placeholder='Write the location name here..' minlength="4" required)
-        div(class='form-group')
-            label(for='eventType' class='col-2 col-form-label')
-                |Event type:
-            input(name='eventType' type='text' class='form-control' id='event-type' aria-describedby='event-type' placeholder='Write the event type here..' minlength="4" required)
-        div(class='form-group')
-            label(for='eventDescription' class='col-2 col-form-label')
-                |Event description:
-            input(name='eventDescription' type='text' class='form-control' id='event-description' aria-describedby='event-description' placeholder='Write the event description here..' minlength="4" required)
-        div(class='form-group')
-            label(for='eventDate' class='col-2 col-form-label')
-                |Event date:
-            input(name='eventDate' type='text' class='form-control' id='event-date' aria-describedby='event-date' placeholder='Write the event date here..' minlength="4" required)
-        button(type='sumbit' class='btn' id='create-event-btn')
-                |Create event
+    div(class="row")
+        form(id='create-event-form' class="col s6" action='/create-event' method='POST')            
+            div(class="input-field col s6")
+                input(name="eventName" id="eventName" type="text" class="validate")
+                label(for="eventName")
+                    |Event name:
+            div(class="input-field col s6")
+                input(name="eventLocation" id="eventLocation" type="text" class="validate")
+                label(for="eventLocation")
+                    |Event location:  
+            div(class="input-field col s6")
+                input(name="eventType" id="eventType" type="text" class="validate")
+                label(for="eventType")
+                    |Event type:                 
+            div(class="input-field col s6")
+                input(name="eventDescription" id="eventDescription" type="text" class="validate")
+                label(for="eventDescription")
+                    |Event description:   
+            div(class="input-field col s6")
+                input(name="eventDate" id="eventDate" type="text" class="validate")
+                label(for="")
+                    |Event date: 
+            div(class="row")
+                div(class="col s6")
+                    div(class="row")
+                        div(class="input-field col s6")
+                            i(class="material-icons prefix")|date_range                                                        
+                            input(name="eventDate" type="date" id="datepicker" class="datepicker")
+                            label(for="datepicker")
+                                |Pick date:
+            div(class="row")
+                div(class="col s8")
+                    div(class="row")
+                        div(class="input-field col s6")
+                            i(class="material-icons prefix")|access_time                                                        
+                            input(name="eventTime" type="date" id="eventTime" class="timepicker")
+                            label(for="eventTime")
+                                |Pick hours:
+                div(class="col s4 file-field input-field")
+                    div(class="btn deep-orange")
+                        span
+                            |Image
+                        input(type="file")                 
+                    div(class="file-path-wrapper")
+                    input(class="file-path validate" type="text")
+            button(type='sumbit' class='btn deep-orange' id='create-event-btn')
+                    |Create event
+            script(src="../../public/js/events/datepicker.js")
+            script(src="../../public/js/events/timepicker.js")
+            

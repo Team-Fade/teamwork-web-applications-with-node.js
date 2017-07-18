@@ -10,7 +10,7 @@ block main
                         div(class="input-field col s12")
                             i(class="material-icons prefix")|textsms    
                             input(type="text" id="eventName" class="autocomplete")
-                            label(for="searchEventName")
+                            label(for="eventName")
                                 |Search event by name:
             div(class="row")
                 div(class="col s12")
@@ -18,7 +18,7 @@ block main
                         div(class="input-field col s12")
                             i(class="material-icons prefix")|location_on    
                             input(type="text" id="eventLocation" class="autocomplete")
-                            label(for="searchEventLocation")
+                            label(for="eventLocation")
                                 |Search event by location:
             div(class="row")
                 div(class="col s12")
@@ -26,13 +26,13 @@ block main
                         div(class="input-field col s12")    
                             i(class="material-icons prefix")|find_replace
                             input(type="text" id="eventType" class="autocomplete")
-                            label(for="searchEventType")
+                            label(for="eventType")
                                 |Search event by type:
             div(class="row")
                 div(class="col s12")
                     div(class="row")
                         div(class="input-field col s12")
                             i(class="material-icons prefix")|date_range                                                        
-                            input(type="date" placeholder="Pick a date:" class="datepicker")
-    script(src="../../public/js/events/browse.events.js")
+                            input(type="date" class="datepicker")
+    script(src="../../public/js/events/datepicker.js")
 
