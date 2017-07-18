@@ -19,6 +19,20 @@ class BaseData {
             .findOne({ '_id': new ObjectId(id) })
             .then((item) => {
                 return this.modelClass.toViewModel(item);
+            })
+            .catch((error) => {
+                return error;
+            });
+    }
+
+    getOne(filter, options) {
+        return this.collection
+            .findOne(filter, options)
+            .then((item) => {
+                return this.modelClass.toViewModel(item);
+            })
+            .catch((error) => {
+                return error;
             });
     }
 
