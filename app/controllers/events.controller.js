@@ -3,7 +3,6 @@ const eventsController = (data) => {
         getViewEventPage(req, res, next) {
             const eventId = req.params.id;
             if (eventId) {
-                console.log(eventId);
                 return data.events.getById(eventId)
                     .then((event) => {
                         return res.render('events/event-view',
@@ -33,7 +32,7 @@ const eventsController = (data) => {
             event.author = res.locals.user.username;
 
             // Check if event doesnt exists in db
-            data.events.collection
+            return data.events.collection
                 .findOne(
                 { 'eventName': event.eventName, 'author': event.author },
                 (error, existingEvent) => {
@@ -62,6 +61,39 @@ const eventsController = (data) => {
                             req.flash('error', err);
                             return res.redirect('/create-event');
                         });
+                });
+        },
+        joinEvent(req, res) {
+            const eventName = req.body.name;
+            const userToJoin = res.locals.user.username;
+
+            return data.events.getOne({ eventName: eventName })
+                .then((event) => {
+                    data.users.getOne({
+                        $and: [
+                            { username: userToJoin },
+                            {
+                                joinedEvents:
+                                { $elemMatch: { eventName: eventName } },
+                            },
+                        ],
+                    })
+                        .then((user) => {
+                            if (user) {
+                                // I dont know why this is not working?? Any idea?
+                                req.flash('error',
+                                    'You are already joined in this event!');
+                            }
+                            data.users.edit(
+                                { username: userToJoin },
+                                { $addToSet: { joinedEvents: event } },
+                                {
+                                    upsert: false,
+                                    multi: false,
+                                });
+                        });
+
+                    return res.send();
                 });
         },
     };

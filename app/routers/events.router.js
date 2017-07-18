@@ -4,6 +4,8 @@ const attach = (app, router, data) => {
     router
         .get('/browse-events/:id?',
         (res, req, next) => eventsController.getViewEventPage(res, req, next))
+        .post('/browse-events/:id',
+        (res, req) => eventsController.joinEvent(res, req))
         .get('/browse-events',
         (res, req) => eventsController.getBrowseEventsPage(res, req))
         .get('/create-event',
