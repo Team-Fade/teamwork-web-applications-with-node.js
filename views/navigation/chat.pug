@@ -1,0 +1,18 @@
+extend ../common/_master
+
+block main
+    link(rel='stylesheet', href='../../public/css/chat/chat.css', type='text/css')
+    div(class="row")
+        div(class="col s6" id="chat")
+            ul(class="pages  ")
+                li(class="login-page")
+                    div(class="form grey darken-4")
+                        h3(class="title center-align" id="choose-nickname-header")
+                            |Choose nickname
+                        input(class="usernameInput center-align" id="username-input-box" type="text" maxlength="14")
+                li(class="chat-page light-green lighter-4")
+                    div(class="chatArea")
+                        ul(class="messages light-green")
+                    input(class="inputMessage grey darken-4 light-green-text text-lighter-4" id="message-box" placeholder="Type here...")        
+    script(src="/socket.io/socket.io.js")
+    script(src="/public/js/chat/chat.js")

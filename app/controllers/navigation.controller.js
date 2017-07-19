@@ -8,6 +8,9 @@ const navigationController = {
     getRankingListPage(req, res) {
         return res.render('navigation/ranking');
     },
+    getChatPage(req, res) {
+        return res.render('navigation/chat');
+    },
     getLoginPage(req, res) {
         return res.render('users/login');
     },
