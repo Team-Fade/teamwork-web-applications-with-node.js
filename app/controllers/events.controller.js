@@ -44,7 +44,8 @@ const eventsController = (data) => {
                     }
 
                     // Add event in events collection
-                    return data.events.add(event)
+                    return data.events
+                        .add(event)
                         .then((_) => {
                             // Add event in user createdEvents
                             data.users.edit(
@@ -67,7 +68,8 @@ const eventsController = (data) => {
             const eventName = req.body.name;
             const userToJoin = res.locals.user.username;
 
-            return data.events.getOne({ eventName: eventName })
+            return data.events
+                .getOne({ eventName: eventName })
                 .then((event) => {
                     data.users.getOne({
                         $and: [
