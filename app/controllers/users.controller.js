@@ -1,9 +1,18 @@
+const fs = require('fs');
+
 const usersController = (data) => {
     return {
         getProfilePage: (req, res) => {
-            return res.render('users/profile', {
-                user: res.locals.user,
-            });
+            const username = res.locals.user.username;
+
+            return data.users
+                .getOne({ username: username })
+                .then((user) => {
+                    return res.render('users/profile', {
+                        encodedImg: user.profileImg.encoded,
+                        // user: res.locals.user,
+                    });
+                });
         },
         getProfileEditPage: (req, res) => {
             return res.render('users/profile-edit', {
@@ -11,23 +20,48 @@ const usersController = (data) => {
             });
         },
         editProfilePage: (req, res) => {
-            const updatedUser = req.body;
+            const username = res.locals.user.username;
 
-            updatedUser.username = res.locals.user.username;
-            updatedUser.email = res.locals.user.email;
+            if (req.file) {
+                const newImg = fs.readFileSync(req.file.path);
 
-            data.users.edit({
-                username: updatedUser.username,
-            }, {
-                $set: updatedUser,
-            }, {
-                new: true,
-            }).then(() => {
-                req.logIn(updatedUser, (err) => {
-                    if (err) throw err;
-                    res.redirect('/user/profile');
-                });
-            });
+                const image = {
+                    contentType: req.file.mimetype,
+                    size: req.file.size,
+                    encoded: newImg.toString('base64'),
+                };
+
+                return data.users.edit(
+                    { username: username },
+                    { $set: { profileImg: image } })
+                    .then(() => {
+                        // delete temp file
+                        fs.unlink(req.file.path, (err) => {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    })
+                    .then(() => {
+                        res.redirect('/user/profile');
+                    });
+            }
+
+            // updatedUser.username = res.locals.user.username;
+            // updatedUser.email = res.locals.user.email;
+
+            // data.users.edit({
+            //     username: updatedUser.username,
+            // }, {
+            //         $set: updatedUser,
+            //     }, {
+            //         new: true,
+            //     }).then(() => {
+            //         req.logIn(updatedUser, (err) => {
+            //             if (err) throw err;
+            //             res.redirect('/user/profile');
+            //         });
+            //     });
         },
     };
 };

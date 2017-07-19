@@ -1,3 +1,5 @@
+const upload = require('../../config/multer.config');
+
 const attach = (app, router, data) => {
     const usersController = require('../controllers/users.controller')(data);
 
@@ -8,7 +10,7 @@ const attach = (app, router, data) => {
         .get('/profile/edit', (req, res) => {
             usersController.getProfileEditPage(req, res);
         })
-        .post('/profile/edit', (req, res) => {
+        .post('/profile/edit', upload.single('profile'), (req, res) => {
             usersController.editProfilePage(req, res);
         });
     app.use('/user', router);

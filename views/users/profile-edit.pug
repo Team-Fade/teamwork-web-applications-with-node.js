@@ -5,10 +5,16 @@ block main
     #profile-container.col-xs-12.col-sm-6.col-sm-offset-3.col-md-6.col-md-offset-3
         .well.well-sm
             .row
-                form(action="/user/profile/edit" method="POST")
+                form(action="/user/profile/edit" method="POST" enctype="multipart/form-data")
                     .col-sm-6.col-md-4
-                        img.img-rounded.img-responsive(src=user.imageUrl, alt=user.username)
-                        input(type="text" name="imageUrl" value=user.imageUrl placeholder="URL to new profile picture" required)
+                        //- img.img-rounded.img-responsive(src=user.imageUrl, alt=user.username)
+                        div(class="col s4 file-field input-field")
+                            div(class="btn deep-orange")
+                                span
+                                    |Image
+                                input(type="file" name="profile" accept="application/x-zip-compressed,image/*")                 
+                            div(class="file-path-wrapper")
+                            input(class="file-path validate" type="text")
                     .col-sm-6.col-md-8.text-center
                         input(type="text" name="firstName" value=user.firstName placeholder="First Name" required)
                         input(type="text" name="lastName" value=user.lastName placeholder="Last Name" required)                                                
@@ -20,6 +26,5 @@ block main
                         i.glyphicon.glyphicon-envelope
                             = user.email
                         br
-
-                        button.btn.btn-primary
+                        button(type='submit' class='btn deep-orange' id='edit-profile-btn')
                             | Submit

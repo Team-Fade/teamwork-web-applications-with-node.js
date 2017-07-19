@@ -4,7 +4,7 @@ block main
     link(rel='stylesheet', href='../../public/css/users/profile.css', type='text/css')
     div(class="row")
         div(class="card col s6 m5 l3" id="profile-container")
-            img(class="responsive-img circle" src="#{user.imageUrl}")
+            img(class="responsive-img circle" src="data:image/png;base64," + encodedImg)
             p(class="flow-text")
                 |Username: #{user.username}
             p(class="flow-text")
