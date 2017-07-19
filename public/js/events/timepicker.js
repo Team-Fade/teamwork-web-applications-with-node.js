@@ -9,5 +9,5 @@ $('.timepicker').pickatime({
     canceltext: 'Cancel', // Text for cancel-button
     autoclose: false, // automatic close timepicker
     ampmclickable: true, // make AM PM clickable
-    aftershow: function() {}, // Function for after opening timepicker  
+    aftershow: function() {}, // Function for after opening timepicker
 });
