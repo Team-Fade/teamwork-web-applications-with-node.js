@@ -1,17 +1,17 @@
 const passport = require('passport');
 const validator = require('../../utils/validator');
+const fs = require('fs');
 
 const authenticationController = ({ users }) => {
     return {
         register(req, res, next) {
-            const user = req.body;
+            const user = JSON.parse(JSON.stringify(req.body));
 
             if (!validator.isValidUser(user)) {
                 res.redirect('/error');
                 return;
             }
 
-            // Check if user with the same username already exists in db
             users.collection
                 .findOne(
                 { 'username': req.body.username }, (_, existingUser) => {
@@ -23,21 +23,19 @@ const authenticationController = ({ users }) => {
                     }
 
                     // Sets the default profile picture
-                    user.imageUrl = 'https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png';
+                    const newImg =
+                        fs.readFileSync(
+                            'public/imgs/default-profile.jpg');
 
+                    const image = {
+                        default: newImg.toString('base64'),
+                    };
+
+                    user.profileImage = image;
                     return users.add(user)
                         .then((dbItem) => {
                             // After successful register, user is logged in
-                            req.login({
-                                username: user.username,
-                                password: user.password,
-                            }, (err) => {
-                                if (err) {
-                                    req.flash('error', err);
-                                }
-
-                                return res.redirect('/');
-                            });
+                            return this.login(req, res, next);
                         })
                         .catch((err) => {
                             req.flash('error', err);
