@@ -3,14 +3,25 @@ const fs = require('fs');
 const usersController = (data) => {
     return {
         getProfilePage: (req, res) => {
+            if (!res.locals.user) {
+                return res.redirect('/');
+            }
+
             const username = res.locals.user.username;
 
             return data.users
                 .getOne({ username: username })
                 .then((user) => {
+                    if (user.profileImage.encoded) {
+                        return res.render('users/profile', {
+                            encodedImg: user.profileImage.encoded,
+                            user: res.locals.user,
+                        });
+                    }
+
                     return res.render('users/profile', {
-                        encodedImg: user.profileImg.encoded,
-                        // user: res.locals.user,
+                        defaultImg: user.profileImage.default,
+                        user: res.locals.user,
                     });
                 });
         },
@@ -33,7 +44,7 @@ const usersController = (data) => {
 
                 return data.users.edit(
                     { username: username },
-                    { $set: { profileImg: image } })
+                    { $set: { profileImage: image } })
                     .then(() => {
                         // delete temp file
                         fs.unlink(req.file.path, (err) => {

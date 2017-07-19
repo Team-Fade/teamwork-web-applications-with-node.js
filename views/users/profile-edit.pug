@@ -16,12 +16,12 @@ block main
                             div(class="file-path-wrapper")
                             input(class="file-path validate" type="text")
                     .col-sm-6.col-md-8.text-center
-                        input(type="text" name="firstName" value=user.firstName placeholder="First Name" required)
-                        input(type="text" name="lastName" value=user.lastName placeholder="Last Name" required)                                                
+                        input(type="text" name="firstName" value=user.firstName placeholder="First Name")
+                        input(type="text" name="lastName" value=user.lastName placeholder="Last Name")                                                
                         h4#username
                             = user.username
                         i.glyphicon.glyphicon-map-marker
-                        input(type="text" name="city" value=user.city placeholder="City" required)                                                
+                        input(type="text" name="city" value=user.city placeholder="City")                                                
                         br
                         i.glyphicon.glyphicon-envelope
                             = user.email

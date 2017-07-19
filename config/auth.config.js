@@ -19,6 +19,7 @@ const configureAuthentification = (app, { users }) => {
                         return done(null, false,
                             { message: 'Incorrect username.' });
                     }
+
                     if (!verifyHashedPassword(
                         password,
                         user.password.salt,
@@ -58,7 +59,6 @@ const configureAuthentification = (app, { users }) => {
             firstName: user.firstName,
             lastName: user.lastName,
             city: user.city,
-            imageUrl: user.imageUrl,
             email: user.email,
         };
         done(null, userInfo);

@@ -4,17 +4,20 @@ block main
     link(rel='stylesheet', href='../../public/css/users/profile.css', type='text/css')
     div(class="row")
         div(class="card col s6 m5 l3" id="profile-container")
-            img(class="responsive-img circle" src="data:image/png;base64," + encodedImg)
+            if defaultImg
+                img(class="responsive-img circle" src="data:image/png;base64," + defaultImg)
+            else 
+                img(class="responsive-img circle" src="data:image/png;base64," + encodedImg)
             p(class="flow-text")
-                |Username: #{user.username}
+                    |Username: #{user.username}
             p(class="flow-text")
-                |Firstname: #{user.firstName}
+                    |Firstname: #{user.firstName}
             p(class="flow-text")
-                |Lastname: #{user.lastName}
+                    |Lastname: #{user.lastName}
             p(class="flow-text")
-                |City: #{user.city}
+                    |City: #{user.city}
             p(class="flow-text")
-                |Lastname: #{user.email}
+                    |Lastname: #{user.email}
         div(class="col s6 m5 l3" id="profile-buttons")
             form(action="/user/profile/edit")
                 button(class="btn deep-orange")
