@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { imageHelper } = require('../../utils');
 
 const usersController = (data) => {
     return {
@@ -34,13 +35,7 @@ const usersController = (data) => {
             const username = res.locals.user.username;
 
             if (req.file) {
-                const newImg = fs.readFileSync(req.file.path);
-
-                const image = {
-                    contentType: req.file.mimetype,
-                    size: req.file.size,
-                    encoded: newImg.toString('base64'),
-                };
+                const image = imageHelper.getNewProfilePicture(req);
 
                 return data.users.edit(
                     { username: username },
@@ -48,14 +43,17 @@ const usersController = (data) => {
                     .then(() => {
                         fs.unlink(req.file.path, (err) => {
                             if (err) {
-                                console.log(err);
+                                req.flash('error', err);
                             }
                         });
                     })
                     .then(() => {
-                        res.redirect('/user/profile');
+                        return res.redirect('/user/profile');
                     });
             }
+
+            // Warning: Add possibility to change something else
+            return res.redirect('/user/profile');
 
             // updatedUser.username = res.locals.user.username;
             // updatedUser.email = res.locals.user.email;

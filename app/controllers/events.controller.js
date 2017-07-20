@@ -20,7 +20,6 @@ const eventsController = (data) => {
                 });
         },
         getCreateEventPage(req, res) {
-            // Only logged user can create event
             if (res.locals.user) {
                 return res.render('events/create-event');
             }
@@ -31,7 +30,6 @@ const eventsController = (data) => {
             const event = req.body;
             event.author = res.locals.user.username;
 
-            // Check if event doesnt exists in db
             return data.events.collection
                 .findOne(
                 { 'eventName': event.eventName, 'author': event.author },
@@ -43,11 +41,9 @@ const eventsController = (data) => {
                         return res.redirect('/create-event');
                     }
 
-                    // Add event in events collection
                     return data.events
                         .add(event)
                         .then((_) => {
-                            // Add event in user createdEvents
                             data.users.edit(
                                 { username: event.author },
                                 { $addToSet: { createdEvents: event } },
@@ -82,7 +78,7 @@ const eventsController = (data) => {
                     })
                         .then((user) => {
                             if (user) {
-                                // I dont know why this is not working?? Any idea?
+                                // I dont know why this is not working.
                                 req.flash('error',
                                     'You are already joined in this event!');
                             }

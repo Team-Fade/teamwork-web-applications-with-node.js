@@ -1,19 +1,19 @@
 const passport = require('passport');
-const validator = require('../../utils/validator');
-const fs = require('fs');
+const { validator } = require('../../utils');
+const { imageHelper } = require('../../utils');
 
 const authenticationController = ({ users }) => {
     return {
         register(req, res, next) {
             const user = JSON.parse(JSON.stringify(req.body));
 
-            // Need to be fixed
-            if (!validator.isValidUser(user)) {
-                res.redirect('/error');
-                return;
+            if (!validator.validateUser(user).isValid) {
+                const errorMessage = validator.validateUser(user).errorMessage;
+                req.flash('error', errorMessage);
+                return res.render('users/register');
             }
 
-            users.collection
+            return users.collection
                 .findOne(
                 { 'username': req.body.username }, (_, existingUser) => {
                     if (existingUser) {
@@ -23,16 +23,8 @@ const authenticationController = ({ users }) => {
                         return res.redirect('/register');
                     }
 
-                    const newImg =
-                        fs.readFileSync(
-                            'public/imgs/default-profile.jpg');
-
-                    const image = {
-                        default: newImg.toString('base64'),
-                    };
-
-                    user.profileImage = image;
-
+                    user.profileImage = imageHelper.getDefaultProfilePricture();
+                    console.log(user);
                     return users.add(user)
                         .then((dbItem) => {
                             return this.login(req, res, next);

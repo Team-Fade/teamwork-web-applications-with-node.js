@@ -1,8 +1,7 @@
 const BaseData = require('./base/base.data');
 const User = require('../models/user.model');
-const validator = require('../utils/validator');
-const generateHashedPassword
-    = require('../utils/hashPassword').generateHashedPassword;
+const { validator } = require('../utils');
+const { hashPasswordHelper } = require('../utils');
 
 class UsersData extends BaseData {
     constructor(db) {
@@ -10,11 +9,17 @@ class UsersData extends BaseData {
     }
 
     add(user) {
-        if (validator.isValidUser(user)) {
-            user.password = generateHashedPassword(user.password);
+        if (validator.validateUser(user)) {
+            user.password =
+                hashPasswordHelper.generateHashedPassword(user.password);
+
+            if (User.isValid(user)) {
+                return super.add(user);
+            }
         }
 
-        return super.add(user);
+        // Warning: TODO: We should return properly error message
+        return super.add(null);
     }
 
     findUserByUsername(username) {
@@ -22,9 +27,6 @@ class UsersData extends BaseData {
             .then((user) => {
                 return user;
             });
-    }
-
-    validateUserPassword(username, password, done) {
     }
 }
 
