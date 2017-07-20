@@ -1,23 +1,30 @@
 const validator = {
     // Warning: TODO: Update the validator
-    isValidUser: (user) => {
+    validateUser: (user) => {
+        const error = {};
+
         if (!user.username ||
             typeof user.username !== 'string' ||
             user.username.length < 4) {
-            return false;
+            error.errorMessage =
+                'Invalid username: length must be atleast 4 symbols!';
+            error.isValid = false;
         }
         if (!user.email ||
             // eslint-disable-next-line
             !(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(user.email))) {
-            return false;
+            error.errorMessage = 'Incorrect email!';
+            error.isValid = false;
         }
         if (!user.password ||
             typeof user.password !== 'string' ||
             user.password.length < 6) {
-            return false;
+            error.errorMessage =
+                'Invalid password: length must be atleast 6 symbols!';
+            error.isValid = false;
         }
 
-        return true;
+        return error;
     },
     isValidEvent: (event) => {
 
