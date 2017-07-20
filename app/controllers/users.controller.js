@@ -46,7 +46,6 @@ const usersController = (data) => {
                     { username: username },
                     { $set: { profileImage: image } })
                     .then(() => {
-                        // delete temp file
                         fs.unlink(req.file.path, (err) => {
                             if (err) {
                                 console.log(err);

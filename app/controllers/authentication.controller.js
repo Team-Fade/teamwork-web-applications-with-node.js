@@ -7,6 +7,7 @@ const authenticationController = ({ users }) => {
         register(req, res, next) {
             const user = JSON.parse(JSON.stringify(req.body));
 
+            // Need to be fixed
             if (!validator.isValidUser(user)) {
                 res.redirect('/error');
                 return;
@@ -22,7 +23,6 @@ const authenticationController = ({ users }) => {
                         return res.redirect('/register');
                     }
 
-                    // Sets the default profile picture
                     const newImg =
                         fs.readFileSync(
                             'public/imgs/default-profile.jpg');
@@ -32,9 +32,9 @@ const authenticationController = ({ users }) => {
                     };
 
                     user.profileImage = image;
+
                     return users.add(user)
                         .then((dbItem) => {
-                            // After successful register, user is logged in
                             return this.login(req, res, next);
                         })
                         .catch((err) => {
