@@ -1,9 +1,11 @@
 class Event {
-    // static isValid(model) {
-    //     return typeof model !== 'undefined' &&
-    //         typeof model.text === 'string' &&
-    //         model.text.length > 3;
-    // }
+    static isValid(model) {
+        return typeof model !== 'undefined' &&
+            typeof model.description === 'string' &&
+            model.description.length > 3;
+
+            // Warning: TODO: Extend verification
+    }
 
     static toViewModel(model) {
         const viewModel = new Event();
