@@ -1,4 +1,5 @@
 const fs = require('fs');
+const Binary = require('mongodb').Binary;
 
 const getDefaultProfilePricture = () => {
     const newImg =
@@ -6,7 +7,7 @@ const getDefaultProfilePricture = () => {
             'public/imgs/default-profile.jpg');
 
     const image = {
-        default: newImg.toString('base64'),
+        default: new Binary(newImg.toString('base64')),
     };
 
     return image;
@@ -18,7 +19,7 @@ const getNewProfilePicture = (req) => {
     const image = {
         contentType: req.file.mimetype,
         size: req.file.size,
-        encoded: newImg.toString('base64'),
+        encoded: new Binary(newImg.toString('base64')),
     };
 
     return image;

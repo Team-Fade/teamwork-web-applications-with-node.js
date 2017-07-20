@@ -15,7 +15,7 @@ const usersController = (data) => {
                 .then((user) => {
                     if (user.profileImage.encoded) {
                         return res.render('users/profile', {
-                            encodedImg: user.profileImage.encoded,
+                            encodedImg: user.profileImage.encoded.value(),
                             user: res.locals.user,
                         });
                     }
