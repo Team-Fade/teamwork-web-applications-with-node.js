@@ -1,7 +1,9 @@
 const validator = {
     // Warning: TODO: Update the validator
     validateUser: (user) => {
-        const error = {};
+        const error = {
+            isValid: true,
+        };
 
         if (!user.username ||
             typeof user.username !== 'string' ||
