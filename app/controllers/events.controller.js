@@ -13,7 +13,25 @@ const eventsController = (data) => {
             return next();
         },
         getBrowseEventsPage(req, res) {
-            data.events.getAllItems({}, {})
+            return data.events.getAllItems({}, {})
+                .then((events) => {
+                    return res.render('events/browse-events',
+                        { events: events });
+                });
+        },
+        getFilteredEvents(req, res) {
+            const event = req.body;
+
+            const filterArray = [];
+            Object.keys(event).forEach((key) => {
+                const obj = {};
+                if (event[key] !== '') {
+                    obj[key] = event[key];
+                    filterArray.push(obj);
+                }
+            });
+
+            return data.events.getAllItems({ $or: filterArray })
                 .then((events) => {
                     return res.render('events/browse-events',
                         { events: events });
