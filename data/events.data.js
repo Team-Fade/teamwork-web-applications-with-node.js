@@ -5,6 +5,22 @@ class EventsData extends BaseData {
     constructor(db) {
         super(db, Event);
     }
+
+    groupEvents() {
+        return this.collection.aggregate(
+            [
+                {
+                    $group:
+                    {
+                        _id: null,
+                        eventNames: { $push: '$eventName' },
+                        eventLocations: { $push: '$eventLocation' },
+                        eventTypes: { $push: '$eventType' },
+                    },
+                },
+            ])
+            .toArray();
+    }
 }
 
 module.exports = EventsData;

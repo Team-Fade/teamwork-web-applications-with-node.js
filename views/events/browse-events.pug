@@ -2,6 +2,7 @@ extend ../common/_master
 
 block main
     link(rel='stylesheet', href='../../public/css/events/browse-events.css', type='text/css')
+    script(src="public/js/events/autocomplete.js")
     form(id='browse-events-form' class="col s6" action='/browse-events' method='POST')
     div(class="row")
         div(class="col s3")
@@ -39,84 +40,19 @@ block main
                 |Search
         div(class="col s9" id="events-box")
             div(class="row")
+            each event in events
                 div(class="col s4 event-view")
                     div(class="card")
                         div(class="card-image")
                             img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
                             span(class="card-title")
-                                |Event name
+                                |#{event.eventName}
                         div(class="card-content")
                             p
                                 |I am a very simple card. I am good at containing small bits of information.
                                 |I am convenient because I require little markup to use effectively.
                         div(class="card-action")
                             a(href="#")
-                                |View more
-                div(class="col s4 event-view")
-                    div(class="card")
-                        div(class="card-image")
-                            img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
-                            span(class="card-title")
-                                |Event name
-                        div(class="card-content")
-                            p
-                                |I am a very simple card. I am good at containing small bits of information.
-                                |I am convenient because I require little markup to use effectively.
-                        div(class="card-action")
-                            a(href="#")
-                                |View more
-                div(class="col s4 event-view")
-                    div(class="card")
-                        div(class="card-image")
-                            img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
-                            span(class="card-title")
-                                |Event name
-                        div(class="card-content")
-                            p
-                                |I am a very simple card. I am good at containing small bits of information.
-                                |I am convenient because I require little markup to use effectively.
-                        div(class="card-action")
-                            a(href="#")
-                                |View more                                     
-            div(class="row")
-                div(class="col s4 event-view")
-                    div(class="card")
-                        div(class="card-image")
-                            img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
-                            span(class="card-title")
-                                |Event name
-                        div(class="card-content")
-                            p
-                                |I am a very simple card. I am good at containing small bits of information.
-                                |I am convenient because I require little markup to use effectively.
-                        div(class="card-action")
-                            a(href="#")
-                                |View more
-                div(class="col s4 event-view")
-                    div(class="card")
-                        div(class="card-image")
-                            img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
-                            span(class="card-title")
-                                |Event name
-                        div(class="card-content")
-                            p
-                                |I am a very simple card. I am good at containing small bits of information.
-                                |I am convenient because I require little markup to use effectively.
-                        div(class="card-action")
-                            a(href="#")
-                                |View more
-                div(class="col s4 event-view")
-                    div(class="card")
-                        div(class="card-image")
-                            img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
-                            span(class="card-title")
-                                |Event name
-                        div(class="card-content")
-                            p
-                                |I am a very simple card. I am good at containing small bits of information.
-                                |I am convenient because I require little markup to use effectively.
-                        div(class="card-action")
-                            a(href="#")
-                                |View more         
+                                |View more 
     script(src="../../public/js/events/datepicker.js")
 
