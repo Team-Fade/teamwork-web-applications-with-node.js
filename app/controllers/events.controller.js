@@ -31,6 +31,10 @@ const eventsController = (data) => {
                 }
             });
 
+            if (filterArray.length < 1) {
+                return res.redirect('/browse-events');
+            }
+
             return data.events.getAllItems({ $or: filterArray })
                 .then((events) => {
                     return res.render('events/browse-events',
