@@ -5,6 +5,7 @@ block main
     script(src="public/js/events/autocomplete.js")
     script(src="public/js/events/view.event.js")
     script(src="public/js/events/join.event.js")
+    script(src="public/js/events/leave.event.js")
     form(id='browse-events-form' class="col s6" action='/browse-events' method='POST')
         div(class="row")
             div(class="col s12 m3 l3")
@@ -72,7 +73,9 @@ block main
                             div(class="btn-container hidden")
                                 button(id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
                                     |Participate
-                                button(id="manage-btn" href="/manage-event" class="modal-action modal-close waves-effect waves-green btn-flat")
+                                button(id="leave-btn" class="modal-action modal-close waves-effect waves-green btn-flat leave-btn hidden")
+                                    |Leave
+                                button(id="manage-btn" href="/manage-event" class="modal-action modal-close waves-effect waves-green btn-flat hidden")
                                     |Manage 
                                 a(href="/about" class="modal-action modal-close waves-effect waves-green btn-flat")
                                     |Bring me back   

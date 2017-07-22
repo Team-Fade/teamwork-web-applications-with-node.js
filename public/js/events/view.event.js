@@ -26,9 +26,12 @@ $(() => {
                         if (createdEvents) {
                             createdEvents.forEach((event) => {
                                 if (event.eventName === eventName) {
+                                    $(modal.find('#manage-btn'))
+                                        .removeClass('hidden');
                                     $(modal.find('#participate-btn'))
-                                        .prop('disabled', true);
-
+                                        .addClass('hidden');
+                                    $(modal.find('#leave-btn'))
+                                        .addClass('hidden');
                                     return;
                                 }
                             });
@@ -40,8 +43,9 @@ $(() => {
                                     $(modal.find('#manage-btn'))
                                         .prop('disabled', true);
                                     $(modal.find('#participate-btn'))
-                                        .text('Leave');
-
+                                        .addClass('hidden');
+                                    $(modal.find('#leave-btn'))
+                                        .removeClass('hidden');
                                     return;
                                 }
                             });

@@ -35,39 +35,6 @@ const apiEventsController = (data) => {
 
             return res.send({ errorMessage: 'Not authenticated user' });
         },
-        joinEvent(req, res) {
-            const eventName = req.body.eventName;
-            const userToJoin = res.locals.user.username;
-
-            return data.events
-                .getOne({ eventName: eventName })
-                .then((event) => {
-                    return data.users.getOne({
-                        $and: [
-                            { username: userToJoin },
-                            {
-                                joinedEvents:
-                                { $elemMatch: { eventName: eventName } },
-                            },
-                        ],
-                    })
-                        .then((user) => {
-                            if (user) {
-                                // I dont know why this is not working.
-                                req.flash('error',
-                                    'You are already joined in this event!');
-                            }
-
-                            return data.users.edit(
-                                { username: userToJoin },
-                                { $addToSet: { joinedEvents: event } },
-                                {
-                                    upsert: false,
-                                    multi: false,
-                                });
-                        });
-                });
-        },
     };
 };
 

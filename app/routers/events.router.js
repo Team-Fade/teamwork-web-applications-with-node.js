@@ -11,7 +11,11 @@ const attach = (app, router, data) => {
         .post('/create-event',
         (req, res) => {
             eventsController.createEvent(req, res);
-        });
+        })
+        .post('/event/join-event', (req, res) =>
+            eventsController.joinEvent(req, res))
+        .post('/event/leave-event', (req, res) =>
+            eventsController.leaveEvent(req, res));
 
     app.use(router);
 };

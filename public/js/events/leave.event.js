@@ -1,10 +1,10 @@
 /* globals $ */
 
 $(() => {
-    $('.participate-btn').click((ev) => {
+    $('.leave-btn').click((ev) => {
         $.ajax({
             type: 'POST',
-            url: '/event/join-event',
+            url: '/event/leave-event',
             data: {
                 eventName: $(ev.target)
                     .parent()

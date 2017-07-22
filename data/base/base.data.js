@@ -60,9 +60,7 @@ class BaseData {
     }
 
     edit(filter, options) {
-        return this.collection.findOneAndUpdate(filter, options, {
-            new: true,
-        })
+        return this.collection.update(filter, options)
             .then((model) => {
                 return this.modelClass.toViewModel(model);
             });
