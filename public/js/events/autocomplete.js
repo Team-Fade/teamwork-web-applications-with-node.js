@@ -1,7 +1,12 @@
 /* globals $ */
 
 $(() => {
-    fetch('/api/events')
+    fetch('/api/browse-events', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+    })
         .then((res) => {
             return res.json();
         })

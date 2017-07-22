@@ -61,6 +61,7 @@ const configureAuthentification = (app, { users }) => {
             city: user.city,
             email: user.email,
         };
+
         done(null, userInfo);
     });
 

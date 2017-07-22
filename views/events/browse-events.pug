@@ -3,6 +3,7 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/events/browse-events.css', type='text/css')
     script(src="public/js/events/autocomplete.js")
+    script(src="public/js/events/view.event.js")
     form(id='browse-events-form' class="col s6" action='/browse-events' method='POST')
         div(class="row")
             div(class="col s3")
@@ -40,7 +41,7 @@ block main
                     |Search
             div(class="col s9" id="events-box")
                 div(class="row")
-                each event in events
+                each event, index in events
                     div(class="col s4 event-view")
                         div(class="card")
                             div(class="card-image")
@@ -52,9 +53,9 @@ block main
                                     |I am a very simple card. I am good at containing small bits of information.
                                     |I am convenient because I require little markup to use effectively.
                             div(class="card-action")
-                                a(href="#modal1" class="modal-trigger")
+                                a(href="#modal" + index data-target="modal" + index class="modal-trigger")
                                     |View more
-                    div(id="modal1" class="modal modal-fixed-footer")
+                    div(id="modal" + index class="modal modal-fixed-footer")
                         div(class="modal-content row")
                             div(class="col s6")
                                 img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg" class="modal-image")

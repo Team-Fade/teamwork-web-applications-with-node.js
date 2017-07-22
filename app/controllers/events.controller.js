@@ -1,17 +1,17 @@
 const eventsController = (data) => {
     return {
-        getViewEventPage(req, res, next) {
-            const eventId = req.params.id;
-            if (eventId) {
-                return data.events.getById(eventId)
-                    .then((event) => {
-                        return res.render('events/event-view',
-                            { event: event });
-                    });
-            }
+        // getViewEventPage(req, res, next) {
+        //     const eventId = req.params.id;
+        //     if (eventId) {
+        //         return data.events.getById(eventId)
+        //             .then((event) => {
+        //                 return res.render('events/event-view',
+        //                     { event: event });
+        //             });
+        //     }
 
-            return next();
-        },
+        //     return next();
+        // },
         getBrowseEventsPage(req, res) {
             return data.events.getAllItems({}, {})
                 .then((events) => {
@@ -32,7 +32,11 @@ const eventsController = (data) => {
             });
 
             if (filterArray.length < 1) {
-                return res.redirect('/browse-events');
+                return data.events.getAllItems({})
+                    .then((events) => {
+                        return res.render('events/browse-events',
+                            { events: events });
+                    });
             }
 
             return data.events.getAllItems({ $or: filterArray })
