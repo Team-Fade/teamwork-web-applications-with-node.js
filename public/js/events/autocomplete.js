@@ -10,41 +10,43 @@ $(() => {
         .then((res) => {
             return res.json();
         })
-        .then((events) => {
-            $('#eventName').autocomplete({
-                data: events.eventNames.reduce((obj, v) => {
-                    obj[v] = null;
-                    return obj;
-                }, {}),
-                limit: 20,
-                onAutocomplete: (val) => {
-                    // Callback function when value is autcompleted.
-                },
-                minLength: 1,
-            });
+        .then((data) => {
+            if (!data.errorMessage) {
+                $('#eventName').autocomplete({
+                    data: data.eventNames.reduce((obj, v) => {
+                        obj[v] = null;
+                        return obj;
+                    }, {}),
+                    limit: 20,
+                    onAutocomplete: (val) => {
+                        // Callback function when value is autcompleted.
+                    },
+                    minLength: 1,
+                });
 
-            $('#eventLocation').autocomplete({
-                data: events.eventLocations.reduce((obj, v) => {
-                    obj[v] = null;
-                    return obj;
-                }, {}),
-                limit: 20,
-                onAutocomplete: (val) => {
-                    // Callback function when value is autcompleted.
-                },
-                minLength: 1,
-            });
+                $('#eventLocation').autocomplete({
+                    data: data.eventLocations.reduce((obj, v) => {
+                        obj[v] = null;
+                        return obj;
+                    }, {}),
+                    limit: 20,
+                    onAutocomplete: (val) => {
+                        // Callback function when value is autcompleted.
+                    },
+                    minLength: 1,
+                });
 
-            $('#eventType').autocomplete({
-                data: events.eventTypes.reduce((obj, v) => {
-                    obj[v] = null;
-                    return obj;
-                }, {}),
-                limit: 20,
-                onAutocomplete: (val) => {
-                    // Callback function when value is autcompleted.
-                },
-                minLength: 1,
-            });
+                $('#eventType').autocomplete({
+                    data: data.eventTypes.reduce((obj, v) => {
+                        obj[v] = null;
+                        return obj;
+                    }, {}),
+                    limit: 20,
+                    onAutocomplete: (val) => {
+                        // Callback function when value is autcompleted.
+                    },
+                    minLength: 1,
+                });
+            }
         });
 });

@@ -24,7 +24,7 @@ const authenticationController = ({ users }) => {
                     }
 
                     user.profileImage = imageHelper.getDefaultProfilePricture();
-                    console.log(user);
+
                     return users.add(user)
                         .then((dbItem) => {
                             return this.login(req, res, next);
