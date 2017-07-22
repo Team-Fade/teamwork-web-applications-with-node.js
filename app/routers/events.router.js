@@ -2,10 +2,6 @@ const attach = (app, router, data) => {
     const eventsController = require('../controllers/events.controller')(data);
 
     router
-        // .get('/browse-events/:id?',
-        // (res, req, next) => eventsController.getViewEventPage(res, req, next))
-        // .post('/browse-events/:id',
-        // (res, req) => eventsController.joinEvent(res, req))
         .get('/browse-events',
         (res, req) => eventsController.getBrowseEventsPage(res, req))
         .post('/browse-events',

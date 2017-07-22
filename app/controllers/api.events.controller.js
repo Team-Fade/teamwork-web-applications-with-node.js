@@ -3,7 +3,11 @@ const apiEventsController = (data) => {
         getEvents(req, res, next) {
             return data.events.groupEvents()
                 .then((eventsData) => {
-                    return res.send(...eventsData);
+                    if (eventsData.length > 0) {
+                        return res.send(...eventsData);
+                    }
+
+                    return res.send({ errorMessage: 'No events' });
                 });
         },
         getUserEvents(req, res) {
@@ -14,16 +18,55 @@ const apiEventsController = (data) => {
                     data.users.getUserCreatedEvents(username),
                 ])
                     .then((events) => {
-                        return res.send(
-                            {
-                                user: username,
-                                joinedEvents: events[0],
-                                createdEvents: events[1],
-                            });
+                        if (events) {
+                            return res.send(
+                                {
+                                    joinedEvents: events[0],
+                                    createdEvents: events[1],
+                                });
+                        }
+
+                        return res.send({
+                            errorMessage:
+                            'No events avaible for this user',
+                        });
                     });
             }
 
-            return res.send({ user: null });
+            return res.send({ errorMessage: 'Not authenticated user' });
+        },
+        joinEvent(req, res) {
+            const eventName = req.body.eventName;
+            const userToJoin = res.locals.user.username;
+
+            return data.events
+                .getOne({ eventName: eventName })
+                .then((event) => {
+                    return data.users.getOne({
+                        $and: [
+                            { username: userToJoin },
+                            {
+                                joinedEvents:
+                                { $elemMatch: { eventName: eventName } },
+                            },
+                        ],
+                    })
+                        .then((user) => {
+                            if (user) {
+                                // I dont know why this is not working.
+                                req.flash('error',
+                                    'You are already joined in this event!');
+                            }
+
+                            return data.users.edit(
+                                { username: userToJoin },
+                                { $addToSet: { joinedEvents: event } },
+                                {
+                                    upsert: false,
+                                    multi: false,
+                                });
+                        });
+                });
         },
     };
 };
