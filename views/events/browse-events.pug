@@ -7,7 +7,7 @@ block main
     script(src="public/js/events/join.event.js")
     form(id='browse-events-form' class="col s6" action='/browse-events' method='POST')
         div(class="row")
-            div(class="col s3")
+            div(class="col s12 m3 l3")
                 div(class="row")
                     div(class="col s12")
                         div(class="row")
@@ -40,10 +40,10 @@ block main
                                 input(name="eventDate" type="date" class="datepicker")
                 button(type='submit' class='btn deep-orange' id='search-event-btn')
                     |Search
-            div(class="col s9" id="events-box")
+            div(class="col s12 m9 l9" id="events-box")
                 div(class="row")
                 each event, index in events
-                    div(class="col s4 event-view")
+                    div(class="col s12 m4 l4 event-view")
                         div(class="card")
                             div(class="card-image")
                                 img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")

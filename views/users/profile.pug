@@ -3,7 +3,7 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/users/profile.css', type='text/css')
     div(class="row")
-        div(class="card col s6 m5 l3" id="profile-container")
+        div(class="card col s12 m5 l3" id="profile-container")
             if defaultImg
                 img(class="responsive-img circle" src="data:image/png;base64," + defaultImg)
             else 
@@ -18,7 +18,7 @@ block main
                     |City: #{user.city}
             p(class="flow-text")
                     |Lastname: #{user.email}
-        div(class="col s6 m5 l3" id="profile-buttons")
+        div(class="col s12 m5 l3" id="profile-buttons")
             form(action="/user/profile/edit")
                 button(class="btn deep-orange")
                     |Edit profile
@@ -28,3 +28,6 @@ block main
             form(action="/user/my-events")
                 button(class="btn deep-orange")
                     |My events
+            form(action="/user/browse-events")
+                button(class="btn deep-orange")
+                    |Browse all

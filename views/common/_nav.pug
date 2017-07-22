@@ -1,17 +1,14 @@
 mixin nav()
     nav(class="nav-wrapper  light-green" id="navbar")
-        a(href="/" class="brand-logo light-green-text text-lighten-4")
+        a(href="/" class="brand-logo hide-on-med-and-down light-green-text text-lighten-4")
             |Fade
-        ul(ul id="nav-mobile" class="right hide-on-med-and-down light-green-text text-lighten-4")                    
+        ul(ul id="nav-mobile" class="right light-green-text text-lighten-4")                    
             li(class="" id="navbar-home")
                 a(href='/')
                    | Home
             li(class="" id="navbar-about")   
                 a(href='/about')
-                    | About us         
-            li(class="" id="navbar-ranking")
-                a(href='/ranking')
-                    | Top Events
+                    | About us
             if user
                 li(class="" id="navbar-profile")
                     a(href='/user/profile')
