@@ -37,7 +37,26 @@ const usersController = (data) => {
                 });
         },
         getMyEventsPage: (req, res) => {
-            return res.render('users/my-events');
+            const username = res.locals.user.username;
+
+            return Promise.all([
+                data.users.getUserJoinedEvents(username),
+                data.users.getUserCreatedEvents(username),
+            ])
+                .then((events) => {
+                    if (events) {
+                        return res.render('users/my-events',
+                            {
+                                joinedEvents: events[0],
+                                createdEvents: events[1],
+                            });
+                    }
+
+                    return res.render('users/my-events', {
+                        errorMessage:
+                        'No events avaible for this user',
+                    });
+                });
         },
         editProfilePage: (req, res) => {
             const username = res.locals.user.username;
