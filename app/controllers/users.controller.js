@@ -37,7 +37,7 @@ const usersController = (data) => {
                 });
         },
         getMyEventsPage: (req, res) => {
-            return res.redirect('users/my-events');
+            return res.render('users/my-events');
         },
         editProfilePage: (req, res) => {
             const username = res.locals.user.username;

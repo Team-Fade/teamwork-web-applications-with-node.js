@@ -44,6 +44,9 @@ const eventsController = (data) => {
 
             return res.redirect('/');
         },
+        getManageEventPage(req, res) {
+            return res.render('events/manage-event');
+        },
         createEvent(req, res) {
             const event = req.body;
             event.author = res.locals.user.username;

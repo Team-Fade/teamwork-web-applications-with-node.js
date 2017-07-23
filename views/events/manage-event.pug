@@ -1,0 +1,51 @@
+extend ../common/_master
+
+
+block main
+    link(rel='stylesheet', href='../../public/css/users/manage-event.css', type='text/css' )
+    form(id='create-event-form' class="col s6" action='/create-event' method='POST')            
+        div(class="input-field col s6")
+            input(name="eventName" id="eventName" type="text" class="validate")
+            label(for="eventName")
+                |Event name:
+        div(class="input-field col s6")
+            input(name="eventLocation" id="eventLocation" type="text" class="validate")
+            label(for="eventLocation")
+                |Event location:  
+        div(class="input-field col s6")
+            input(name="eventType" id="eventType" type="text" class="validate")
+            label(for="eventType")
+                |Event type:                 
+        div(class="input-field col s6")
+            input(name="eventDescription" id="eventDescription" type="text" class="validate")
+            label(for="eventDescription")
+                |Event description:
+        div(class="row")
+            div(class="col s6")
+                div(class="row")
+                    div(class="input-field col s6")
+                        i(class="material-icons prefix")|date_range                                                        
+                        input(name="eventDate" type="date" id="datepicker" class="datepicker")
+                        label(for="datepicker")
+                            |Pick date:
+            div(class="col s6")
+                div(class="row")
+                    div(class="input-field col s6")
+                        i(class="material-icons prefix")|access_time                                                        
+                        input(name="eventTime" type="date" id="eventTime" class="timepicker")
+                        label(for="eventTime")
+                            |Pick hours:
+        div(class="row")            
+            div(class="col s4 file-field input-field")
+                div(class="btn deep-orange")
+                    span
+                        |Image
+                    input(type="file")                 
+                div(class="file-path-wrapper")
+                input(class="file-path validate" type="text")
+            button(type='submit' class='btn deep-orange' id='manage-event-btn')
+                    |Save
+            button(type='submit' class='btn deep-orange' id='manage-event-btn')
+                    |Discard changes
+        script(src="../../public/js/events/datepicker.js")
+        script(src="../../public/js/events/timepicker.js")

@@ -76,8 +76,9 @@ block main
                                     |Participate
                                 button(id="leave-btn" class="modal-action modal-close waves-effect waves-green btn-flat leave-btn hidden")
                                     |Leave
-                                button(id="manage-btn" href="/manage-event" class="modal-action modal-close waves-effect waves-green btn-flat hidden")
-                                    |Manage 
+                                form(action="event/manage-event")
+                                    button(id="manage-btn" class="modal-action modal-close waves-effect waves-green btn-flat hidden")
+                                        |Manage 
                                 a(href="/about" class="modal-action modal-close waves-effect waves-green btn-flat")
                                     |Bring me back   
     script(src="../../public/js/events/datepicker.js")
