@@ -2,25 +2,29 @@ extend ../common/_master
 
 block main
     link(rel='stylesheet', href='../../public/css/users/profile.css', type='text/css' )
-    #profile-container.col-xs-12.col-sm-6.col-sm-offset-3.col-md-6.col-md-offset-3
-        .well.well-sm
-            .row
-                form(action="/user/profile/edit" method="POST" enctype="multipart/form-data")
-                    .col-sm-6.col-md-4
-                        div(class="col s4 file-field input-field")
-                            div(class="btn deep-orange")
-                                span
-                                    |Change Image
-                                input(type="file" name="profile" accept="application/x-zip-compressed,image/*")                 
-                            div(class="file-path-wrapper")
-                            input(class="file-path validate" type="text")
-                    .col-sm-6.col-md-8.text-center
-                        h4#username
-                            = user.username
-                        i.glyphicon.glyphicon-map-marker
-                        br
-                        i.glyphicon.glyphicon-envelope
-                            = user.email
-                        br
-                        button(type='submit' class='btn deep-orange' id='edit-profile-btn')
-                            | Submit
+    script(src="../../public/js/users/edit.profile.helper.js")
+    div(class="row")
+        form(action="/user/profile/edit" method="POST" enctype="multipart/form-data")
+            .col-sm-6.col-md-8
+                h4#username
+                    |#{user.username}
+
+            div(class="col s4 file-field input-field")
+                div(class="btn deep-orange")
+                    span
+                        |Change Image
+                    input(type="file" name="profile" accept="application/x-zip-compressed,image/*")                 
+                div(class="file-path-wrapper")
+                input(class="file-path validate" type="text")
+            div(class="input-field col s6")
+                input(disabled value="" name="password" id="password" type="password" class="validate")
+                label(for="password")
+                    |Change Password    
+                button.material-icons.prefix mode_edit
+            div(class="input-field col s6")
+                input(disabled value=user.email name="email" id="email" type="email" class="validate")
+                label(for="email")
+                    |Change Email
+                button.material-icons.prefix mode_edit
+            button(type='submit' class='btn deep-orange')
+                | Submit
