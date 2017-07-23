@@ -6,7 +6,6 @@ block main
         div(class="container-fluid row")
                 div(class="col s12 m6 l6")
                     div(class="card event-card")
-                        //- img(class="card-img-top" src="..." alt="Image")
                         div(class="card-block")
                                 h4(class="card-title")
                                         |#{event.eventName}
@@ -14,4 +13,3 @@ block main
                                         |
                                 a#join-link(href="#" class="btn")
                                         |Participate
-                != messages()

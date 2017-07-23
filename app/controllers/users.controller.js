@@ -4,7 +4,7 @@ const { hashPasswordHelper } = require('../../utils');
 
 const usersController = (data) => {
     return {
-        getProfilePage: (req, res) => {
+        getProfilePage(req, res) {
             if (!res.locals.user) {
                 return res.redirect('/');
             }
@@ -27,7 +27,7 @@ const usersController = (data) => {
                     });
                 });
         },
-        getProfileEditPage: (req, res) => {
+        getProfileEditPage(req, res) {
             const username = res.locals.user.username;
             return data.users.getOne({ username: username })
                 .then((user) => {
@@ -36,7 +36,7 @@ const usersController = (data) => {
                     });
                 });
         },
-        getMyEventsPage: (req, res) => {
+        getMyEventsPage(req, res) {
             const username = res.locals.user.username;
 
             return Promise.all([
@@ -58,7 +58,7 @@ const usersController = (data) => {
                     });
                 });
         },
-        editProfilePage: (req, res) => {
+        editProfilePage(req, res) {
             const username = res.locals.user.username;
 
             const changeEmailPromise = new Promise((resolve, reject) => {
