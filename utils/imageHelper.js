@@ -4,7 +4,7 @@ const Binary = require('mongodb').Binary;
 const getDefaultProfilePricture = () => {
     const newImg =
         fs.readFileSync(
-            'public/imgs/default-profile.jpg');
+            'public/uploads/default-profile.jpg');
 
     const image = {
         default: new Binary(newImg.toString('base64')),

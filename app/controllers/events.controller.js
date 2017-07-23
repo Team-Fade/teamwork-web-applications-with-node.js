@@ -115,8 +115,6 @@ const eventsController = (data) => {
             const eventName = req.body.eventName;
             const username = res.locals.user.username;
 
-            console.log(username);
-
             return data.users.edit(
                 { username: username },
                 {
