@@ -12,6 +12,9 @@ const attach = (app, router, data) => {
         })
         .post('/profile/edit', upload.single('profile'), (req, res) => {
             usersController.editProfilePage(req, res);
+        })
+        .get('/profile/my-events', (req, res) => {
+            usersController.getMyEventsPage(req, res);
         });
     app.use('/user', router);
 };
