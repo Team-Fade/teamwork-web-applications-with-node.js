@@ -1,4 +1,4 @@
-/* globals $ */
+/* globals $ Materialize*/
 
 $(() => {
     $('.participate-btn').click((ev) => {
@@ -17,5 +17,7 @@ $(() => {
 
             },
         });
+
+        Materialize.toast('You have joined successfully the event', 3000);
     });
 });
