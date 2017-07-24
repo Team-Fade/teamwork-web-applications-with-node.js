@@ -1,11 +1,17 @@
-const eventsController = (data) => {
+const ObjectId = require('mongodb').ObjectId;
+
+const eventsController = ({ events }) => {
     return {
         getBrowseEventsPage(req, res) {
-            return data.events.getAllItems({}, {})
-                .then((events) => {
-                    if (events) {
+            return events
+                .getAllItems()
+                .then((eventsData) => {
+                    if (eventsData) {
                         return res.render('events/browse-events',
-                            { events: events });
+                            {
+                                events: eventsData,
+                                user: res.locals.user,
+                            });
                     }
 
                     return res.send({ errorMessage: 'No events avaible' });
@@ -24,17 +30,17 @@ const eventsController = (data) => {
             });
 
             if (filterArray.length < 1) {
-                return data.events.getAllItems({})
-                    .then((events) => {
+                return events.getAllItems({})
+                    .then((eventsData) => {
                         return res.render('events/browse-events',
-                            { events: events });
+                            { events: eventsData });
                     });
             }
 
-            return data.events.getAllItems({ $or: filterArray })
-                .then((events) => {
+            return events.getAllItems({ $or: filterArray })
+                .then((eventsData) => {
                     return res.render('events/browse-events',
-                        { events: events });
+                        { events: eventsData });
                 });
         },
         getCreateEventPage(req, res) {
@@ -45,15 +51,106 @@ const eventsController = (data) => {
             return res.redirect('/');
         },
         getManageEventPage(req, res) {
-            return res.render('events/manage-event');
+            const eventId = req.params.id;
+
+            return events.getOne({ _id: new ObjectId(eventId) })
+                .then((event) => {
+                    return res.render('events/manage-event', { event: event });
+                });
+        },
+        editEvent(req, res) {
+            const eventId = req.headers.referer.split('/').pop();
+            const newEventName = req.body.eventName;
+
+            const changeEventNamePromise =
+                new Promise((resolve, reject) => {
+                    if (typeof newEventName === 'undefined' ||
+                        newEventName === null ||
+                        newEventName === '') {
+                        return;
+                    }
+
+                    events.edit(
+                        { _id: new ObjectId(eventId) },
+                        {
+                            $set: {
+                                eventName: newEventName,
+                            },
+                        });
+                });
+
+            const newEventLocation = req.body.eventLocation;
+
+            const changeEventLocationPromise =
+                new Promise((resolve, reject) => {
+                    if (typeof newEventLocation === 'undefined' ||
+                        newEventLocation === null ||
+                        newEventLocation === '') {
+                        return;
+                    }
+
+                    events.edit(
+                        { _id: new ObjectId(eventId) },
+                        {
+                            $set: {
+                                eventLocation: newEventLocation,
+                            },
+                        });
+                });
+
+            const newEventType = req.body.eventType;
+
+            const changeEventTypePromise =
+                new Promise((resolve, reject) => {
+                    if (typeof newEventType === 'undefined' ||
+                        newEventType === null ||
+                        newEventType === '') {
+                        return;
+                    }
+
+                    events.edit(
+                        { _id: new ObjectId(eventId) },
+                        {
+                            $set: {
+                                eventType: newEventType,
+                            },
+                        });
+                });
+
+            const newEventDescription = req.body.eventDescription;
+
+            const changeEventDescriptionPromise =
+                new Promise((resolve, reject) => {
+                    if (typeof newEventDescription === 'undefined' ||
+                        newEventDescription === null ||
+                        newEventDescription === '') {
+                        return;
+                    }
+
+                    events.edit(
+                        { _id: new ObjectId(eventId) },
+                        {
+                            $set: {
+                                eventDescription: newEventDescription,
+                            },
+                        });
+                });
+
+            Promise.all([
+                changeEventNamePromise,
+                changeEventLocationPromise,
+                changeEventTypePromise,
+                changeEventDescriptionPromise,
+            ])
+                .then(res.redirect('/user/profile/my-events'));
         },
         createEvent(req, res) {
             const event = req.body;
             event.author = res.locals.user.username;
 
-            return data.events.collection
+            return events.collection
                 .findOne(
-                { 'eventName': event.eventName, 'author': event.author },
+                { eventName: event.eventName, author: event.author },
                 (error, existingEvent) => {
                     if (existingEvent) {
                         req.flash('error',
@@ -62,19 +159,9 @@ const eventsController = (data) => {
                         return res.redirect('/create-event');
                     }
 
-                    return data.events
+                    return events
                         .add(event)
-                        .then((_) => {
-                            data.users.edit(
-                                { username: event.author },
-                                { $addToSet: { createdEvents: event } },
-                                {
-                                    upsert: false,
-                                    multi: false,
-                                });
-
-                            return res.redirect('/profile');
-                        })
+                        .then(res.redirect('/profile'))
                         .catch((err) => {
                             req.flash('error', err);
                             return res.redirect('/create-event');
@@ -83,45 +170,34 @@ const eventsController = (data) => {
         },
         joinEvent(req, res) {
             const eventName = req.body.eventName;
-            const userToJoin = res.locals.user.username;
-
-            return data.events
+            return events
                 .getOne({ eventName: eventName })
                 .then((event) => {
-                    return data.users.getOne({
-                        $and: [
-                            { username: userToJoin },
-                            {
-                                joinedEvents:
-                                { $elemMatch: { eventName: eventName } },
-                            },
-                        ],
-                    })
-                        .then((user) => {
-                            if (user) {
-                                // I dont know why this is not working.
-                                req.flash('error',
-                                    'You are already joined in this event!');
-                            }
+                    if (event.author === res.locals.user.username) {
+                        req.flash('error', 'You are author of this event!');
 
-                            return data.users.edit(
-                                { username: userToJoin },
-                                { $addToSet: { joinedEvents: event } },
-                                {
-                                    upsert: false,
-                                    multi: false,
-                                });
+                        return res.redirect('/browse-events');
+                    }
+
+                    return events.edit(
+                        { eventName: eventName },
+                        {
+                            $addToSet:
+                            { participants: res.locals.user.username },
+                        },
+                        {
+                            upsert: false,
+                            multi: false,
                         });
                 });
         },
         leaveEvent(req, res) {
             const eventName = req.body.eventName;
-            const username = res.locals.user.username;
 
-            return data.users.edit(
-                { username: username },
+            return events.edit(
+                { eventName: eventName },
                 {
-                    $pull: { joinedEvents: { eventName: eventName } },
+                    $pull: { participants: res.locals.user.username },
                 });
         },
     };

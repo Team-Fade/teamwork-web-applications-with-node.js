@@ -40,8 +40,8 @@ const usersController = (data) => {
             const username = res.locals.user.username;
 
             return Promise.all([
-                data.users.getUserJoinedEvents(username),
-                data.users.getUserCreatedEvents(username),
+                data.events.getUserJoinedEvents(username),
+                data.events.getUserCreatedEvents(username),
             ])
                 .then((events) => {
                     if (events) {

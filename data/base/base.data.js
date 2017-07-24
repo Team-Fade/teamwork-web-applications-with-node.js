@@ -13,18 +13,6 @@ class BaseData {
         return this.modelClass.name.toLowerCase() + 's';
     }
 
-    getById(id) {
-        // Add error if not found
-        return this.collection
-            .findOne({ '_id': new ObjectId(id) })
-            .then((item) => {
-                return this.modelClass.toViewModel(item);
-            })
-            .catch((error) => {
-                return error;
-            });
-    }
-
     getOne(filter, options) {
         return this.collection
             .findOne(filter, options)

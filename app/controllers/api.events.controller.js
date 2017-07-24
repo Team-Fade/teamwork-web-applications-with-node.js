@@ -1,7 +1,7 @@
-const apiEventsController = (data) => {
+const apiEventsController = ({ events }) => {
     return {
         getEvents(req, res, next) {
-            return data.events.groupEvents()
+            return events.groupEvents()
                 .then((eventsData) => {
                     if (eventsData.length > 0) {
                         return res.send(...eventsData);
@@ -10,25 +10,21 @@ const apiEventsController = (data) => {
                     return res.send({ errorMessage: 'No events' });
                 });
         },
-        getUserEvents(req, res) {
+        getAllEvents(req, res) {
             if (res.locals.user) {
-                const username = res.locals.user.username;
-                return Promise.all([
-                    data.users.getUserJoinedEvents(username),
-                    data.users.getUserCreatedEvents(username),
-                ])
-                    .then((events) => {
-                        if (events) {
+                return events.getAllItems()
+                    .then((eventsData) => {
+                        if (eventsData) {
                             return res.send(
                                 {
-                                    joinedEvents: events[0],
-                                    createdEvents: events[1],
+                                    user: res.locals.user,
+                                    events: eventsData,
                                 });
                         }
 
                         return res.send({
                             errorMessage:
-                            'No events avaible for this user',
+                            'No events avaible in this moment',
                         });
                     });
             }

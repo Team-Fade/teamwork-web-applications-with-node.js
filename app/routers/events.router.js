@@ -16,8 +16,10 @@ const attach = (app, router, data) => {
             eventsController.joinEvent(req, res))
         .post('/event/leave-event', (req, res) =>
             eventsController.leaveEvent(req, res))
-        .get('/event/manage-event',
-        (res, req) => eventsController.getManageEventPage(res, req));
+        .get('/event/manage-event/:id',
+        (res, req) => eventsController.getManageEventPage(res, req))
+        .post('/event/manage-event/:id?',
+        (res, req) => eventsController.editEvent(res, req));
 
     app.use(router);
 };

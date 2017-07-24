@@ -14,11 +14,7 @@ $(() => {
                     .text(),
             },
             success: (data) => {
-                localStorage
-                    .setItem('leave-event', data);
             },
         });
-
-        Materialize.toast('You have left successfully the event', 3000);
     });
 });

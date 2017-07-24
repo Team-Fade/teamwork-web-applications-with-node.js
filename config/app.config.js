@@ -15,7 +15,6 @@ const configureApp = (app, data) => {
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.use('/libs', express.static(path.join(__dirname, '../node_modules/')));
-    // app.use('/jquery', express.static(__dirname, '/libs/jquery/dist/'));
     app.use('/public', express.static(path.join(__dirname, '../public')));
 
     app.use(flash());

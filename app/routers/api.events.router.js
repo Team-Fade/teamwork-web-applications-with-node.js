@@ -5,8 +5,8 @@ const attach = (app, router, data) => {
     router
         .get('/api/browse-events', (req, res) =>
             apiEventsController.getEvents(req, res))
-        .get('/api/user-events', (req, res) =>
-            apiEventsController.getUserEvents(req, res));
+        .get('/api/all-events', (req, res) =>
+            apiEventsController.getAllEvents(req, res));
 
     app.use(router);
 };

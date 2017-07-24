@@ -6,6 +6,18 @@ class EventsData extends BaseData {
         super(db, Event);
     }
 
+    getUserJoinedEvents(username) {
+        return this.collection.find(
+            { participants: { $elemMatch: { $eq: username } } })
+            .toArray();
+    }
+
+    getUserCreatedEvents(username) {
+        return this.collection
+            .find({ author: username })
+            .toArray();
+    }
+
     groupEvents() {
         return this.collection.aggregate(
             [

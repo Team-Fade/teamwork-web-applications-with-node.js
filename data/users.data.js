@@ -28,20 +28,6 @@ class UsersData extends BaseData {
                 return user;
             });
     }
-
-    getUserJoinedEvents(username) {
-        return this.collection.findOne({ 'username': username })
-            .then((user) => {
-                return user.joinedEvents;
-            });
-    }
-
-    getUserCreatedEvents(username) {
-        return this.collection.findOne({ 'username': username })
-            .then((user) => {
-                return user.createdEvents;
-            });
-    }
 }
 
 module.exports = UsersData;

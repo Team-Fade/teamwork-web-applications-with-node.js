@@ -2,11 +2,6 @@ extend ../common/_master
 
 block main
     link(rel='stylesheet', href='../../public/css/events/browse-events.css', type='text/css')
-    script(src="public/js/events/autocomplete.js")
-    script(src="public/js/events/view.event.js")
-    script(src="public/js/events/join.event.js")
-    script(src="public/js/events/leave.event.js")
-    script(src="public/js/notifications/notification.helper.js")
     form(id='browse-events-form' class="col s6" action='/browse-events' method='POST')
         div(class="row")
             div(class="col s12 m3 l3")
@@ -53,12 +48,11 @@ block main
                                     |#{event.eventName}
                             div(class="card-content")
                                 p
-                                    |I am a very simple card. I am good at containing small bits of information.
-                                    |I am convenient because I require little markup to use effectively.
+                                    |#{event.eventDescription}
                             div(class="card-action")
-                                a(href="#modal" + index data-target="modal" + index class="modal-trigger")
+                                a(href="#modal" + event._id data-target="modal" + event._id class="modal-trigger")
                                     |View more
-                    div(id="modal" + index class="modal modal-fixed-footer")
+                    div(id="modal" + event._id class="modal modal-fixed-footer")
                         div(class="modal-content row")
                             div(class="col s6")
                                 img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg" class="modal-image")
@@ -66,20 +60,32 @@ block main
                                 h4(class="col s12")
                                     |#{event.eventName}
                                 p
-                                    |Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                    |Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                                    |#{event.eventDescription}
                         div(class="modal-footer")
                             div(class="progress")
                                 div(class="indeterminate")
-                            div(class="btn-container hidden")
-                                button(id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
-                                    |Participate
-                                button(id="leave-btn" class="modal-action modal-close waves-effect waves-green btn-flat leave-btn hidden")
-                                    |Leave
-                                form(action="event/manage-event")
-                                    button(id="manage-btn" class="modal-action modal-close waves-effect waves-green btn-flat hidden")
+                            if user
+                                div(class="btn-container hidden")
+                                    button(id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
+                                        |Participate
+                                    button(id="leave-btn" class="modal-action modal-close waves-effect waves-green btn-flat leave-btn hidden")
+                                        |Leave
+                                    a(href="/event/manage-event/" + event._id id="manage-btn" class="modal-action modal-close waves-effect waves-green btn-flat manage-btn hidden")
                                         |Manage 
-                                a(href="/about" class="modal-action modal-close waves-effect waves-green btn-flat")
-                                    |Bring me back   
+                                    a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
+                                        |Bring me back
+                            else
+                                div(class="btn-container hidden")
+                                    button(id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
+                                        |Participate
+                                    a(href="/event/manage-event/" + event._id id="manage-btn" class="modal-action modal-close waves-effect waves-green btn-flat")
+                                        |Manage 
+                                    a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
+                                        |Bring me back    
     script(src="../../public/js/events/datepicker.js")
     script(src="../../public/js/modal.js")
+    script(src="../../public/js/events/autocomplete.js")
+    script(src="../../public/js/events/view.event.js")
+    script(src="../../public/js/events/join.event.js")
+    script(src="../../public/js/events/leave.event.js")
+    script(src="../../public/js/notifications/notification.helper.js")
