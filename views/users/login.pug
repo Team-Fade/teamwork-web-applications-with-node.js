@@ -2,8 +2,9 @@ extend ../common/_master
 
 
 block main
-    link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )
-    != messages()
+    link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )   
+    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
+            !=messages()
     div(class="row")
         form(id="login-form" class="col s12" action='/login' method='POST')
             div(class="row")
@@ -21,4 +22,3 @@ block main
                     |Login
                 button(class='btn deep-orange' type="button" onclick="window.location.href='/register'" id='register-btn')
                     |Register
-        
