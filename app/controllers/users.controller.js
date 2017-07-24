@@ -36,28 +36,6 @@ const usersController = (data) => {
                     });
                 });
         },
-        getMyEventsPage(req, res) {
-            const username = res.locals.user.username;
-
-            return Promise.all([
-                data.events.getUserJoinedEvents(username),
-                data.events.getUserCreatedEvents(username),
-            ])
-                .then((events) => {
-                    if (events) {
-                        return res.render('users/my-events',
-                            {
-                                joinedEvents: events[0],
-                                createdEvents: events[1],
-                            });
-                    }
-
-                    return res.render('users/my-events', {
-                        errorMessage:
-                        'No events avaible for this user',
-                    });
-                });
-        },
         editProfilePage(req, res) {
             const username = res.locals.user.username;
 
@@ -90,7 +68,7 @@ const usersController = (data) => {
 
             const changePicturePromise = new Promise((resolve, reject) => {
                 if (req.file) {
-                    const image = imageHelper.getNewProfilePicture(req);
+                    const image = imageHelper.setNewPicture(req);
                     data.users.edit(
                         { username: username },
                         { $set: { profileImage: image } })
@@ -131,6 +109,28 @@ const usersController = (data) => {
                 changePasswordPromise,
             ])
                 .then(res.redirect('/user/profile'));
+        },
+        getMyEventsPage(req, res) {
+            const username = res.locals.user.username;
+
+            return Promise.all([
+                data.events.getUserJoinedEvents(username),
+                data.events.getUserCreatedEvents(username),
+            ])
+                .then((events) => {
+                    if (events) {
+                        return res.render('users/my-events',
+                            {
+                                joinedEvents: events[0],
+                                createdEvents: events[1],
+                            });
+                    }
+
+                    return res.render('users/my-events', {
+                        errorMessage:
+                        'No events avaible for this user',
+                    });
+                });
         },
     };
 };

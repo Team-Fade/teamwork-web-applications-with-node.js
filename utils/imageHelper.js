@@ -13,7 +13,19 @@ const getDefaultProfilePricture = () => {
     return image;
 };
 
-const getNewProfilePicture = (req) => {
+const getDefaultEventPricture = () => {
+    const newImg =
+        fs.readFileSync(
+            'public/uploads/default-event.jpg');
+
+    const image = {
+        default: new Binary(newImg.toString('base64')),
+    };
+
+    return image;
+};
+
+const setNewPicture = (req) => {
     const newImg = fs.readFileSync(req.file.path);
 
     const image = {
@@ -28,5 +40,6 @@ const getNewProfilePicture = (req) => {
 
 module.exports = {
     getDefaultProfilePricture,
-    getNewProfilePicture,
+    getDefaultEventPricture,
+    setNewPicture,
 };

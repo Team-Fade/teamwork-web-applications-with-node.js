@@ -20,7 +20,10 @@ block main
     if createdEvents
         each event, index in createdEvents
             div(class="card-image col s12 m3 l3")
-                img(class="col s12" src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
+            if event.eventImage.encoded
+                img(src="data:image/png;base64," + event.eventImage.encoded)
+            else
+                 mg(src="data:image/png;base64," + event.eventImage.default)
             div(class="card-stacked col s12 m9 l6")
                 h5(class="header")
                     |#{event.eventName}

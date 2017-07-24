@@ -3,7 +3,7 @@ extend ../common/_master
 block main 
     link(rel='stylesheet', href='../../public/css/events/create-event.css', type='text/css')
     div(class="row")
-        form(id='create-event-form' class="col s6" action='/create-event' method='POST')            
+        form(id='create-event-form' class="col s6" action='/create-event' method='POST' enctype="multipart/form-data")
             div(class="input-field col s6")
                 input(name="eventName" id="eventName" type="text" class="validate")
                 label(for="eventName")
@@ -40,7 +40,7 @@ block main
                     div(class="btn deep-orange")
                         span
                             |Image
-                        input(type="file")                 
+                        input(type="file" name="eventImage" accept="application/x-zip-compressed,image/*")
                     div(class="file-path-wrapper")
                     input(class="file-path validate" type="text")
                 button(type='submit' class='btn deep-orange' id='create-event-btn')

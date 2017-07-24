@@ -1,3 +1,5 @@
+const upload = require('../../config/multer.config');
+
 const attach = (app, router, data) => {
     const eventsController = require('../controllers/events.controller')(data);
 
@@ -8,7 +10,7 @@ const attach = (app, router, data) => {
         (res, req) => eventsController.getFilteredEvents(res, req))
         .get('/create-event',
         (res, req) => eventsController.getCreateEventPage(res, req))
-        .post('/create-event',
+        .post('/create-event', upload.single('eventImage'),
         (req, res) => {
             eventsController.createEvent(req, res);
         })
@@ -18,7 +20,7 @@ const attach = (app, router, data) => {
             eventsController.leaveEvent(req, res))
         .get('/event/manage-event/:id',
         (res, req) => eventsController.getManageEventPage(res, req))
-        .post('/event/manage-event/:id?',
+        .post('/event/manage-event/:id?', upload.single('eventImage'),
         (res, req) => eventsController.editEvent(res, req));
 
     app.use(router);

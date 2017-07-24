@@ -43,7 +43,10 @@ block main
                     div(class="col s12 m4 l4 event-view")
                         div(class="card")
                             div(class="card-image")
-                                img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
+                            if event.eventImage.encoded
+                                img(src="data:image/png;base64," + event.eventImage.encoded)
+                            else
+                                img(src="data:image/png;base64," + event.eventImage.default)
                                 span(class="card-title")
                                     |#{event.eventName}
                             div(class="card-content")
@@ -55,7 +58,10 @@ block main
                     div(id="modal" + event._id class="modal modal-fixed-footer")
                         div(class="modal-content row")
                             div(class="col s6")
-                                img(src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg" class="modal-image")
+                            if event.eventImage.encoded
+                                img(src="data:image/png;base64," + event.eventImage.encoded)
+                            else
+                                img(src="data:image/png;base64," + event.eventImage.default)
                             div(class="col s6")
                                 h4(class="col s12")
                                     |#{event.eventName}

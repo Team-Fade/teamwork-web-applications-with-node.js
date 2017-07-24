@@ -3,7 +3,7 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/users/manage-event.css', type='text/css' )
     script(src="../../public/js/users/edit.profile.helper.js")
-    form(action='/event/manage-event' method='POST')            
+    form(action='/event/manage-event' method='POST' enctype="multipart/form-data")            
         div(class="input-field col s11 m6 l5")
             input(disabled name="eventName" value=event.eventName id="eventName" type="text" class="validate")
             label(for="eventName")
@@ -48,7 +48,7 @@ block main
                 div(class="btn deep-orange")
                     span
                         |Image
-                    input(type="file")                 
+                    input(type="file" name="eventImage" accept="application/x-zip-compressed,image/*")
                 div(class="file-path-wrapper")
                 input(class="file-path validate" type="text")
             button(type='submit' class='btn deep-orange' id='manage-event-btn')
