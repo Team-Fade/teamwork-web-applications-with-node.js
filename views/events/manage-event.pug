@@ -3,7 +3,7 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/users/manage-event.css', type='text/css' )
     script(src="../../public/js/users/edit.profile.helper.js")
-    form(action='/event/manage-event' method='POST' enctype="multipart/form-data")            
+    form(action=`/events/manage/${event._id}` method='POST' enctype="multipart/form-data")            
         div(class="input-field col s11 m6 l5")
             input(disabled name="eventName" value=event.eventName id="eventName" type="text" class="validate")
             label(for="eventName")

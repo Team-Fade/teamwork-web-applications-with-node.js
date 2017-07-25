@@ -64,7 +64,7 @@ const eventsController = ({ events }) => {
                         req.flash('error',
                             `Event with this name and ... already exists!`);
 
-                        return res.redirect('/create-event');
+                        return res.redirect('/create');
                     }
 
                     if (req.file) {
@@ -80,53 +80,59 @@ const eventsController = ({ events }) => {
                         .then(res.redirect('/profile'))
                         .catch((err) => {
                             req.flash('error', err);
-                            return res.redirect('/create-event');
+                            return res.redirect('/create');
                         });
                 });
         },
         joinEvent(req, res) {
-            const eventName = req.body.eventName;
-            return events
-                .getOne({ eventName: eventName })
-                .then((event) => {
-                    if (event.author === res.locals.user.username) {
-                        req.flash('error', 'You are author of this event!');
+            const eventId = req.params.id;
+            if (req.params.action === 'join') {
+                return events
+                    .getOne({ _id: new ObjectId(eventId) })
+                    .then((event) => {
+                        if (event.author === res.locals.user.username) {
+                            req.flash('error', 'You are author of this event!');
 
-                        return res.redirect('/browse-events');
-                    }
+                            return res.redirect('/browse');
+                        }
 
-                    return events.edit(
-                        { eventName: eventName },
-                        {
-                            $addToSet:
-                            { participants: res.locals.user.username },
-                        },
-                        {
-                            upsert: false,
-                            multi: false,
-                        });
-                });
+                        return events.edit(
+                            { _id: new ObjectId(eventId) },
+                            {
+                                $addToSet:
+                                { participants: res.locals.user.username },
+                            },
+                            {
+                                upsert: false,
+                                multi: false,
+                            });
+                    });
+            }
+
+            return this.leaveEvent(req, res);
         },
         leaveEvent(req, res) {
-            const eventName = req.body.eventName;
+            const eventId = req.params.id;
+            if (req.params.action === 'leave') {
+                return events.edit(
+                    { _id: new ObjectId(eventId) },
+                    {
+                        $pull: { participants: res.locals.user.username },
+                    });
+            }
 
-            return events.edit(
-                { eventName: eventName },
-                {
-                    $pull: { participants: res.locals.user.username },
-                });
+            return this.joinEvent(req, res);
         },
         getManageEventPage(req, res) {
             const eventId = req.params.id;
-
             return events.getOne({ _id: new ObjectId(eventId) })
                 .then((event) => {
-                    return res.render('events/manage-event', { event: event });
+                    return res.render('events/manage-event',
+                        { event: event });
                 });
         },
         editEvent(req, res) {
             const eventId = req.headers.referer.split('/').pop();
-
             const newEventName = req.body.eventName;
 
             const changeEventNamePromise =

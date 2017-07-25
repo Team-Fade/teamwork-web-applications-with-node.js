@@ -2,22 +2,21 @@
 
 $(() => {
     $('.participate-btn').click((ev) => {
+        const eventId = $(ev.target)
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+
         $.ajax({
-            type: 'POST',
-            url: '/event/join-event',
+            type: 'PUT',
+            url: `/events/${eventId}/join`,
             data: {
-                eventName: $(ev.target)
-                    .parent()
-                    .parent()
-                    .prev()
-                    .find('h4')
-                    .text(),
+                eventId: eventId,
             },
             success: (data) => {
 
             },
         });
-
-        Materialize.toast('You have joined successfully the event', 3000);
     });
 });

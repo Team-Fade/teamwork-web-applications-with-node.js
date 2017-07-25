@@ -3,7 +3,7 @@ extend ../common/_master
 block main 
     link(rel='stylesheet', href='../../public/css/events/create-event.css', type='text/css')
     div(class="row")
-        form(id='create-event-form' class="col s6" action='/create-event' method='POST' enctype="multipart/form-data")
+        form(id='create-event-form' class="col s6" action='/events/create' method='POST' enctype="multipart/form-data")
             div(class="input-field col s6")
                 input(name="eventName" id="eventName" type="text" class="validate")
                 label(for="eventName")

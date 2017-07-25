@@ -1,7 +1,7 @@
 /* globals $ */
 
 $(() => {
-    fetch('/api/all-events', {
+    fetch('/api/events', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ $(() => {
             }
 
             data.events.forEach((event) => {
-                $(`#modal${event._id}`).modal({
+                $(`#${event._id}`).modal({
                     inDuration: 300,
                     outDuration: 200,
                     ready: (modal, trigger) => {

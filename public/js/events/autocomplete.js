@@ -1,7 +1,7 @@
 /* globals $ */
 
 $(() => {
-    fetch('/api/browse-events', {
+    fetch('/api/filter-events', {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',

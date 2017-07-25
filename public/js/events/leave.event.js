@@ -2,18 +2,20 @@
 
 $(() => {
     $('.leave-btn').click((ev) => {
+        const eventId = $(ev.target)
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+
         $.ajax({
-            type: 'POST',
-            url: '/event/leave-event',
+            type: 'PUT',
+            url: `/events/${eventId}/leave`,
             data: {
-                eventName: $(ev.target)
-                    .parent()
-                    .parent()
-                    .prev()
-                    .find('h4')
-                    .text(),
+                eventId: eventId,
             },
             success: (data) => {
+
             },
         });
     });
