@@ -2,36 +2,97 @@ extend ../common/_master
 
 block main
     link(rel='stylesheet', href='../../public/css/users/my-events.css', type='text/css' )
-    div(class="card horizontal row")
-    if joinedEvents
-        each event, index in joinedEvents
-            div(class="card-image col s12 m3 l3")
-                img(class="col s12" src="http://sunrisebangalore.com/gallery-pic/1f154-45749128-50609527event1.jpg")
-            div(class="card-stacked col s12 m9 l6")
-                h5(class="header")
-                    |#{event.eventName}
-                div(class="card-content")
-                    p
-                        |joined.         
-                div(class="card-action")
-                    a(href="#")
-                        |Leave
-    div(class="card horizontal row")
-    if createdEvents
-        each event, index in createdEvents
-            div(class="card-image col s12 m3 l3")
-            if event.eventImage.encoded
-                img(src="data:image/png;base64," + event.eventImage.encoded)
-            else
-                 mg(src="data:image/png;base64," + event.eventImage.default)
-            div(class="card-stacked col s12 m9 l6")
-                h5(class="header")
-                    |#{event.eventName}
-                div(class="card-content")
-                    p
-                        |created.         
-                div(class="card-action")
-                    a(href=`/events/manage/${event._id}`)
-                        |Manage
-                    a(href="#")
-                        |Disband
+    div(class="row")
+        div(class="col s12 m6 l6")
+            h4
+                |Events organized by you:
+            if createdEvents
+                each event, index in createdEvents
+                    div(class="col s12 m5 l5 event-view")
+                        div(class="card")
+                            div(class="card-image")
+                            if event.eventImage.encoded
+                                img(src="data:image/png;base64," + event.eventImage.encoded class="event-image")
+                            else
+                                img(src="data:image/png;base64," + event.eventImage.default)
+                                span(class="card-title")
+                                    |#{event.eventName}
+                            div(class="card-content")
+                                p
+                                    |Author: #{event.author}
+                                p
+                                    |#{event.eventDescription}
+                            div(class="card-action")
+                                a(href=event._id data-target=event._id class="modal-trigger")
+                                    |View more
+                    div(id=event._id class="modal modal-fixed-footer")
+                        div(class="modal-content row")
+                            div(class="col s6")
+                            if event.eventImage.encoded
+                                img(src="data:image/png;base64," + event.eventImage.encoded)
+                            else
+                                img(src="data:image/png;base64," + event.eventImage.default)
+                            div(class="col s6")
+                                h4(class="col s12")
+                                    |#{event.eventName}
+                                p
+                                    |Author: #{event.author}
+                                p
+                                    |#{event.eventDescription}
+                        div(class="modal-footer")
+                            div(class="progress")
+                                div(class="indeterminate")
+                            div(class="btn-container hidden")
+                                    button(id="disband-btn" class="modal-action modal-close waves-effect waves-green btn-flat leave-btn hidden")
+                                        |Disband
+                                    a(href=`/events/manage/${event._id}` id="manage-btn" class="modal-action modal-close waves-effect waves-green btn-flat manage-btn hidden")
+                                        |Manage 
+                                    a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
+                                        |Bring me back                             
+        div(class="col s12 m6 l6")
+            h4
+                |Events you participate in:
+            if joinedEvents
+                each event, index in joinedEvents
+                    div(class="col s12 m5 l5 event-view")
+                        div(class="card")
+                            div(class="card-image")
+                            if event.eventImage.encoded
+                                img(src="data:image/png;base64," + event.eventImage.encoded class="event-image")
+                            else
+                                img(src="data:image/png;base64," + event.eventImage.default)
+                                span(class="card-title")
+                                    |#{event.eventName}
+                            div(class="card-content")
+                                p
+                                    |Author: #{event.author}
+                                p
+                                    |#{event.eventDescription}
+                            div(class="card-action")
+                                a(href=event._id data-target=event._id class="modal-trigger")
+                                    |View more
+                    div(id=event._id class="modal modal-fixed-footer")
+                        div(class="modal-content row")
+                            div(class="col s6")
+                            if event.eventImage.encoded
+                                img(src="data:image/png;base64," + event.eventImage.encoded)
+                            else
+                                img(src="data:image/png;base64," + event.eventImage.default)
+                            div(class="col s6")
+                                h4(class="col s12")
+                                    |#{event.eventName}
+                                p
+                                    |Author: #{event.author}
+                                p
+                                    |#{event.eventDescription}
+                        div(class="modal-footer")
+                            div(class="progress")
+                                div(class="indeterminate")
+                            div(class="btn-container hidden")
+                                    button(id="leave-btn" class="modal-action modal-close waves-effect waves-green btn-flat leave-btn hidden")
+                                        |Leave 
+                                    a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
+                                        |Bring me back
+    script(src="../../public/js/modal.js")
+    script(src="../../public/js/events/view.event.js")
+    script(src="../../public/js/events/leave.event.js")
