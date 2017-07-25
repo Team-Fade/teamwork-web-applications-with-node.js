@@ -1,10 +1,13 @@
- #register-form {
-     margin-top: 5%;
-     margin-left: 35%;
- }
+#register-form {
+    margin-top: 5%;
+    margin-left: 35%;
+}
 
-  
+#register-btn {
+    margin-left: 28%;
+}
 
- #register-btn{
-     margin-left: 28%;
+#messages-box {
+     width: 20%;
+     margin-left: 38%;
  }
