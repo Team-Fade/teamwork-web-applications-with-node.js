@@ -2,16 +2,16 @@ const fs = require('fs');
 const ObjectId = require('mongodb').ObjectId;
 const { imageHelper } = require('../../utils');
 
-const eventsController = ({ events }) => {
+const eventsController = (data) => {
     return {
         getBrowseEventsPage(req, res) {
-            return events
+            return data.events
                 .getAllItems()
-                .then((eventsData) => {
-                    if (eventsData) {
+                .then((events) => {
+                    if (events) {
                         return res.render('events/browse-events',
                             {
-                                events: eventsData,
+                                context: events,
                                 user: res.locals.user,
                             });
                     }
@@ -21,6 +21,8 @@ const eventsController = ({ events }) => {
         },
         getFilteredEvents(req, res) {
             const event = req.body;
+
+            console.log(event);
 
             const filterArray = [];
             Object.keys(event).forEach((key) => {
@@ -32,17 +34,17 @@ const eventsController = ({ events }) => {
             });
 
             if (filterArray.length < 1) {
-                return events.getAllItems({})
+                return data.events.getAllItems({})
                     .then((eventsData) => {
                         return res.render('events/browse-events',
-                            { events: eventsData });
+                            { context: eventsData });
                     });
             }
 
-            return events.getAllItems({ $or: filterArray })
+            return data.events.getAllItems({ $or: filterArray })
                 .then((eventsData) => {
                     return res.render('events/browse-events',
-                        { events: eventsData });
+                        { context: eventsData });
                 });
         },
         getCreateEventPage(req, res) {
@@ -56,7 +58,7 @@ const eventsController = ({ events }) => {
             const event = req.body;
             event.author = res.locals.user.username;
 
-            return events.collection
+            return data.events.collection
                 .findOne(
                 { eventName: event.eventName, author: event.author },
                 (error, existingEvent) => {
@@ -75,7 +77,7 @@ const eventsController = ({ events }) => {
                             imageHelper.getDefaultEventPricture();
                     }
 
-                    return events
+                    return data.events
                         .add(event)
                         .then(res.redirect('/profile'))
                         .catch((err) => {
@@ -87,7 +89,7 @@ const eventsController = ({ events }) => {
         joinEvent(req, res) {
             const eventId = req.params.id;
             if (req.params.action === 'join') {
-                return events
+                return data.events
                     .getOne({ _id: new ObjectId(eventId) })
                     .then((event) => {
                         if (event.author === res.locals.user.username) {
@@ -96,7 +98,7 @@ const eventsController = ({ events }) => {
                             return res.redirect('/browse');
                         }
 
-                        return events.edit(
+                        return data.events.edit(
                             { _id: new ObjectId(eventId) },
                             {
                                 $addToSet:
@@ -114,7 +116,7 @@ const eventsController = ({ events }) => {
         leaveEvent(req, res) {
             const eventId = req.params.id;
             if (req.params.action === 'leave') {
-                return events.edit(
+                return data.events.edit(
                     { _id: new ObjectId(eventId) },
                     {
                         $pull: { participants: res.locals.user.username },
@@ -125,10 +127,10 @@ const eventsController = ({ events }) => {
         },
         getManageEventPage(req, res) {
             const eventId = req.params.id;
-            return events.getOne({ _id: new ObjectId(eventId) })
+            return data.events.getOne({ _id: new ObjectId(eventId) })
                 .then((event) => {
                     return res.render('events/manage-event',
-                        { event: event });
+                        { context: event });
                 });
         },
         editEvent(req, res) {
@@ -143,7 +145,7 @@ const eventsController = ({ events }) => {
                         return;
                     }
 
-                    events.edit(
+                    data.events.edit(
                         { _id: new ObjectId(eventId) },
                         {
                             $set: {
@@ -162,7 +164,7 @@ const eventsController = ({ events }) => {
                         return;
                     }
 
-                    events.edit(
+                    data.events.edit(
                         { _id: new ObjectId(eventId) },
                         {
                             $set: {
@@ -181,7 +183,7 @@ const eventsController = ({ events }) => {
                         return;
                     }
 
-                    events.edit(
+                    data.events.edit(
                         { _id: new ObjectId(eventId) },
                         {
                             $set: {
@@ -200,7 +202,7 @@ const eventsController = ({ events }) => {
                         return;
                     }
 
-                    events.edit(
+                    data.events.edit(
                         { _id: new ObjectId(eventId) },
                         {
                             $set: {
@@ -213,7 +215,7 @@ const eventsController = ({ events }) => {
                 new Promise((resolve, reject) => {
                     if (req.file) {
                         const image = imageHelper.setNewPicture(req);
-                        events.edit(
+                        data.events.edit(
                             { _id: new ObjectId(eventId) },
                             { $set: { eventImage: image } })
                             .then(() => {

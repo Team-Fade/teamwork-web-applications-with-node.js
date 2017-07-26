@@ -1,5 +1,3 @@
-const ObjectId = require('mongodb').ObjectId;
-
 class BaseData {
     constructor(db, modelClass, validator) {
         this.db = db;
@@ -25,13 +23,12 @@ class BaseData {
     }
 
     getAllItems(filter, options) {
-        // Add error if not found
         const result = this.collection
             .find(filter, options)
             .toArray();
 
         if (this.modelClass.toViewModel) {
-            result.then((models) => {
+            return result.then((models) => {
                 return models.map((model) =>
                     this.modelClass.toViewModel(model));
             });
@@ -54,5 +51,7 @@ class BaseData {
             });
     }
 }
+
+// istanbul cover ./node_modules/mocha/bin/_mocha test/unit/**/*.js
 
 module.exports = BaseData;
