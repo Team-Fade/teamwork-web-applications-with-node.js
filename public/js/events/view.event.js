@@ -25,36 +25,36 @@ $(() => {
                         });
                     },
                 });
-            }
+            } else {
+                data.events.forEach((event) => {
+                    $(`#${event._id}`).modal({
+                        inDuration: 300,
+                        outDuration: 200,
+                        ready: (modal, trigger) => {
+                            if (event.author === data.user.username) {
+                                $(modal.find('#manage-btn'))
+                                    .removeClass('hidden');
+                                $(modal.find('#participate-btn'))
+                                    .addClass('hidden');
+                                $(modal.find('#leave-btn'))
+                                    .addClass('hidden');
+                            }
+                            if (event.participants && event.participants
+                                .indexOf(data.user.username) > -1) {
+                                $(modal.find('#participate-btn'))
+                                    .addClass('hidden');
+                                $(modal.find('#leave-btn'))
+                                    .removeClass('hidden');
+                            }
 
-            data.events.forEach((event) => {
-                $(`#${event._id}`).modal({
-                    inDuration: 300,
-                    outDuration: 200,
-                    ready: (modal, trigger) => {
-                        if (event.author === data.user.username) {
-                            $(modal.find('#manage-btn'))
-                                .removeClass('hidden');
-                            $(modal.find('#participate-btn'))
-                                .addClass('hidden');
-                            $(modal.find('#leave-btn'))
-                                .addClass('hidden');
-                        }
-                        if (event.participants && event.participants
-                            .indexOf(data.user.username) > -1) {
-                            $(modal.find('#participate-btn'))
-                                .addClass('hidden');
-                            $(modal.find('#leave-btn'))
-                                .removeClass('hidden');
-                        }
-
-                        $(modal.find('.progress')).fadeOut(500, () => {
-                            $(modal.find('.btn-container'))
-                                .removeClass('hidden')
-                                .fadeIn(600);
-                        });
-                    },
+                            $(modal.find('.progress')).fadeOut(500, () => {
+                                $(modal.find('.btn-container'))
+                                    .removeClass('hidden')
+                                    .fadeIn(600);
+                            });
+                        },
+                    });
                 });
-            });
+            }
         });
 });

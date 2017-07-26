@@ -2,6 +2,8 @@ extend ../common/_master
 
 block main
     link(rel='stylesheet', href='../../public/css/users/profile.css', type='text/css')
+    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
+        !=messages()
     div(class="row")
         div(class="card col s12 m5 l3" id="profile-container")
             if defaultImg

@@ -5,36 +5,49 @@ const { hashPasswordHelper } = require('../../utils');
 const usersController = (data) => {
     return {
         getProfilePage(req, res) {
-            if (!res.locals.user) {
-                return res.redirect('/');
+            if (req.session.passport) {
+                const username = res.locals.user.username;
+                return data.users
+                    .getOne({ username: username })
+                    .then((user) => {
+                        if (user) {
+                            req.flash('success',
+                                'You have been successfully logged in!');
+                            if (user.profileImage.encoded) {
+                                return res.render('users/profile', {
+                                    encodedImg: user.profileImage
+                                        .encoded.value(),
+                                    user: user,
+                                });
+                            }
+
+                            return res.render('users/profile', {
+                                defaultImg: user.profileImage.default,
+                                user: user,
+                            });
+                        }
+
+                        req.flash('error', 'User does not exists!');
+                        return res.redirect('/login');
+                    });
             }
 
-            const username = res.locals.user.username;
-
-            return data.users
-                .getOne({ username: username })
-                .then((user) => {
-                    if (user.profileImage.encoded) {
-                        return res.render('users/profile', {
-                            encodedImg: user.profileImage.encoded.value(),
-                            user: user,
-                        });
-                    }
-
-                    return res.render('users/profile', {
-                        defaultImg: user.profileImage.default,
-                        user: user,
-                    });
-                });
+            req.flash('error', 'You are not currently logged in!');
+            return res.redirect('/login');
         },
         getProfileEditPage(req, res) {
-            const username = res.locals.user.username;
-            return data.users.getOne({ username: username })
-                .then((user) => {
-                    return res.render('users/profile-edit', {
-                        user: user,
+            if (req.session.passport) {
+                const username = res.locals.user.username;
+                return data.users.getOne({ username: username })
+                    .then((user) => {
+                        return res.render('users/profile-edit', {
+                            user: user,
+                        });
                     });
-                });
+            }
+
+            req.flash('error', 'You are not currently logged in!');
+            return res.redirect('/login');
         },
         editProfilePage(req, res) {
             const username = res.locals.user.username;
@@ -111,26 +124,31 @@ const usersController = (data) => {
                 .then(res.redirect('/user/profile'));
         },
         getMyEventsPage(req, res) {
-            const username = res.locals.user.username;
+            if (req.locals) {
+                const username = res.locals.user.username;
 
-            return Promise.all([
-                data.events.getUserJoinedEvents(username),
-                data.events.getUserCreatedEvents(username),
-            ])
-                .then((events) => {
-                    if (events) {
-                        return res.render('users/my-events',
-                            {
-                                joinedEvents: events[0],
-                                createdEvents: events[1],
-                            });
-                    }
+                return Promise.all([
+                    data.events.getUserJoinedEvents(username),
+                    data.events.getUserCreatedEvents(username),
+                ])
+                    .then((events) => {
+                        if (events) {
+                            return res.render('users/my-events',
+                                {
+                                    joinedEvents: events[0],
+                                    createdEvents: events[1],
+                                });
+                        }
 
-                    return res.render('users/my-events', {
-                        errorMessage:
-                        'No events avaible for this user',
+                        return res.render('users/my-events', {
+                            errorMessage:
+                            'No events avaible for this user',
+                        });
                     });
-                });
+            }
+
+            req.flash('error', 'You are not currently logged in!');
+            return res.redirect('/login');
         },
     };
 };
