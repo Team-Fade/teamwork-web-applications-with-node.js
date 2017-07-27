@@ -3,14 +3,9 @@ mixin event-view()
         div(class="col s12 m4 l4 event-view")
             div(class="card")
                 div(class="card-image")
-                    if event.eventImage.encoded
-                        img(src="data:image/png;base64," + event.eventImage.encoded class="event-image col s12")
-                        span(class="card-title")
-                            |#{event.eventName}
-                    else
-                        img(src="data:image/png;base64," + event.eventImage.default class="event-image col s12")
-                        span(class="card-title")
-                            |#{event.eventName}
+                        img(src="data:image/png;base64," + event.eventImage.data class="event-image col s12")
+                span(class="card-title")
+                        |#{event.eventName}
                 div(class="card-content")
                     p
                         |Author: #{event.author}
@@ -24,10 +19,7 @@ mixin event-view()
         div(id=event._id class="modal modal-fixed-footer")
             div(class="modal-content row")
                 div(class="col s12")
-                    if event.eventImage.encoded
-                        img(src="data:image/png;base64," + event.eventImage.encoded class="event-image")
-                    else
-                        img(src="data:image/png;base64," + event.eventImage.default class="event-image")
+                        img(src="data:image/png;base64," + event.eventImage.data class="event-image")
                 div(class="col s6")
                     h4(class="col s12")
                         |#{event.eventName}
@@ -58,7 +50,9 @@ mixin event-view()
                             |Bring me back
                 else
                     div(class="btn-container hidden")
-                        button(id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
+                        a(href="/login")
+                            |You need to be logged in to participate 
+                        a(disabled id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
                             |Participate
                         a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
                             |Bring me back
