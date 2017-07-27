@@ -1,10 +1,15 @@
 extend ../common/_master
-
+include ../utils/notifications
 
 block main
+<<<<<<< HEAD
     link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )   
     div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
         !=messages()
+=======
+    link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )
+    +notifications()
+>>>>>>> origin/master
     div(class="row")
         form(id="login-form" class="col s12" action='/login' method='POST')
             div(class="row")

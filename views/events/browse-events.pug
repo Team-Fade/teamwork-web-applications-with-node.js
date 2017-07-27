@@ -1,46 +1,17 @@
 extend ../common/_master
+include ../utils/notifications
+include utils/search-nav
+include utils/event-view
 
 block main
     link(rel='stylesheet', href='../../public/css/events/browse-events.css', type='text/css')
-    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
-        !=messages()
+    +notifications()
     form(id='browse-events-form' class="col s6" action='/events/browse' method='PUT')
         div(class="row")
-            div(class="col s12 m3 l3")
-                div(class="row")
-                    div(class="col s12")
-                        div(class="row")
-                            div(class="input-field col s12")
-                                i(class="material-icons prefix")|textsms    
-                                input(name="eventName" type="text" id="eventName" class="autocomplete")
-                                label(for="eventName")
-                                    |Search event by name:
-                div(class="row")
-                    div(class="col s12")
-                        div(class="row")
-                            div(class="input-field col s12")
-                                i(class="material-icons prefix")|location_on    
-                                input(name="eventLocation" type="text" id="eventLocation" class="autocomplete")
-                                label(for="eventLocation")
-                                    |Search event by location:
-                div(class="row")
-                    div(class="col s12")
-                        div(class="row")
-                            div(class="input-field col s12")    
-                                i(class="material-icons prefix")|find_replace
-                                input(name="eventType" type="text" id="eventType" class="autocomplete")
-                                label(for="eventType")
-                                    |Search event by type:
-                div(class="row")
-                    div(class="col s12")
-                        div(class="row")
-                            div(class="input-field col s12")
-                                i(class="material-icons prefix")|date_range                                                        
-                                input(name="eventDate" type="date" class="datepicker")
-                button(type='submit' class='btn deep-orange' id='search-event-btn')
-                    |Search
+            +search-nav
             div(class="col s12 m9 l9" id="events-box")
                 div(class="row")
+<<<<<<< HEAD
                 each event, index in context
                     div(class="col s12 m4 l4 event-view")
                         div(class="card")
@@ -98,10 +69,12 @@ block main
                                         |Participate
                                     a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
                                         |Bring me back    
+=======
+                    +event-view()       
+>>>>>>> origin/master
     script(src="../../public/js/events/datepicker.js")
     script(src="../../public/js/modal.js")
     script(src="../../public/js/events/autocomplete.js")
     script(src="../../public/js/events/view.event.js")
     script(src="../../public/js/events/join.event.js")
     script(src="../../public/js/events/leave.event.js")
-    script(src="../../public/js/notifications/notification.helper.js")
