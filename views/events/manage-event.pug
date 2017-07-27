@@ -3,6 +3,8 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/users/manage-event.css', type='text/css')
     script(src="../../public/js/users/edit.profile.helper.js")
+    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
+        !=messages()
     form(action=`/events/manage/${context._id}` method='POST' enctype="multipart/form-data")    
         div(class="row")     
             div(class="input-field col s12 m5 l3")

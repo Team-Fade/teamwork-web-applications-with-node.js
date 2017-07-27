@@ -3,6 +3,8 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/users/profile-edit.css', type='text/css' )
     script(src="../../public/js/users/edit.profile.helper.js")
+    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
+        !=messages()
     div(class="row")
         form(action="/user/profile/edit" method="POST" enctype="multipart/form-data")
             h4

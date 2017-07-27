@@ -6,10 +6,7 @@ block main
         !=messages()
     div(class="row")
         div(class="card col s12 m5 l3" id="profile-container")
-            if defaultImg
-                img(class="responsive-img circle" src="data:image/png;base64," + defaultImg)
-            else 
-                img(class="responsive-img circle" src="data:image/png;base64," + encodedImg)
+            img(class="responsive-img circle" src="data:image/png;base64," + user.profileImage)
             p(class="flow-text")
                     |Username: #{user.username}
             p(class="flow-text")

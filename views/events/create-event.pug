@@ -2,6 +2,8 @@ extend ../common/_master
 
 block main 
     link(rel='stylesheet', href='../../public/css/events/create-event.css', type='text/css')
+    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
+        !=messages()
     div(class="row")
         form(id='create-event-form' class="col s6" action='/events/create' method='POST' enctype="multipart/form-data")
             div(class="input-field col s6")
