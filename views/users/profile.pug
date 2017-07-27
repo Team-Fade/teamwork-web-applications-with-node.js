@@ -1,9 +1,9 @@
 extend ../common/_master
+include ../utils/notifications
 
 block main
     link(rel='stylesheet', href='../../public/css/users/profile.css', type='text/css')
-    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
-        !=messages()
+    +notifications()
     div(class="row")
         div(class="card col s12 m5 l3" id="profile-container")
             if defaultImg
@@ -33,4 +33,3 @@ block main
             form(action="/events/browse")
                 button(class="btn deep-orange")
                     |Browse all
-    script(src="/public/js/notifications/profile.notification.js")

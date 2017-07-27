@@ -3,7 +3,7 @@ extend ../common/_master
 block main
     link(rel='stylesheet', href='../../public/css/users/register.css', type='text/css' )
     div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
-            !=messages()
+        !=messages()
     div(class="row")
         form(id='register-form' class="col s4" action='/register' method='POST')            
             div(class="input-field col s6")

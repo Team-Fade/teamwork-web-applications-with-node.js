@@ -1,0 +1,64 @@
+mixin event-view()
+    each event, index in context
+        div(class="col s12 m4 l4 event-view")
+            div(class="card")
+                div(class="card-image")
+                    if event.eventImage.encoded
+                        img(src="data:image/png;base64," + event.eventImage.encoded class="event-image col s12")
+                        span(class="card-title")
+                            |#{event.eventName}
+                    else
+                        img(src="data:image/png;base64," + event.eventImage.default class="event-image col s12")
+                        span(class="card-title")
+                            |#{event.eventName}
+                div(class="card-content")
+                    p
+                        |Author: #{event.author}
+                    p
+                        |Date: #{event.eventDate}
+                    p
+                        |Description: #{event.eventDescription}
+                div(class="card-action")
+                    a(href=event._id data-target=event._id class="modal-trigger")
+                        |View more
+        div(id=event._id class="modal modal-fixed-footer")
+            div(class="modal-content row")
+                div(class="col s12")
+                    if event.eventImage.encoded
+                        img(src="data:image/png;base64," + event.eventImage.encoded class="event-image")
+                    else
+                        img(src="data:image/png;base64," + event.eventImage.default class="event-image")
+                div(class="col s6")
+                    h4(class="col s12")
+                        |#{event.eventName}
+                    p
+                        |Author: #{event.author}
+                    p
+                        |Type: #{event.eventType}
+                    p
+                        |Location: #{event.eventLocation}
+                    p
+                        |Date: #{event.eventDate}
+                    p
+                        |Time: #{event.eventTime}
+                    p
+                        |Description: #{event.eventDescription}
+            div(class="modal-footer")
+                div(class="progress")
+                    div(class="indeterminate")
+                if user
+                    div(class="btn-container hidden")
+                        button(id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
+                            |Participate
+                        button(id="leave-btn" class="modal-action modal-close waves-effect waves-green btn-flat leave-btn hidden")
+                            |Leave
+                        a(href=`/events/manage/${event._id}` id="manage-btn" class="modal-action modal-close waves-effect waves-green btn-flat manage-btn hidden")
+                            |Manage 
+                        a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
+                            |Bring me back
+                else
+                    div(class="btn-container hidden")
+                        button(id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
+                            |Participate
+                        a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
+                            |Bring me back

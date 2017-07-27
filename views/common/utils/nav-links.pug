@@ -1,0 +1,22 @@
+mixin nav-links()
+    li(class="" id="navbar-home")
+        a(href='/')
+           | Home
+    li(class="" id="navbar-about")   
+        a(href='/about')
+            | About us
+    if user
+        li(class="" id="navbar-profile")
+            a(href='/user/profile')
+                =user.username
+        li(class="" id="navbar-logout")
+            a(href='/logout')
+                span(class="" aria-hidden="true")
+                | Logout
+    else
+        li(class="" id="navbar-profile")                
+            a(href='/login')
+                | Login
+    li(class="" id="navbar-chat")
+        a(href='/chat')
+           | Join chat

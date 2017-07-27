@@ -1,9 +1,11 @@
 extend ../common/_master
+include ../utils/notifications
 
 block main
     link(rel='stylesheet', href='../../public/css/home.css', type='text/css')
-    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
-        !=messages()
+    +notifications()
+    //- div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
+    //-     !=messages()
     div(class="flow-text")
         p(class="center-align grey-text text-darken-4")
             | Check out our top rated events:
@@ -21,9 +23,6 @@ block main
     div(class="row center-align" id="home-buttons") 
         a(class="btn deep-orange col s12 m4 l2" href="/events/browse" id="browse-events-btn")
             |Browse More
-        if user
-                a(href='/chat' class="s12 m4 l4 hide-on-med-and-up btn deep-orange")
-                    |Join chat
         unless user   
             a(class="btn deep-orange col s12 m4 l2" href="/login" id="sign-in-btn")
                 |Sign In
