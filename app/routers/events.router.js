@@ -7,8 +7,6 @@ const attach = (app, router, data) => {
     router
         .get('/browse',
         (res, req) => eventsController.getBrowseEventsPage(res, req))
-        .post('/browse',
-        (res, req) => eventsController.getFilteredEvents(res, req))
         .get('/create', isAuthenticated,
         (res, req) => eventsController.getCreateEventPage(res, req))
         .post('/create', isAuthenticated, upload.single('eventImage'),

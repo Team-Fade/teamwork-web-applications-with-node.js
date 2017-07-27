@@ -6,7 +6,7 @@ include utils/event-view
 block main
     link(rel='stylesheet', href='../../public/css/events/browse-events.css', type='text/css')
     +notifications()
-    form(id='browse-events-form' class="col s6" action='/events/browse' method='PUT')
+    form(id='browse-events-form' class="col s6" action='/events/browse')
         div(class="row")
             +search-nav
             div(class="col s12 m9 l9" id="events-box")

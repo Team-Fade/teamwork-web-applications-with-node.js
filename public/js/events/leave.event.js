@@ -1,4 +1,4 @@
-/* globals $ Materialize*/
+/* globals $ */
 
 $(() => {
     $('.leave-btn').click((ev) => {

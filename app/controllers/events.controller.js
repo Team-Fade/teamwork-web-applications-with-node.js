@@ -5,27 +5,12 @@ const { imageHelper } = require('../../utils');
 const eventsController = (data) => {
     return {
         getBrowseEventsPage(req, res) {
+            const event = req.query;
             let user = null;
+
             if (req.session.passport) {
                 user = req.session.passport.user;
             }
-
-            return data.events
-                .getAllItems()
-                .then((events) => {
-                    if (events) {
-                        return res.render('events/browse-events',
-                            {
-                                context: events,
-                                user: user,
-                            });
-                    }
-
-                    return req.flash('error', 'No events avaible');
-                });
-        },
-        getFilteredEvents(req, res) {
-            const event = req.body;
 
             const filterArray = [];
             Object.keys(event).forEach((key) => {
@@ -42,6 +27,7 @@ const eventsController = (data) => {
                         return res.render('events/browse-events',
                             {
                                 context: eventsData,
+                                user: user,
                             });
                     });
             }
@@ -49,7 +35,10 @@ const eventsController = (data) => {
             return data.events.getAllItems({ $or: filterArray })
                 .then((eventsData) => {
                     return res.render('events/browse-events',
-                        { context: eventsData });
+                        {
+                            context: eventsData,
+                            user: user,
+                        });
                 });
         },
         getCreateEventPage(req, res) {
