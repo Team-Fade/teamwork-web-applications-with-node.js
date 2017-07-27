@@ -20,8 +20,20 @@ function isInRange(value, start, end) {
     return true;
 }
 
+function isEmail(value) {
+    const atIndex = value.indexOf('@');
+    if (atIndex < 1) {
+        return false;
+    }
+    if (value.splice(0, atIndex).indexOf('.') < 1) {
+        return false;
+    }
+    return true;
+}
+
 module.exports = {
     isNumber,
     isString,
     isInRange,
+    isEmail,
 };
