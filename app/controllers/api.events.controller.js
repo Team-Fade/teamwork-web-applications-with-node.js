@@ -11,13 +11,13 @@ const apiEventsController = ({ events }) => {
                 });
         },
         getAllEvents(req, res) {
-            if (res.locals.user) {
+            if (req.session.passport) {
                 return events.getAllItems()
                     .then((eventsData) => {
                         if (eventsData) {
                             return res.send(
                                 {
-                                    user: res.locals.user,
+                                    user: req.session.passport.user,
                                     events: eventsData,
                                 });
                         }

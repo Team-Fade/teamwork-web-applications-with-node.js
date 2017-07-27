@@ -1,14 +1,13 @@
 const passport = require('passport');
-const { Strategy } = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const { isAuthenticated } = require('../utils');
+const bodyParser = require('body-parser');
 const { hashPasswordHelper }
     = require('../utils');
 
 const configureAuthentification = (app, { users }) => {
-    passport.use(new Strategy(
+    passport.use(new LocalStrategy(
         (username, password, done) => {
             users.collection
                 .findOne({ 'username': username }, (err, user) => {
@@ -32,46 +31,32 @@ const configureAuthentification = (app, { users }) => {
                 });
         }
     ));
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 
-    // Need to generate session key, add in db and change it on every log
-
-    app.use(passport.initialize());
-    app.use(passport.session());
     app.use(cookieParser());
     app.use(session({
         secret: 'Purple Unicorn',
         maxAge: new Date(Date.now() + 60 * 60 * 1000),
         resave: false,
         saveUninitialized: false,
-        store: new MongoStore(
-            {
-                url: 'mongodb://localhost/nodejs-teamwork',
-            },
-            (err) => {
-                console.log(err || 'connect-mongodb setup ok');
-            }),
     }));
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     passport.serializeUser((user, done) => {
-        const userInfo = {
-            id: user._id,
+        const sessionUser = {
+            _id: user._id,
             username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            city: user.city,
             email: user.email,
+            profileImage: user.profileImage.data.value(),
         };
-
-        done(null, userInfo);
+        done(null, sessionUser);
     });
 
-    passport.deserializeUser((id, done) => {
-        users.collection.findOne({ '_id': id }, (err, user) => {
-            done(err, user);
-        });
+    passport.deserializeUser((sessionUser, done) => {
+        done(null, sessionUser);
     });
-
-    app.use(isAuthenticated);
 };
 
 module.exports = configureAuthentification;

@@ -9,7 +9,7 @@ const authenticationController = ({ users }) => {
 
             if (!validator.validateUser(user).isValid) {
                 const errorMessage = validator.validateUser(user).errorMessage;
-                req.flash('error', errorMessage);
+                req.flash('register', errorMessage);
                 return res.render('users/register');
             }
 
@@ -17,7 +17,7 @@ const authenticationController = ({ users }) => {
                 .findOne(
                 { 'username': req.body.username }, (_, existingUser) => {
                     if (existingUser) {
-                        req.flash('error',
+                        req.flash('register',
                             'User with that username already exists!');
 
                         return res.redirect('/register');
@@ -25,24 +25,23 @@ const authenticationController = ({ users }) => {
 
                     user.profileImage = imageHelper.getDefaultProfilePricture();
 
-                    return users.add(user)
+                    return users
+                        .add(user)
                         .then((dbItem) => {
                             return this.login(req, res, next);
                         })
                         .catch((err) => {
-                            req.flash('error', err);
+                            req.flash('register', err);
                             return res.redirect('/register');
                         });
                 });
         },
         login(req, res, next) {
-            const authenticate = passport.authenticate('local', {
+            passport.authenticate('local', {
                 successRedirect: '/user/profile',
                 failureRedirect: '/login',
                 failureFlash: true,
-            });
-
-            authenticate(req, res, next);
+            })(req, res, next);
         },
         logout(req, res) {
             req.session.destroy((err) => {

@@ -5,45 +5,18 @@ const { hashPasswordHelper } = require('../../utils');
 const usersController = (data) => {
     return {
         getProfilePage(req, res) {
-            if (req.session.passport) {
-                const username = res.locals.user.username;
-                return data.users
-                    .getOne({ username: username })
-                    .then((user) => {
-                        if (user) {
-                            req.flash('success',
-                                'You have been successfully logged in!');
-                            if (user.profileImage.encoded) {
-                                return res.render('users/profile', {
-                                    encodedImg: user.profileImage
-                                        .encoded.value(),
-                                    user: user,
-                                });
-                            }
-
-                            return res.render('users/profile', {
-                                defaultImg: user.profileImage.default,
-                                user: user,
-                            });
-                        }
-
-                        req.flash('error', 'User does not exists!');
-                        return res.redirect('/login');
-                    });
-            }
-
-            req.flash('error', 'You are not currently logged in!');
-            return res.redirect('/login');
+            const user = res.locals.user;
+            res.render('users/profile', {
+                user: user,
+            });
         },
         getProfileEditPage(req, res) {
             if (req.session.passport) {
-                const username = res.locals.user.username;
-                return data.users.getOne({ username: username })
-                    .then((user) => {
-                        return res.render('users/profile-edit', {
-                            user: user,
-                        });
-                    });
+                const user = res.locals.user;
+
+                return res.render('users/profile-edit', {
+                    user: user,
+                });
             }
 
             req.flash('error', 'You are not currently logged in!');
@@ -51,8 +24,19 @@ const usersController = (data) => {
         },
         editProfilePage(req, res) {
             const username = res.locals.user.username;
-
             const changeEmailPromise = new Promise((resolve, reject) => {
+                if (typeof req.body.email === 'undefined') {
+                    return;
+                }
+
+                if (req.body.email === '' ||
+                    req.body.email === null ||
+                    req.body.email.length < 6) {
+                    req.flash('error',
+                        'Incorrect email');
+                    return;
+                }
+
                 if (req.body.email !== '') {
                     data.users.getOne(
                         {
@@ -63,16 +47,13 @@ const usersController = (data) => {
                         }
                     )
                         .then((user) => {
-                            if (user.username ||
-                                req.body.email === '' ||
-                                req.body.email === null ||
-                                typeof req.body.email === 'undefined') {
-                                return {
-                                    errorMessage: 'Incorrect email!',
-                                };
+                            if (user.username) {
+                                req.flash('error',
+                                    'That email is already in use!');
+                                return;
                             }
 
-                            return data.users.edit(
+                            data.users.edit(
                                 { username: username },
                                 { $set: { email: req.body.email } });
                         });
@@ -82,30 +63,36 @@ const usersController = (data) => {
             const changePicturePromise = new Promise((resolve, reject) => {
                 if (req.file) {
                     const image = imageHelper.setNewPicture(req);
+                    res.locals.user.profileImage = image.data.value();
                     data.users.edit(
                         { username: username },
                         { $set: { profileImage: image } })
                         .then(() => {
                             fs.unlink(req.file.path, (err) => {
                                 if (err) {
-                                    req.flash('error', err);
+                                    req.session.sessionFlash = err;
                                 }
                             });
                         });
+
+                    req.flash('success',
+                        'Your profile picture was changed!');
                 }
             });
 
             const changePasswordPromise = new Promise((resolve, reject) => {
+                if (typeof req.body.password === 'undefined') {
+                    return;
+                }
+
                 if (!req.body.password ||
                     typeof req.body.password !== 'string' ||
                     req.body.password.length < 6) {
-                    return {
-                        errorMessage:
-                        'Invalid password: length must be atleast 6 symbols!',
-                    };
+                    req.flash('error', 'Invalid password!');
+                    return;
                 }
 
-                return data.users.edit(
+                data.users.edit(
                     { username: username },
                     {
                         $set: {
@@ -121,34 +108,28 @@ const usersController = (data) => {
                 changePicturePromise,
                 changePasswordPromise,
             ])
-                .then(res.redirect('/user/profile'));
+                .then(res.redirect('/user/profile/edit'));
         },
         getMyEventsPage(req, res) {
-            if (req.locals) {
-                const username = res.locals.user.username;
+            const username = res.locals.user.username;
+            Promise.all([
+                data.events.getUserJoinedEvents(username),
+                data.events.getUserCreatedEvents(username),
+            ])
+                .then((events) => {
+                    if (events) {
+                        return res.render('users/my-events',
+                            {
+                                joinedEvents: events[0],
+                                createdEvents: events[1],
+                            });
+                    }
 
-                return Promise.all([
-                    data.events.getUserJoinedEvents(username),
-                    data.events.getUserCreatedEvents(username),
-                ])
-                    .then((events) => {
-                        if (events) {
-                            return res.render('users/my-events',
-                                {
-                                    joinedEvents: events[0],
-                                    createdEvents: events[1],
-                                });
-                        }
-
-                        return res.render('users/my-events', {
-                            errorMessage:
-                            'No events avaible for this user',
-                        });
+                    return res.render('users/my-events', {
+                        errorMessage:
+                        'No events avaible for this user',
                     });
-            }
-
-            req.flash('error', 'You are not currently logged in!');
-            return res.redirect('/login');
+                });
         },
     };
 };

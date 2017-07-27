@@ -1,5 +1,10 @@
 const navigationController = {
     getHomePage(req, res) {
+        if (req.session.passport) {
+            return res.render('navigation/home',
+                { user: req.session.passport.user });
+        }
+
         return res.render('navigation/home');
     },
     getAboutUsPage(req, res) {
