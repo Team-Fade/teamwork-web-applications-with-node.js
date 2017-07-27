@@ -1,4 +1,4 @@
-/* globals $ Materialize*/
+/* globals $ */
 
 $(() => {
     $('.participate-btn').click((ev) => {
