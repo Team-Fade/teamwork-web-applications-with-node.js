@@ -27,4 +27,52 @@ describe('Home routes', () => {
                 done();
             });
     });
+    it('expect header to have link to about us page with name "About us"',
+        (done) => {
+            driver.get(appUrl)
+                .then(() => {
+                    return driver.findElement(
+                        webdriver.By.id('navbar-about')
+                    );
+                })
+                .then((el) => {
+                    return el.getText();
+                })
+                .then((text) => {
+                    expect(text).to.contain('About us');
+                    done();
+                });
+    });
+    it('expect header to have link to about us page with name "Chat"',
+        (done) => {
+            driver.get(appUrl)
+                .then(() => {
+                    return driver.findElement(
+                        webdriver.By.id('navbar-chat')
+                    );
+                })
+                .then((el) => {
+                    return el.getText();
+                })
+                .then((text) => {
+                    expect(text).to.contain('Chat');
+                    done();
+                });
+    });
+    it('expect home to have link to browse events page with name "Browse more"',
+        (done) => {
+            driver.get(appUrl)
+                .then(() => {
+                    return driver.findElement(
+                        webdriver.By.id('browse-events-btn')
+                    );
+                })
+                .then((el) => {
+                    return el.getText();
+                })
+                .then((text) => {
+                    expect(text).to.contain('Browse more');
+                    done();
+                });
+    });
 });
