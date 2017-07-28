@@ -1,32 +1,32 @@
 extend ../common/_master
+include ../utils/notifications
 
 block main
     link(rel='stylesheet', href='../../public/css/users/register.css', type='text/css' )
-    div(class="orange accent-4 card center-align light-green-text text-lighten-4" id="messages-box")
-        !=messages()
+    +notifications()
     div(class="row")
-        form(id='register-form' class="col s4" action='/register' method='POST')            
-            div(class="input-field col s6")
+        form(id='register-form' class="col s7" action='/register' method='POST')            
+            div(class="input-field col s12 m6 l4")
                 input(name="username" id="username" type="text" class="validate")
                 label(for="username")
                     |Username:         
-            div(class="input-field col s6")
+            div(class="input-field col s12 m6 l4")
                 input(name="password" id="password" type="password" class="validate")
                 label(for="password")
                     |Password:      
-            div(class="input-field col s6")
+            div(class="input-field col s12 m6 l4")
                 input(name="firstName" id="firstName" type="text" class="validate")
                 label(for="firstName")
                     |First Name:                               
-            div(class="input-field col s6")
+            div(class="input-field col s12 m6 l4")
                 input(name="lastName" id="lastName" type="text" class="validate")
                 label(for="lastName")
                     |Last Name:   
-            div(class="input-field col s6")
+            div(class="input-field col s12 m6 l4")
                 input(name="city" id="city" type="text" class="validate")
                 label(for="city")
                     |City:
-            div(class="input-field col s6")
+            div(class="input-field col s12 m6 l4")
                 input(name="email" id="email" type="email" class="validate")
                 label(for="email")
                     |Email:                             

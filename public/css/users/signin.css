@@ -1,7 +1,3 @@
-#login-form{
-    margin-left: 39%;
-    margin-top: 5%;
-}
 .buttons{
     margin-left: -2.5%;
 }
@@ -11,4 +7,19 @@
 #messages-box{
     width: 20%;
     margin-left: 38%;
+}
+@media screen and (min-width: 700px) {
+    #login-form {
+        margin-left: 40%;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 800px) {
+    #login-form {
+        margin-left: 35%;
+    }
+}
+@media screen and (min-width: 350px) and (max-width: 600px) {
+    #login-form {
+        margin-left: 18%;
+    }
 }

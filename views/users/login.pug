@@ -4,8 +4,8 @@ include ../utils/notifications
 block main
     link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )
     +notifications()
-    div(class="row")
-        form(id="login-form" class="col s12" action='/login' method='POST')
+    div(class="row" id="login-form" )
+        form(class="col s12" action='/login' method='POST')
             div(class="row")
                 div(class="input-field col")
                     input(name="username" id="username" type="text" class="validate")
