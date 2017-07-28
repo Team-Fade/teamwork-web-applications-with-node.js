@@ -204,4 +204,3 @@ const VALIDATOR = {
 };
 
 module.exports = VALIDATOR;
-

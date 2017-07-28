@@ -1,6 +1,5 @@
 const getRequestMock = (options = {}) => {
     const req = {};
-
     Object.keys(options)
         .forEach((key) => {
             req[key] = options[key];
@@ -11,10 +10,14 @@ const getRequestMock = (options = {}) => {
 const getResponseMock = () => {
     return {
         locals: {
-            user: {},
+            user: {
+
+            },
         },
         viewName: '',
         model: null,
+        redirectUrl: '',
+
         render(viewName, context) {
             this.viewName = viewName;
             this.context = context;
