@@ -1,10 +1,18 @@
-#home-buttons{
-    margin-left: 39%;
-}
 #home-buttons .btn {
     margin-left: 1%;
     margin-top: 1%;
 }
 #home-top-events{
     margin-top: -5%;
+}
+
+@media screen and (min-width: 700px) {
+    #home-buttons {
+        margin-left: 39%;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 700px) {
+    #home-buttons {
+        margin-left: 30%;
+    }
 }

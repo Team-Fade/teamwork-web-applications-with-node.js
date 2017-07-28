@@ -1,10 +1,4 @@
-// let socket = io.connect('http://localhost:3000/chat');
-//       socket.on('news', function(data) {
-//         console.log(data);
-//         socket.emit('my other event', { my: 'data' });
-// });
 /* globals $ io */
-
 $(function() {
   const FADE_TIME = 150; // ms
   const TYPING_TIMER_LENGTH = 400; // ms
@@ -14,16 +8,16 @@ $(function() {
     '#3b88eb', '#3824aa', '#a700ff', '#d300e7',
   ];
 
-  // Initialize variables
   const $window = $(window);
-  const $usernameInput = $('.usernameInput'); // Input for username
-  const $messages = $('.messages'); // Messages area
-  const $inputMessage = $('.inputMessage'); // Input message input box
+  const $usernameInput = $('.usernameInput');
+  const $messages = $('.messages');
+  const $inputMessage = $('.inputMessage');
 
-  const $loginPage = $('.login-page'); // The login page
-  const $chatPage = $('.chat-page'); // The chatroom page
+  const $loginPage = $('.login-page');
+  const $chatPage = $('.chat-page');
 
-  // Prompt for setting a username
+  $chatPage.hide();
+
   let username;
   let connected = false;
   let typing = false;
@@ -42,7 +36,6 @@ $(function() {
     log(message);
   }
 
-  // Sets the client's username
   function setUsername() {
     username = cleanInput($usernameInput.val().trim());
 
@@ -50,6 +43,7 @@ $(function() {
     if (username) {
       $loginPage.fadeOut();
       $chatPage.show();
+
       $loginPage.off('click');
       $currentInput = $inputMessage.focus();
 
@@ -94,7 +88,7 @@ $(function() {
       .text(data.username)
       .css('color', getUsernameColor(data.username));
     const $messageBodyDiv = $('<span class="messageBody">')
-      .text(data.message);
+      .text(': ' + data.message);
 
     const typingClass = data.typing ? 'typing' : '';
     const $messageDiv = $('<li class="message"/>')

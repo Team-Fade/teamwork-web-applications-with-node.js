@@ -1,11 +1,27 @@
-#profile-container{
-  
-    margin-top: 5%;
-}
-
-#profile-buttons{
-    margin-top: 12%;
-}
 #profile-buttons .btn{
     margin-top: 2%;
+}
+#profile-img{
+        width: 250px;
+        height: 250px;
+}
+
+@media screen and (min-width: 700px) {
+    #profile-container{
+        margin-top: 1%;
+        margin-left: 30%;
+    }
+    #profile-buttons {
+        margin-top: 15%;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 800px) {
+    #profile-buttons {
+        margin-left: 25%;
+    }
+}
+@media screen and (min-width: 350px) and (max-width: 600px) {
+    #profile-buttons {
+        margin-left: 25%;
+    }
 }

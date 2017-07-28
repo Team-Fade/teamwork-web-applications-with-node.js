@@ -6,7 +6,7 @@ block main
     +notifications()
     div(class="row")
         div(class="card col s12 m5 l3" id="profile-container")
-            img(class="responsive-img circle" src="data:image/png;base64," + user.profileImage)
+            img(class="responsive-img circle" src="data:image/png;base64," + user.profileImage id="profile-img")
             p(class="flow-text")
                     |Username: #{user.username}
             p(class="flow-text")
