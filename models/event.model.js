@@ -1,10 +1,8 @@
+const VALIDATOR = require('../utils/validator/validator.new');
+
 class Event {
     static isValid(model) {
-        return typeof model !== 'undefined' &&
-            typeof model.description === 'string' &&
-            model.description.length > 3;
-
-            // Warning: TODO: Extend verification
+        return VALIDATOR.validateEventModel(model).isValid;
     }
 
     static toViewModel(model) {

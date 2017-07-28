@@ -1,16 +1,17 @@
 const passport = require('passport');
-const { validator } = require('../../utils');
 const { imageHelper } = require('../../utils');
+const VALIDATOR = require('../../utils/validator/validator.new');
 
 const authenticationController = ({ users }) => {
     return {
         register(req, res, next) {
             const user = JSON.parse(JSON.stringify(req.body));
 
-            if (!validator.validateUser(user).isValid) {
-                const errorMessage = validator.validateUser(user).errorMessage;
-                req.flash('register', errorMessage);
-                return res.render('users/register');
+            const error = VALIDATOR.validateRegister(user);
+
+            if (error.message) {
+                req.flash('register', error.message);
+                return res.redirect('/register');
             }
 
             return users.collection

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const ObjectId = require('mongodb').ObjectId;
 const { imageHelper } = require('../../utils');
+const VALIDATOR = require('../../utils/validator/validator.new');
 
 const eventsController = (data) => {
     return {
@@ -48,10 +49,17 @@ const eventsController = (data) => {
             const event = req.body;
             event.author = res.locals.user.username;
 
+            const error = VALIDATOR.validateEvent(event);
+
+            if (error.message) {
+                req.flash('createEvent', error.message);
+                return res.redirect('/events/create');
+            }
+
             return data.events.collection
                 .findOne(
                 { eventName: event.eventName, author: event.author },
-                (error, existingEvent) => {
+                (err, existingEvent) => {
                     if (existingEvent) {
                         req.flash('error',
                             `Event with this name and ... already exists!`);

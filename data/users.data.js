@@ -1,6 +1,6 @@
 const BaseData = require('./base/base.data');
 const User = require('../models/user.model');
-const { validator } = require('../utils');
+const VALIDATOR = require('../utils/validator/validator.new');
 const { hashPasswordHelper } = require('../utils');
 
 class UsersData extends BaseData {
@@ -9,7 +9,7 @@ class UsersData extends BaseData {
     }
 
     add(user) {
-        if (validator.validateUser(user)) {
+        if (VALIDATOR.validateRegister(user)) {
             user.password =
                 hashPasswordHelper.generateHashedPassword(user.password);
 

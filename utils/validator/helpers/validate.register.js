@@ -10,19 +10,19 @@ const { INVALID_EMAIL } = require('../utils/validator.constants');
 
 function validateFirstname(value, minCharacters, maxCharacters) {
     if (!validatorUtils.isString(value)) {
-         return {
-             isValid: false,
-             message: FIRSTNAME_MUST_BE_STRING,
-         };
+        return {
+            isValid: false,
+            message: FIRSTNAME_MUST_BE_STRING,
+        };
     }
     if (!validatorUtils.isInRange(value.length,
-                                    minCharacters, maxCharacters)) {
+        minCharacters, maxCharacters)) {
         return {
-             isValid: false,
-             message:
-                FIRSTNAME_MUST_BE_IN_RANGE +
-                ' ' + minCharacters + ' and ' + maxCharacters + ' symbols.',
-         };
+            isValid: false,
+            message:
+            FIRSTNAME_MUST_BE_IN_RANGE +
+            ' ' + minCharacters + ' and ' + maxCharacters + ' symbols.',
+        };
     }
     return {
         isValid: true,
@@ -31,19 +31,19 @@ function validateFirstname(value, minCharacters, maxCharacters) {
 
 function validateLastname(value, minCharacters, maxCharacters) {
     if (!validatorUtils.isString(value)) {
-         return {
-             isValid: false,
-             message: LASTNAME_MUST_BE_STRING,
-         };
+        return {
+            isValid: false,
+            message: LASTNAME_MUST_BE_STRING,
+        };
     }
     if (!validatorUtils.isInRange(value.length,
-                                    minCharacters, maxCharacters)) {
+        minCharacters, maxCharacters)) {
         return {
-             isValid: false,
-             message:
-                LASTNAME_MUST_BE_IN_RANGE +
-                ' ' + minCharacters + ' and ' + maxCharacters + ' symbols.',
-         };
+            isValid: false,
+            message:
+            LASTNAME_MUST_BE_IN_RANGE +
+            ' ' + minCharacters + ' and ' + maxCharacters + ' symbols.',
+        };
     }
     return {
         isValid: true,
@@ -52,19 +52,19 @@ function validateLastname(value, minCharacters, maxCharacters) {
 
 function validateCity(value, minCharacters, maxCharacters) {
     if (!validatorUtils.isString(value)) {
-         return {
-             isValid: false,
-             message: CITY_MUST_BE_STRING,
-         };
+        return {
+            isValid: false,
+            message: CITY_MUST_BE_STRING,
+        };
     }
     if (!validatorUtils.isInRange(value.length,
-                                    minCharacters, maxCharacters)) {
+        minCharacters, maxCharacters)) {
         return {
-             isValid: false,
-             message:
-                CITY_MUST_BE_IN_RANGE +
-                ' ' + minCharacters + ' and ' + maxCharacters + ' symbols.',
-         };
+            isValid: false,
+            message:
+            CITY_MUST_BE_IN_RANGE +
+            ' ' + minCharacters + ' and ' + maxCharacters + ' symbols.',
+        };
     }
     return {
         isValid: true,
@@ -73,10 +73,10 @@ function validateCity(value, minCharacters, maxCharacters) {
 
 function validateEmail(value, minCharacters, maxCharacters) {
     if (!validatorUtils.isEmail(value)) {
-         return {
-             isValid: false,
-             message: INVALID_EMAIL,
-         };
+        return {
+            isValid: false,
+            message: INVALID_EMAIL,
+        };
     }
     return {
         isValid: true,
