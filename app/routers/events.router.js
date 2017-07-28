@@ -2,7 +2,8 @@ const upload = require('../../config/multer.config');
 const isAuthenticated = require('../../utils/isAuthenticated');
 
 const attach = (app, router, data) => {
-    const eventsController = require('../controllers/events.controller')(data);
+    const eventsController =
+        require('../controllers/events.controller').init(data);
 
     router
         .get('/browse',

@@ -15,9 +15,6 @@ const navigationController = {
 
         return res.render('navigation/about');
     },
-    getRankingListPage(req, res) {
-        return res.render('navigation/ranking');
-    },
     getChatPage(req, res) {
         if (req.session.passport) {
             return res.render('navigation/chat',

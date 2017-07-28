@@ -3,8 +3,8 @@ const ObjectId = require('mongodb').ObjectId;
 const { imageHelper } = require('../../utils');
 const VALIDATOR = require('../../utils/validator/validator.new');
 
-const eventsController = (data) => {
-    return {
+const init = (data) => {
+    const eventsController = {
         getBrowseEventsPage(req, res) {
             const event = req.query;
             let user = null;
@@ -23,7 +23,7 @@ const eventsController = (data) => {
             });
 
             if (filterArray.length < 1) {
-                return data.events.getAllItems({})
+                return data.events.getAllItems()
                     .then((eventsData) => {
                         return res.render('events/browse-events',
                             {
@@ -33,7 +33,8 @@ const eventsController = (data) => {
                     });
             }
 
-            return data.events.getAllItems({ $or: filterArray })
+            return data.events
+                .getAllItems({ $or: filterArray })
                 .then((eventsData) => {
                     return res.render('events/browse-events',
                         {
@@ -49,17 +50,19 @@ const eventsController = (data) => {
             const event = req.body;
             event.author = res.locals.user.username;
 
-            const error = VALIDATOR.validateEvent(event);
+            const validatorError = VALIDATOR.validateEvent(event);
 
-            if (error.message) {
-                req.flash('createEvent', error.message);
+            if (validatorError.message) {
+                req.flash('createEvent', validatorError.message);
                 return res.redirect('/events/create');
             }
 
-            return data.events.collection
-                .findOne(
-                { eventName: event.eventName, author: event.author },
-                (err, existingEvent) => {
+            return data.events
+                .getOne({
+                    eventName: event.eventName,
+                    author: event.author,
+                })
+                .then((existingEvent) => {
                     if (existingEvent) {
                         req.flash('error',
                             `Event with this name and ... already exists!`);
@@ -77,11 +80,7 @@ const eventsController = (data) => {
 
                     return data.events
                         .add(event)
-                        .then(res.redirect('/profile'))
-                        .catch((err) => {
-                            req.flash('error', err);
-                            return res.redirect('/create');
-                        });
+                        .then(res.redirect('/profile'));
                 });
         },
         joinEvent(req, res) {
@@ -195,6 +194,8 @@ const eventsController = (data) => {
                 .then(() => res.redirect('/user/profile/my-events'));
         },
     };
+
+    return eventsController;
 };
 
-module.exports = eventsController;
+module.exports = { init };
