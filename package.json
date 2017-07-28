@@ -44,6 +44,7 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "chai": "^4.1.0",
+    "chai-spies": "^0.7.1",
     "eslint": "^4.3.0",
     "eslint-config-google": "^0.8.1",
     "gulp-istanbul": "^1.1.2",
