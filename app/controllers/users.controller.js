@@ -30,7 +30,6 @@ const usersController = (data) => {
                 }
 
                 if (req.body.email === '' ||
-                    req.body.email === null ||
                     req.body.email.length < 6) {
                     req.flash('error',
                         'Incorrect email');
@@ -85,8 +84,8 @@ const usersController = (data) => {
                     return;
                 }
 
-                if (!req.body.password ||
-                    typeof req.body.password !== 'string' ||
+                if (typeof req.body.password !== 'string' ||
+                    req.body.password === '' ||
                     req.body.password.length < 6) {
                     req.flash('error', 'Invalid password!');
                     return;

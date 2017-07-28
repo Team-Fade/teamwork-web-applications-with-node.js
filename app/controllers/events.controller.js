@@ -130,23 +130,46 @@ const eventsController = (data) => {
         },
         editEvent(req, res) {
             const eventId = req.headers.referer.split('/').pop();
-            const newEventName = req.body.eventName;
 
-            data.events.getOne({ _id: new ObjectId(eventId) })
+            let newEventName = req.body.eventName;
+            let newEventLocation = req.body.eventLocation;
+            let newEventType = req.body.eventType;
+            let newEventDescription = req.body.eventDescription;
+            let image;
+
+            return data.events.getOne({ _id: new ObjectId(eventId) })
                 .then((event) => {
                     if (!event) {
                         req.flash('error',
-                            'Event that you are want to edit dont exists!');
+                            'Event that you want to edit dont exists!');
                         return;
                     }
-                });
+                    // Warning: TODO: Add validation
+                    if (typeof newEventName === 'undefined') {
+                        newEventName = event.eventName;
+                    }
 
-            const changeEventNamePromise =
-                new Promise((resolve, reject) => {
-                    if (typeof newEventName === 'undefined' ||
-                        newEventName === null ||
-                        newEventName === '') {
-                        return;
+                    if (typeof newEventLocation === 'undefined') {
+                        newEventLocation = event.eventLocation;
+                    }
+
+                    if (typeof newEventType === 'undefined') {
+                        newEventType = event.eventType;
+                    }
+
+                    if (typeof newEventDescription === 'undefined') {
+                        newEventDescription = event.eventDescription;
+                    }
+
+                    if (req.file) {
+                        image = imageHelper.setNewPicture(req);
+                        fs.unlink(req.file.path, (err) => {
+                            if (err) {
+                                req.flash('error', err);
+                            }
+                        });
+                    } else {
+                        image = event.eventImage;
                     }
 
                     data.events.edit(
@@ -154,92 +177,14 @@ const eventsController = (data) => {
                         {
                             $set: {
                                 eventName: newEventName,
-                            },
-                        });
-                });
-
-            const newEventLocation = req.body.eventLocation;
-
-            const changeEventLocationPromise =
-                new Promise((resolve, reject) => {
-                    if (typeof newEventLocation === 'undefined' ||
-                        newEventLocation === null ||
-                        newEventLocation === '') {
-                        return;
-                    }
-
-                    data.events.edit(
-                        { _id: new ObjectId(eventId) },
-                        {
-                            $set: {
                                 eventLocation: newEventLocation,
-                            },
-                        });
-                });
-
-            const newEventType = req.body.eventType;
-
-            const changeEventTypePromise =
-                new Promise((resolve, reject) => {
-                    if (typeof newEventType === 'undefined' ||
-                        newEventType === null ||
-                        newEventType === '') {
-                        return;
-                    }
-
-                    data.events.edit(
-                        { _id: new ObjectId(eventId) },
-                        {
-                            $set: {
                                 eventType: newEventType,
-                            },
-                        });
-                });
-
-            const newEventDescription = req.body.eventDescription;
-
-            const changeEventDescriptionPromise =
-                new Promise((resolve, reject) => {
-                    if (typeof newEventDescription === 'undefined' ||
-                        newEventDescription === null ||
-                        newEventDescription === '') {
-                        return;
-                    }
-
-                    data.events.edit(
-                        { _id: new ObjectId(eventId) },
-                        {
-                            $set: {
                                 eventDescription: newEventDescription,
+                                eventImage: image,
                             },
                         });
-                });
-
-            const changeEventPicturePromise =
-                new Promise((resolve, reject) => {
-                    if (req.file) {
-                        const image = imageHelper.setNewPicture(req);
-                        data.events.edit(
-                            { _id: new ObjectId(eventId) },
-                            { $set: { eventImage: image } })
-                            .then(() => {
-                                fs.unlink(req.file.path, (err) => {
-                                    if (err) {
-                                        req.flash('error', err);
-                                    }
-                                });
-                            });
-                    }
-                });
-
-            Promise.all([
-                changeEventNamePromise,
-                changeEventLocationPromise,
-                changeEventTypePromise,
-                changeEventDescriptionPromise,
-                changeEventPicturePromise,
-            ])
-                .then(res.redirect('/user/profile/my-events'));
+                })
+                .then(() => res.redirect('/user/profile/my-events'));
         },
     };
 };
