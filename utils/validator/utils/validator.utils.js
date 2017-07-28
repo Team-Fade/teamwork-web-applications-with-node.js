@@ -21,13 +21,13 @@ function isInRange(value, start, end) {
 }
 
 function isEmail(value) {
-    // const atIndex = value.indexOf('@');
-    // if (atIndex < 1) {
-    //     return false;
-    // }
-    // if (value.splice(0, atIndex).indexOf('.') < 1) {
-    //     return false;
-    // }
+    const atIndex = value.indexOf('@');
+    if (atIndex < 1) {
+        return false;
+    }
+    if (value.substring(atIndex, value.length).indexOf('.') < 1) {
+        return false;
+    }
     return true;
 }
 
