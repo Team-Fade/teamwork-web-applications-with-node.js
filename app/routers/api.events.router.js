@@ -1,6 +1,6 @@
 const attach = (app, router, data) => {
     const apiEventsController =
-        require('../controllers/api.events.controller')(data);
+        require('../controllers/api.events.controller').init(data);
 
     router
         .get('/api/filter-events', (req, res) =>

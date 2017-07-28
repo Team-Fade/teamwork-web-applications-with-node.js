@@ -15,7 +15,11 @@ class BaseData {
         return this.collection
             .findOne(filter, options)
             .then((item) => {
-                return this.modelClass.toViewModel(item);
+                if (item) {
+                    return this.modelClass.toViewModel(item);
+                }
+
+                return null;
             })
             .catch((error) => {
                 return error;

@@ -1,4 +1,4 @@
-const chai = require('chai')
+const chai = require('chai');
 const spies = require('chai-spies');
 chai.use(spies);
 const should = chai.should();
@@ -46,8 +46,6 @@ describe('events controller', () => {
                 .getRequestMock(reqOptions);
             res = require('../../../req-res')
                 .getResponseMock();
-            res = require('../../../req-res')
-                .getResponseMock();
 
             res.locals.user.username = 'testAuthor';
         });
@@ -91,8 +89,6 @@ describe('events controller', () => {
 
             req = require('../../../req-res')
                 .getRequestMock(reqOptions);
-            res = require('../../../req-res')
-                .getResponseMock();
             res = require('../../../req-res')
                 .getResponseMock();
 
@@ -139,8 +135,6 @@ describe('events controller', () => {
 
             req = require('../../../req-res')
                 .getRequestMock(reqOptions);
-            res = require('../../../req-res')
-                .getResponseMock();
             res = require('../../../req-res')
                 .getResponseMock();
 

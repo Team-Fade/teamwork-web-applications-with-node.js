@@ -58,9 +58,12 @@ const init = (data) => {
             }
 
             return data.events
-                .getOne({
-                    eventName: event.eventName,
-                    author: event.author,
+                .getOne(
+                {
+                    $and: [
+                        { eventName: event.eventName },
+                        { author: event.author },
+                    ],
                 })
                 .then((existingEvent) => {
                     if (existingEvent) {
@@ -149,9 +152,9 @@ const init = (data) => {
                     if (!event) {
                         req.flash('error',
                             'Event that you want to edit dont exists!');
-                        return;
+                        return res.redirect('/user/profile/my-events');
                     }
-                    // Warning: TODO: Add validation
+
                     if (typeof newEventName === 'undefined') {
                         newEventName = event.eventName;
                     }
@@ -179,7 +182,7 @@ const init = (data) => {
                         image = event.eventImage;
                     }
 
-                    data.events.edit(
+                    return data.events.edit(
                         { _id: new ObjectId(eventId) },
                         {
                             $set: {

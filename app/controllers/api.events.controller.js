@@ -1,5 +1,5 @@
-const apiEventsController = ({ events }) => {
-    return {
+const init = ({ events }) => {
+    const apiEventsController = {
         getEvents(req, res, next) {
             return events.groupEvents()
                 .then((eventsData) => {
@@ -32,6 +32,7 @@ const apiEventsController = ({ events }) => {
             return res.send({ errorMessage: 'Not authenticated user' });
         },
     };
-};
 
-module.exports = apiEventsController;
+    return apiEventsController;
+};
+module.exports = { init };

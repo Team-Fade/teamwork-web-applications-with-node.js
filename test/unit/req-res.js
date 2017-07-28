@@ -17,7 +17,6 @@ const getResponseMock = () => {
         viewName: '',
         model: null,
         redirectUrl: '',
-
         render(viewName, context) {
             this.viewName = viewName;
             this.context = context;
