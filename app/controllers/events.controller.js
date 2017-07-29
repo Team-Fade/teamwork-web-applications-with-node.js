@@ -102,8 +102,8 @@ const init = (data) => {
                         return data.events.edit(
                             { _id: new ObjectId(eventId) },
                             {
-                                $addToSet:
-                                { participants: res.locals.user.username },
+                                $push: { participants: res.locals.user.username },
+                                $inc: { participantsCount: 1 },
                             },
                             {
                                 upsert: false,
@@ -121,6 +121,7 @@ const init = (data) => {
                     { _id: new ObjectId(eventId) },
                     {
                         $pull: { participants: res.locals.user.username },
+                        $inc: { participantsCount: -1 },
                     });
             }
 

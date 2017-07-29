@@ -18,6 +18,14 @@ class EventsData extends BaseData {
             .toArray();
     }
 
+    sortEventsByParticipants() {
+        return this.collection
+            .find()
+            .sort({ participantsCount: -1 })
+            .limit(5)
+            .toArray();
+    }
+
     groupEvents() {
         return this.collection.aggregate(
             [
