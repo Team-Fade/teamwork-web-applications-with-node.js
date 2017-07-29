@@ -18,6 +18,10 @@ const attach = (app, router, data) => {
         })
         .get('/profile/my-events', isAuthenticated, (req, res) => {
             usersController.getMyEventsPage(req, res);
+        })
+        .delete('/profile/my-events/:id/:action', isAuthenticated,
+        (req, res) => {
+            usersController.deleteEvent(req, res);
         });
     app.use('/user', router);
 };

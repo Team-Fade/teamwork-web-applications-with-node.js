@@ -48,6 +48,14 @@ class BaseData {
             });
     }
 
+    delete(filter) {
+        return this.collection
+            .deleteOne(filter)
+            .then((result) => {
+                return result;
+            });
+    }
+
     edit(filter, options) {
         return this.collection.update(filter, options)
             .then((model) => {
@@ -55,7 +63,5 @@ class BaseData {
             });
     }
 }
-
-// istanbul cover ./node_modules/mocha/bin/_mocha test/unit/**/*.js
 
 module.exports = BaseData;

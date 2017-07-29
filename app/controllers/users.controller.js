@@ -1,4 +1,5 @@
 const fs = require('fs');
+const ObjectId = require('mongodb').ObjectId;
 const { imageHelper } = require('../../utils');
 const { hashPasswordHelper } = require('../../utils');
 
@@ -129,6 +130,13 @@ const usersController = (data) => {
                         'No events avaible for this user',
                     });
                 });
+        },
+        deleteEvent(req, res) {
+            const eventId = req.params.id;
+            if (req.params.action === 'delete') {
+                data.events
+                    .delete({ _id: new ObjectId(eventId) });
+            }
         },
     };
 };
