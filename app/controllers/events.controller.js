@@ -86,7 +86,7 @@ const init = (data) => {
                         .then(res.redirect('/profile'));
                 });
         },
-        joinEvent(req, res) {
+        joinEvent(req, res, next) {
             const eventId = req.params.id;
             if (req.params.action === 'join') {
                 return data.events
@@ -112,9 +112,9 @@ const init = (data) => {
                     });
             }
 
-            return this.leaveEvent(req, res);
+            return next();
         },
-        leaveEvent(req, res) {
+        leaveEvent(req, res, next) {
             const eventId = req.params.id;
             if (req.params.action === 'leave') {
                 return data.events.edit(
@@ -123,7 +123,8 @@ const init = (data) => {
                         $pull: { participants: res.locals.user.username },
                     });
             }
-            return this.joinEvent(req, res);
+
+            return next();
         },
         getManageEventPage(req, res) {
             const eventId = req.params.id;
