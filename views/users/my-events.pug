@@ -62,12 +62,9 @@ block main
                     div(class="col s12 m5 l5 event-view")
                         div(class="card")
                             div(class="card-image")
-                            if event.eventImage.encoded
-                                img(src="data:image/png;base64," + event.eventImage.encoded class="event-image")
-                            else
-                                img(src="data:image/png;base64," + event.eventImage.default)
-                                span(class="card-title")
-                                    |#{event.eventName}
+                                img(src="data:image/png;base64," + event.eventImage.data class="event-image col s12")
+                            span(class="card-title")
+                                |#{event.eventName}
                             div(class="card-content")
                                 p
                                     |Author: #{event.author}
@@ -80,11 +77,8 @@ block main
                                     |View more
                     div(id=event._id class="modal modal-fixed-footer")
                         div(class="modal-content row")
-                            div(class="col s12")
-                            if event.eventImage.encoded
-                                img(src="data:image/png;base64," + event.eventImage.encoded class="event-image")
-                            else
-                                img(src="data:image/png;base64," + event.eventImage.default class="event-image")
+                            div(class="card-image")
+                                img(src="data:image/png;base64," + event.eventImage.data class="event-image col s12")
                             div(class="col s6")
                                 h4(class="col s12")
                                     |#{event.eventName}
