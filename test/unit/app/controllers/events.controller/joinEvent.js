@@ -11,7 +11,6 @@ describe('events controller', () => {
     let data;
     let req = null;
     let res = null;
-    let spy;
 
     describe('if user who wants to join this event is the author', () => {
         beforeEach(() => {
@@ -99,53 +98,6 @@ describe('events controller', () => {
             controller.joinEvent(req, res)
                 .then((result) => {
                     expect(result.author).to.include('test');
-                });
-        });
-    });
-
-    describe('if param action is not join', () => {
-        beforeEach(() => {
-            const event = {
-                author: 'testUser',
-                participants: ['testUser'],
-            };
-
-            data = {
-                events: {
-                    edit() {
-                        return Promise.resolve(event);
-                    },
-                    getOne() {
-                        return Promise.resolve(event);
-                    },
-                },
-            };
-
-            controller = init(data);
-
-            const reqOptions = {
-                params: {
-                    id: 1,
-                    action: 'leave',
-                },
-                flash: () => {
-
-                },
-            };
-
-            req = require('../../../req-res')
-                .getRequestMock(reqOptions);
-            res = require('../../../req-res')
-                .getResponseMock();
-
-            res.locals.user.username = 'testUser';
-            spy = chai.spy(controller.leaveEvent(req, res));
-        });
-
-        it('expect joinEvent() to call leaveEvent()', () => {
-            controller.joinEvent(req, res)
-                .then((result) => {
-                    expect(spy).to.have.been.called();
                 });
         });
     });
