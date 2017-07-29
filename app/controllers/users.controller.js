@@ -1,6 +1,10 @@
 const fs = require('fs');
 const { imageHelper } = require('../../utils');
 const { hashPasswordHelper } = require('../../utils');
+const registerValidator =
+    require('../../utils/validator/helpers/validate.register');
+const userValidator =
+    require('../../utils/validator/helpers/validate.user');
 
 const init = (data) => {
     const usersController = {
@@ -18,40 +22,6 @@ const init = (data) => {
         },
         editProfilePage(req, res) {
             const username = res.locals.user.username;
-            const changeEmailPromise = new Promise((resolve, reject) => {
-                if (typeof req.body.email === 'undefined') {
-                    return;
-                }
-
-                if (req.body.email === '' ||
-                    req.body.email.length < 6) {
-                    req.flash('error',
-                        'Incorrect email');
-                    return;
-                }
-
-                if (req.body.email !== '') {
-                    data.users.getOne(
-                        {
-                            $and: [
-                                { email: req.body.email },
-                                { username: { $ne: username } },
-                            ],
-                        }
-                    )
-                        .then((user) => {
-                            if (user.username) {
-                                req.flash('error',
-                                    'That email is already in use!');
-                                return;
-                            }
-
-                            data.users.edit(
-                                { username: username },
-                                { $set: { email: req.body.email } });
-                        });
-                }
-            });
 
             const changePicturePromise = new Promise((resolve, reject) => {
                 if (req.file) {
@@ -78,13 +48,6 @@ const init = (data) => {
                     return;
                 }
 
-                if (typeof req.body.password !== 'string' ||
-                    req.body.password === '' ||
-                    req.body.password.length < 6) {
-                    req.flash('error', 'Invalid password!');
-                    return;
-                }
-
                 data.users.edit(
                     { username: username },
                     {
@@ -96,12 +59,46 @@ const init = (data) => {
                     });
             });
 
-            Promise.all([
-                changeEmailPromise,
-                changePicturePromise,
-                changePasswordPromise,
-            ])
-                .then(res.redirect('/user/profile/edit'));
+            return data.users
+                .getOne({
+                    $and: [
+                        { email: req.body.email },
+                        { username: { $ne: username } },
+                    ],
+                })
+                .then((user) => {
+                    if (user) {
+                        req.flash('error',
+                            'That email is already in use!');
+                        res.redirect('/user/profile/edit');
+                        return;
+                    }
+
+                    const changeEmailPromise = new Promise((resolve, reject) => {
+                        if (typeof req.body.email === 'undefined') {
+                            return;
+                        }
+
+                        if (registerValidator.validateEmail(req.body.email).isValid) {
+                            req.session.passport.user.email = req.body.email;
+
+                            data.users.edit(
+                                { username: username },
+                                { $set: { email: req.body.email } });
+                        } else {
+                            req.flash('error',
+                                'Invalid email!');
+                        }
+                    });
+
+                    Promise
+                        .all([
+                            changeEmailPromise,
+                            changePicturePromise,
+                            changePasswordPromise,
+                        ])
+                        .then(res.redirect('/user/profile/edit'));
+                });
         },
         getMyEventsPage(req, res) {
             const username = res.locals.user.username;
