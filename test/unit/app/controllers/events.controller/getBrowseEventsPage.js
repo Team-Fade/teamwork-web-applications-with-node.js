@@ -17,7 +17,7 @@ describe('events controller', () => {
                 beforeEach(() => {
                         const reqOptions = {
                                 params: { id: 1 },
-                                query: { },
+                                query: {},
                                 session: {
                                         passport: { user: {} },
                                 },

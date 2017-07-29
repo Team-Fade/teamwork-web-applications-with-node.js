@@ -2,7 +2,8 @@ const upload = require('../../config/multer.config');
 const isAuthenticated = require('../../utils/isAuthenticated');
 
 const attach = (app, router, data) => {
-    const usersController = require('../controllers/users.controller')(data);
+    const usersController =
+        require('../controllers/users.controller').init(data);
 
     router
         .get('/profile', isAuthenticated, (req, res) => {
@@ -18,11 +19,8 @@ const attach = (app, router, data) => {
         })
         .get('/profile/my-events', isAuthenticated, (req, res) => {
             usersController.getMyEventsPage(req, res);
-        })
-        .delete('/profile/my-events/:id/:action', isAuthenticated,
-        (req, res) => {
-            usersController.deleteEvent(req, res);
         });
+
     app.use('/user', router);
 };
 

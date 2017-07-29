@@ -1,27 +1,20 @@
 const fs = require('fs');
-const ObjectId = require('mongodb').ObjectId;
 const { imageHelper } = require('../../utils');
 const { hashPasswordHelper } = require('../../utils');
 
-const usersController = (data) => {
-    return {
+const init = (data) => {
+    const usersController = {
         getProfilePage(req, res) {
             const user = res.locals.user;
-            res.render('users/profile', {
+            return res.render('users/profile', {
                 user: user,
             });
         },
         getProfileEditPage(req, res) {
-            if (req.session.passport) {
-                const user = res.locals.user;
-
-                return res.render('users/profile-edit', {
-                    user: user,
-                });
-            }
-
-            req.flash('error', 'You are not currently logged in!');
-            return res.redirect('/login');
+            const user = res.locals.user;
+            return res.render('users/profile-edit', {
+                user: user,
+            });
         },
         editProfilePage(req, res) {
             const username = res.locals.user.username;
@@ -112,33 +105,28 @@ const usersController = (data) => {
         },
         getMyEventsPage(req, res) {
             const username = res.locals.user.username;
-            Promise.all([
+            return Promise.all([
                 data.events.getUserJoinedEvents(username),
                 data.events.getUserCreatedEvents(username),
             ])
                 .then((events) => {
-                    if (events) {
+                    if (events[0].length !== 0 || events[1].length !== 0) {
                         return res.render('users/my-events',
                             {
-                                joinedEvents: events[0],
-                                createdEvents: events[1],
+                                context: {
+                                    joinedEvents: events[0],
+                                    createdEvents: events[1],
+                                },
                             });
                     }
 
-                    return res.render('users/my-events', {
-                        errorMessage:
-                        'No events avaible for this user',
-                    });
+                    req.flash('error', 'No events avaible for this user');
+                    return res.render('users/my-events', { context: {} });
                 });
         },
-        deleteEvent(req, res) {
-            const eventId = req.params.id;
-            if (req.params.action === 'delete') {
-                data.events
-                    .delete({ _id: new ObjectId(eventId) });
-            }
-        },
     };
+
+    return usersController;
 };
 
-module.exports = usersController;
+module.exports = { init };

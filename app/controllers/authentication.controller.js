@@ -14,11 +14,18 @@ const init = ({ users }) => {
                 return res.redirect('/register');
             }
 
-            return users.getOne({ username: req.body.username })
+            return users
+                .getOne({
+                    $or:
+                    [
+                        { username: req.body.username },
+                        { email: req.body.email },
+                    ],
+                })
                 .then((existingUser) => {
                     if (existingUser) {
                         req.flash('register',
-                            'User with that username already exists!');
+                            'User with that username or email already exists!');
 
                         return res.redirect('/register');
                     }

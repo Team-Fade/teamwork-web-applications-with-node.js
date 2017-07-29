@@ -127,6 +127,13 @@ const init = (data) => {
 
             return next();
         },
+        deleteEvent(req, res) {
+            const eventId = req.params.id;
+            if (req.params.action === 'delete') {
+                data.events
+                    .delete({ _id: new ObjectId(eventId) });
+            }
+        },
         getManageEventPage(req, res) {
             const eventId = req.params.id;
             return data.events.getOne({ _id: new ObjectId(eventId) })

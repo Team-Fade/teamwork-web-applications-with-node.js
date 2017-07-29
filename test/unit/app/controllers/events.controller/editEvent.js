@@ -103,7 +103,6 @@ describe('events controller: ', () => {
         it('expect editEvent() to redirect to /user/profile/my-events', () => {
             return controller.editEvent(req, res)
                 .then((result) => {
-                    console.log(result);
                     expect(res.redirectUrl).to.be
                         .equal('/user/profile/my-events');
                 });

@@ -12,7 +12,7 @@ $(() => {
 
         $.ajax({
             type: 'DELETE',
-            url: `/user/profile/my-events/${eventId}/delete`,
+            url: `/events/${eventId}/delete`,
             data: {
                 eventId: eventId,
             },

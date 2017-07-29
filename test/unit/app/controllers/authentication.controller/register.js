@@ -66,11 +66,11 @@ describe('authentication controller', () => {
             const reqOptions = {
                 body: {
                     username: 'testUser',
-                    password: '',
-                    email: '',
-                    firstName: '',
-                    lastName: '',
-                    city: '',
+                    password: 'testUser',
+                    email: 'testUser',
+                    firstName: 'testUser',
+                    lastName: 'testUser',
+                    city: 'testUser',
                 },
                 flash: () => {
 
@@ -87,8 +87,123 @@ describe('authentication controller', () => {
 
         it('expect register() redirect to /register', () => {
             return controller.register(req, res, next)
-                .then((result) => {
+                .then(() => {
                     expect(res.redirectUrl).to.be.equal('/register');
+                });
+        });
+    });
+
+    describe('if valid user that does not exists is passed', () => {
+        beforeEach(() => {
+            const user = {
+                username: 'testUser',
+                password: 'testUser',
+                email: 'testUser',
+                firstName: 'testUser',
+                lastName: 'testUser',
+                city: 'testUser',
+                profileImage: '',
+            };
+
+            next = () => {
+
+            };
+
+            data = {
+                users: {
+                    getOne() {
+                        return Promise.resolve();
+                    },
+                    add() {
+                        return Promise.reject();
+                    },
+                },
+            };
+
+            const reqOptions = {
+                body: {
+                    username: 'testUser',
+                    password: 'testUser',
+                    email: 'testUser',
+                    firstName: 'testUser',
+                    lastName: 'testUser',
+                    city: 'testUser',
+                },
+                flash: () => {
+
+                },
+            };
+
+            controller = init(data);
+
+            req = require('../../../req-res')
+                .getRequestMock(reqOptions);
+            res = require('../../../req-res')
+                .getResponseMock();
+        });
+
+        it('expect register() to catch error if user cannot be added in db', () => {
+            return controller.register(req, res, next)
+                .catch((err) => {
+                    expect(res.redirectUrl).to.be.equal('/register');
+                });
+        });
+    });
+
+    describe('if valid user that does not exists is passed', () => {
+        beforeEach(() => {
+            const user = {
+                username: 'testUser',
+                password: 'testUser',
+                email: 'testUser',
+                firstName: 'testUser',
+                lastName: 'testUser',
+                city: 'testUser',
+                profileImage: '',
+            };
+
+            next = () => {
+
+            };
+
+            data = {
+                users: {
+                    getOne() {
+                        return Promise.resolve();
+                    },
+                    add() {
+                        return Promise.resolve(user);
+                    },
+                },
+            };
+
+            const reqOptions = {
+                body: {
+                    username: 'testUser',
+                    password: 'testUser',
+                    email: 'testUser',
+                    firstName: 'testUser',
+                    lastName: 'testUser',
+                    city: 'testUser',
+                },
+                flash: () => {
+
+                },
+            };
+
+            controller = init(data);
+
+            req = require('../../../req-res')
+                .getRequestMock(reqOptions);
+            res = require('../../../req-res')
+                .getResponseMock();
+        });
+
+        it('expect register() on success to do not throw', () => {
+            return controller.register(req, res, next)
+                .then()
+                .then(() => {
+                    expect(req.flash).to.not.have.property('register');
                 });
         });
     });

@@ -14,6 +14,10 @@ const attach = (app, router, data) => {
         (req, res) => eventsController.createEvent(req, res))
         .put('/:id/:action', isAuthenticated,
         [eventsController.joinEvent, eventsController.leaveEvent])
+        .delete('/:id/:action', isAuthenticated,
+        (req, res) => {
+            eventsController.deleteEvent(req, res);
+        })
         .get('/manage/:id', isAuthenticated,
         (res, req) => eventsController.getManageEventPage(res, req))
         .post('/manage/:id', isAuthenticated, upload.single('eventImage'),

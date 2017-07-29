@@ -1,14 +1,16 @@
 extend ../common/_master
+include ../utils/notifications
 
 block main
     link(rel='stylesheet', href='../../public/css/users/my-events.css', type='text/css' )
     form(id='manage-events-form' class="col s6" action='/user/profile/my-events')
+        +notifications()
         div(class="row")
             div(class="col s12 m6 l6")
                 h4
                     |Events organized by you:
-                if createdEvents
-                    each event, index in createdEvents
+                if context.createdEvents
+                    each event, index in context.createdEvents
                         div(class="col s12 m5 l5 event-view")
                             div(class="card")
                                 div(class="card-image")
@@ -58,8 +60,8 @@ block main
             div(class="col s12 m6 l6")
                 h4
                     |Events you participate in:
-                if joinedEvents
-                    each event, index in joinedEvents
+                if context.joinedEvents
+                    each event, index in context.joinedEvents
                         div(class="col s12 m5 l5 event-view")
                             div(class="card")
                                 div(class="card-image")

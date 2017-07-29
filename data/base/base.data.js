@@ -42,8 +42,9 @@ class BaseData {
     }
 
     add(model) {
-        return this.collection.insert(model)
-            .then(() => {
+        return this.collection
+            .insert(model)
+            .then((status) => {
                 return this.modelClass.toViewModel(model);
             });
     }
