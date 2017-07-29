@@ -1,6 +1,6 @@
 const attach = (app, router, data) => {
     const authController =
-        require('../controllers/authentication.controller')(data);
+        require('../controllers/authentication.controller').init(data);
 
     router
         .post('/login', (req, res, next) =>

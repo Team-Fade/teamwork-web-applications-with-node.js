@@ -2,8 +2,8 @@ const passport = require('passport');
 const { imageHelper } = require('../../utils');
 const VALIDATOR = require('../../utils/validator/validator.new');
 
-const authenticationController = ({ users }) => {
-    return {
+const init = ({ users }) => {
+    const authenticationController = {
         register(req, res, next) {
             const user = JSON.parse(JSON.stringify(req.body));
 
@@ -14,9 +14,8 @@ const authenticationController = ({ users }) => {
                 return res.redirect('/register');
             }
 
-            return users.collection
-                .findOne(
-                { 'username': req.body.username }, (_, existingUser) => {
+            return users.getOne({ username: req.body.username })
+                .then((existingUser) => {
                     if (existingUser) {
                         req.flash('register',
                             'User with that username already exists!');
@@ -50,6 +49,8 @@ const authenticationController = ({ users }) => {
             });
         },
     };
+
+    return authenticationController;
 };
 
-module.exports = authenticationController;
+module.exports = { init };
