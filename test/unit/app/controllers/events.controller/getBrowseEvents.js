@@ -5,23 +5,30 @@ const { init } =
 
 describe('Controllers tests: ', () => {
     describe('Events controller: ', () => {
-        let data = null;
-        const event = 'testEvent';
         let controller;
+        let data = null;
+        const events = ['testEvent', 1, 2, 3];
+        const user = {
+
+        };
 
         let req = null;
         let res = null;
 
-        describe('if event is found', () => {
+        describe('when no query params are passed', () => {
             before(() => {
                 const reqOptions = {
                     params: { id: 1 },
+                    query: {},
+                    session: {
+                        passport: { user: {} },
+                    },
                 };
 
                 data = {
                     events: {
-                        getOne() {
-                            return Promise.resolve(event);
+                        getAllItems() {
+                            return Promise.resolve(events);
                         },
                     },
                 };
@@ -34,32 +41,34 @@ describe('Controllers tests: ', () => {
                     .getResponseMock();
             });
 
-            it('expect getManageEventPage() to return items', () => {
-                return controller.getManageEventPage(req, res)
+            it('expect getBrowseEventsPage() to return items', () => {
+                return controller.getBrowseEventsPage(req, res)
                     .then((result) => {
                         expect(res.context).to.be.deep
                             .equal({
-                                context: event,
+                                context: events,
+                                user: user,
                             });
                         expect(res.viewName).to.be
-                            .equal('events/manage-event');
+                            .equal('events/browse-events');
                     });
             });
         });
 
-        describe('if event is not found', () => {
+        describe('when query params are passed', () => {
             before(() => {
                 const reqOptions = {
                     params: { id: 1 },
-                    flash: () => {
-
+                    query: { eventName: 'testEvent' },
+                    session: {
+                        passport: { user: {} },
                     },
                 };
 
                 data = {
                     events: {
-                        getOne() {
-                            return Promise.resolve(null);
+                        getAllItems() {
+                            return Promise.resolve(events);
                         },
                     },
                 };
@@ -72,15 +81,18 @@ describe('Controllers tests: ', () => {
                     .getResponseMock();
             });
 
-            it(`expect getManageEventPage() 
-            to redirect to /events/create`, () => {
-                    return controller
-                        .getManageEventPage(req, res)
-                        .then((result) => {
-                            expect(res.redirectUrl)
-                                .to.be.equal('/events/create');
-                        });
-                });
+            it('expect getBrowseEventsPage() should use filter array', () => {
+                return controller.getBrowseEventsPage(req, res)
+                    .then((result) => {
+                        expect(res.context).to.be.deep
+                            .equal({
+                                context: events,
+                                user: user,
+                            });
+                        expect(res.viewName).to.be
+                            .equal('events/browse-events');
+                    });
+            });
         });
     });
 });

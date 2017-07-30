@@ -1,9 +1,9 @@
 const { expect } = require('chai');
 const { init } =
-    require('../../../../../app/controllers/authentication.controller');
+    require('../../../../../app/controllers/navigation.controller');
 
 describe('Controllers tests: ', () => {
-    describe('Authentication controller: ', () => {
+    describe('Navigation controller: ', () => {
         let controller;
         let data;
         let req = null;
@@ -11,15 +11,15 @@ describe('Controllers tests: ', () => {
 
         before(() => {
             data = {
-                users: {
+                events: {
 
                 },
             };
 
             const reqOptions = {
                 session: {
-                    destroy() {
-                        return Promise.resolve(res.redirect('/'));
+                    passport: {
+                        user: 'testUser',
                     },
                 },
             };
@@ -32,10 +32,10 @@ describe('Controllers tests: ', () => {
                 .getResponseMock();
         });
 
-        it('expect logout() to call session.destroy and redirect to /', () => {
-            controller.logout(req, res);
-            expect(res.redirectUrl).to.be.equal('/');
+        it('expect getAboutUsPage() to render navigation/about', () => {
+            controller.getAboutUsPage(req, res);
+            expect(res.viewName).to.be.equal('navigation/about');
+            expect(res.context.user).to.be.equal('testUser');
         });
     });
 });
-

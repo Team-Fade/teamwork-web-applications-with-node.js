@@ -62,7 +62,8 @@ class BaseData {
     }
 
     edit(filter, options) {
-        return this.collection.update(filter, options)
+        return this.collection
+            .update(filter, options)
             .then((model) => {
                 return this.modelClass.toViewModel(model);
             });

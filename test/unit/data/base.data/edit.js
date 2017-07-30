@@ -3,50 +3,52 @@ const sinon = require('sinon');
 
 const BaseData = require('../../../../data/base/base.data');
 
-describe('BaseData.edit()', () => {
-    let ModelClass = null;
-    let data = null;
-    let update;
-    const validator = null;
+describe('Data tests: ', () => {
+    describe('BaseData.edit(): ', () => {
+        let ModelClass = null;
+        let data = null;
+        let update;
+        const validator = null;
 
-    const db = {
-        collection: () => { },
-    };
+        const db = {
+            collection: () => { },
+        };
 
-    const item = { testModel: 'testModel' };
+        const item = { testModel: 'testModel' };
 
-    ModelClass = class {
-    };
+        ModelClass = class {
+        };
 
-    describe('when model is passed as argument', () => {
-        beforeEach(() => {
-            update = () => {
-                return Promise.resolve(item);
-            };
+        describe('when model is passed as argument', () => {
+            before(() => {
+                update = () => {
+                    return Promise.resolve(item);
+                };
 
-            sinon
-                .stub(db, 'collection')
-                .callsFake(() => {
-                    return { update };
-                });
+                sinon
+                    .stub(db, 'collection')
+                    .callsFake(() => {
+                        return { update };
+                    });
 
-            ModelClass.toViewModel = (model) => {
-                return model;
-            };
+                ModelClass.toViewModel = (model) => {
+                    return model;
+                };
 
-            data = new BaseData(db, ModelClass, validator);
-        });
+                data = new BaseData(db, ModelClass, validator);
+            });
 
-        afterEach(() => {
-            db.collection.restore();
-        });
+            after(() => {
+                db.collection.restore();
+            });
 
-        it('expect to return the item in viewModel', () => {
-            return data
-                .edit(item)
-                .then((model) => {
-                    expect(model).to.deep.equal(item);
-                });
+            it('expect to return the item in viewModel', () => {
+                return data
+                    .edit(item)
+                    .then((model) => {
+                        expect(model).to.deep.equal(item);
+                    });
+            });
         });
     });
 });
