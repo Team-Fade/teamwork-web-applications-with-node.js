@@ -9,16 +9,14 @@ class UsersData extends BaseData {
     }
 
     add(user) {
-        if (VALIDATOR.validateRegister(user)) {
+        if (VALIDATOR.validateRegister(user).isValid) {
             user.password =
                 hashPasswordHelper.generateHashedPassword(user.password);
-
             if (User.isValid(user)) {
                 return super.add(user);
             }
         }
 
-        // Warning: TODO: We should return properly error message
         return super.add(null);
     }
 

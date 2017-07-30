@@ -8,47 +8,60 @@ const VALIDATOR = {
         validateUserPassword: validateUser.validateUserPassword,
     },
     validateRegister: (user) => {
-        const error = {};
+        const error = {
+            isValid: true,
+            message: '',
+        };
+
         const validateUsername = validateUser
             .validateUsername(user.username, 5, 15);
         const validatePassword = validateUser
             .validateUserPassword(user.password, 5, 15);
+
         const validateFirstname = validateRegister
             .validateFirstname(user.firstName, 5, 15);
         const validateLastname = validateRegister
             .validateLastname(user.lastName, 5, 15);
         const validateCity = validateRegister
-            .validateCity(user.city, 5, 10);
+            .validateCity(user.city, 5, 15);
         const validateEmail = validateRegister
             .validateEmail(user.email, 5, 15);
 
         if (!validateUsername.isValid) {
             error.message = validateUsername.message;
+            error.isValid = false;
             return error;
         }
 
         if (!validatePassword.isValid) {
             error.message = validatePassword.message;
+            error.isValid = false;
             return error;
         }
 
         if (!validateFirstname.isValid) {
             error.message = validateFirstname.message;
+            error.isValid = false;
             return error;
         }
 
+
         if (!validateLastname.isValid) {
             error.message = validateLastname.message;
+            error.isValid = false;
             return error;
         }
 
         if (!validateCity.isValid) {
             error.message = validateCity.message;
+            error.isValid = false;
             return error;
         }
 
+
         if (!validateEmail.isValid) {
             error.message = validateEmail.message;
+            error.isValid = false;
             return error;
         }
 

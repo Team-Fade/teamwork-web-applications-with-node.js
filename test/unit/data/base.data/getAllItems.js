@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const BaseData = require('../../../data/base/base.data');
+const BaseData = require('../../../../data/base/base.data');
 
 describe('BaseData.getAllItems()', () => {
     const db = {
@@ -44,7 +44,8 @@ describe('BaseData.getAllItems()', () => {
             });
 
             it('expect to return items', () => {
-                return data.getAllItems()
+                return data
+                    .getAllItems()
                     .then((models) => {
                         expect(models).to.deep.equal(items);
                     });

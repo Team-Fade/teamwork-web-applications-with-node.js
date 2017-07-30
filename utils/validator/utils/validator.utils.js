@@ -7,7 +7,7 @@ function isString(value) {
 
 function isNumber(value) {
     if (typeof Number.parseInt(value, 10) !== 'number'
-            || Number.isNaN(value) || value === null) {
+        || Number.isNaN(value) || value === null) {
         return false;
     }
     return true;

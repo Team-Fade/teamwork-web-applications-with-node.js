@@ -6,13 +6,17 @@ class User {
     }
 
     static toViewModel(model) {
-        const viewModel = new User();
-        Object.keys(model)
-            .forEach((property) => {
-                viewModel[property] = model[property];
-            });
+        if (model !== null) {
+            const viewModel = new User();
+            Object.keys(model)
+                .forEach((property) => {
+                    viewModel[property] = model[property];
+                });
 
-        return viewModel;
+            return viewModel;
+        }
+
+        return null;
     }
 
     get id() {

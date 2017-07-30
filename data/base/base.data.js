@@ -42,11 +42,15 @@ class BaseData {
     }
 
     add(model) {
-        return this.collection
-            .insert(model)
-            .then((status) => {
-                return this.modelClass.toViewModel(model);
-            });
+        if (model !== null) {
+            return this.collection
+                .insert(model)
+                .then((status) => {
+                    return this.modelClass.toViewModel(model);
+                });
+        }
+
+        return Promise.resolve(null);
     }
 
     delete(filter) {

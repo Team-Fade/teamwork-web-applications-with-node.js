@@ -21,6 +21,7 @@ function validateUsername(value, minCharacters, maxCharacters) {
             ' ' + minCharacters + ' and ' + maxCharacters + ' symbols.',
         };
     }
+
     return {
         isValid: true,
     };
@@ -42,7 +43,10 @@ function validateUserPassword(value, minCharacters, maxCharacters) {
             ' ' + minCharacters + ' and ' + maxCharacters,
         };
     }
-    return true;
+
+    return {
+        isValid: true,
+    };
 }
 
 module.exports = {

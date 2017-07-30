@@ -67,7 +67,7 @@ describe('authentication controller', () => {
                 body: {
                     username: 'testUser',
                     password: 'testUser',
-                    email: 'testUser',
+                    email: 'test@abv.bg',
                     firstName: 'testUser',
                     lastName: 'testUser',
                     city: 'testUser',
@@ -95,16 +95,6 @@ describe('authentication controller', () => {
 
     describe('if valid user that does not exists is passed', () => {
         beforeEach(() => {
-            const user = {
-                username: 'testUser',
-                password: 'testUser',
-                email: 'testUser',
-                firstName: 'testUser',
-                lastName: 'testUser',
-                city: 'testUser',
-                profileImage: '',
-            };
-
             next = () => {
 
             };
@@ -124,7 +114,7 @@ describe('authentication controller', () => {
                 body: {
                     username: 'testUser',
                     password: 'testUser',
-                    email: 'testUser',
+                    email: 'test@abv.bg',
                     firstName: 'testUser',
                     lastName: 'testUser',
                     city: 'testUser',
@@ -155,7 +145,7 @@ describe('authentication controller', () => {
             const user = {
                 username: 'testUser',
                 password: 'testUser',
-                email: 'testUser',
+                email: 'test@abv.bg',
                 firstName: 'testUser',
                 lastName: 'testUser',
                 city: 'testUser',
@@ -181,7 +171,7 @@ describe('authentication controller', () => {
                 body: {
                     username: 'testUser',
                     password: 'testUser',
-                    email: 'testUser',
+                    email: 'test@abv.bg',
                     firstName: 'testUser',
                     lastName: 'testUser',
                     city: 'testUser',
