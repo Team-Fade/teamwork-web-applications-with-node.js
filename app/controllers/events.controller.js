@@ -102,7 +102,8 @@ const init = (data) => {
                         return data.events.edit(
                             { _id: new ObjectId(eventId) },
                             {
-                                $push: { participants: res.locals.user.username },
+                                $push:
+                                    { participants: res.locals.user.username },
                                 $inc: { participantsCount: 1 },
                             },
                             {

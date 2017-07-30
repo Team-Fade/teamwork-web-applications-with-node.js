@@ -74,12 +74,14 @@ const init = (data) => {
                         return;
                     }
 
-                    const changeEmailPromise = new Promise((resolve, reject) => {
+                    const changeEmailPromise =
+                    new Promise((resolve, reject) => {
                         if (typeof req.body.email === 'undefined') {
                             return;
                         }
 
-                        if (registerValidator.validateEmail(req.body.email).isValid) {
+                        if (registerValidator
+                                    .validateEmail(req.body.email).isValid) {
                             req.session.passport.user.email = req.body.email;
 
                             data.users.edit(

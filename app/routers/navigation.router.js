@@ -15,7 +15,6 @@ const attach = (app, router, data) => {
         (res, req) => navigationController.getLoginPage(res, req))
         .get('/register',
         (res, req) => navigationController.getRegisterPage(res, req));
-
     app.use(router);
 };
 

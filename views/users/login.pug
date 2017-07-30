@@ -2,7 +2,7 @@ extend ../common/_master
 include ../utils/notifications
 
 block main
-    link(rel='stylesheet', href='../../public/css/users/signin.css', type='text/css' )
+    link(rel='stylesheet', href='../../public/css/users/login.css', type='text/css' )
     +notifications()
     div(class="row" id="login-form" )
         form(class="col s12" action='/login' method='POST')
@@ -17,7 +17,7 @@ block main
                     label(for="password")
                         |Password
             div(class="row buttons")            
-                button(type='submit' class='btn deep-orange' id='sign-in-btn')
+                button(type='submit' class='btn deep-orange' id='login-btn')
                     |Login
                 button(class='btn deep-orange' type="button" onclick="window.location.href='/register'" id='register-btn')
                     |Register

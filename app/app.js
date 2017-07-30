@@ -9,6 +9,7 @@ const init = (data) => {
 
     require('./routers')
         .attachRoutes(app, data);
+
     return Promise.resolve(app);
 };
 
