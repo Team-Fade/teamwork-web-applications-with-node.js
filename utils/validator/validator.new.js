@@ -68,7 +68,10 @@ const VALIDATOR = {
         return error;
     },
     validateEvent: (event) => {
-        const error = {};
+        const error = {
+            isValid: true,
+            message: '',
+        };
         const validateEventName = validateEvent
             .validateEventName(event.eventName, 5, 10);
         const validateEventLocation = validateEvent
@@ -80,21 +83,25 @@ const VALIDATOR = {
 
         if (!validateEventName.isValid) {
             error.message = validateEventName.message;
+            error.isValid = false;
             return error;
         }
 
         if (!validateEventLocation.isValid) {
             error.message = validateEventLocation.message;
+            error.isValid = false;
             return error;
         }
 
         if (!validateEventDescription.isValid) {
             error.message = validateEventDescription.message;
+            error.isValid = false;
             return error;
         }
 
         if (!validateEventType.isValid) {
             error.message = validateEventType.message;
+            error.isValid = false;
             return error;
         }
 
@@ -174,13 +181,13 @@ const VALIDATOR = {
         };
 
         const validateEventName = validateEvent
-            .validateEventName(event.eventName, 5, 15);
+            .validateEventName(model.eventName, 5, 15);
         const validateEventLocation = validateEvent
-            .validateEventLocation(event.eventLocation, 5, 15);
+            .validateEventLocation(model.eventLocation, 5, 15);
         const validateEventDescription = validateEvent
-            .validateEventDescription(event.eventDescription, 5, 15);
+            .validateEventDescription(model.eventDescription, 5, 15);
         const validateEventType = validateEvent
-            .validateEventType(event.eventType, 5, 15);
+            .validateEventType(model.eventType, 5, 15);
 
         if (typeof model === 'undefined') {
             error.message = 'Passed model is undefined';

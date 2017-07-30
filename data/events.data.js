@@ -1,9 +1,20 @@
 const BaseData = require('./base/base.data');
 const Event = require('../models/event.model');
+const VALIDATOR = require('../utils/validator/validator.new');
 
 class EventsData extends BaseData {
     constructor(db) {
         super(db, Event);
+    }
+
+    add(event) {
+        if (VALIDATOR.validateEvent(event).isValid) {
+            if (Event.isValid(event)) {
+                return super.add(event);
+            }
+        }
+
+        return super.add(null);
     }
 
     getUserJoinedEvents(username) {

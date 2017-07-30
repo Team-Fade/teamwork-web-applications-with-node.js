@@ -3,62 +3,65 @@ const sinon = require('sinon');
 
 const EventsData = require('../../../../data/events.data');
 
-describe('Events.data.groupEvents()', () => {
-    let Event = null;
-    let data = null;
-    let aggregate;
-    let toArray;
+describe('Data tests: ', () => {
+    describe('EventsData.groupEvents(): ', () => {
+        let Event = null;
+        let data = null;
+        let aggregate;
+        let toArray;
 
-    const db = {
-        collection: () => { },
-    };
+        const db = {
+            collection: () => { },
+        };
 
-    let events;
+        let events;
 
-    Event = class {
-    };
+        Event = class {
+        };
 
-    describe('when filter is passed as argument', () => {
-        beforeEach(() => {
-            events = [{ eventName: 1 }, { eventName: 2 }];
+        describe('when filter is passed as argument', () => {
+            before(() => {
+                events = [{ eventName: 1 }, { eventName: 2 }];
 
-            toArray = () => {
-                return Promise.resolve(events);
-            };
-
-            aggregate = () => {
-                return {
-                    toArray,
+                toArray = () => {
+                    return Promise.resolve(events);
                 };
-            };
 
-            sinon
-                .stub(db, 'collection')
-                .callsFake(() => {
-                    return { aggregate };
-                });
+                aggregate = () => {
+                    return {
+                        toArray,
+                    };
+                };
 
-            Event.toViewModel = (model) => {
-                return model;
-            };
+                sinon
+                    .stub(db, 'collection')
+                    .callsFake(() => {
+                        return { aggregate };
+                    });
 
-            Event.isValid = (model) => {
-                return true;
-            };
+                Event.toViewModel = (model) => {
+                    return model;
+                };
 
-            data = new EventsData(db, Event);
-        });
+                Event.isValid = (model) => {
+                    return true;
+                };
 
-        afterEach(() => {
-            db.collection.restore();
-        });
+                data = new EventsData(db, Event);
+            });
 
-        it('expect to return the proper collection to array', () => {
-            return data
-                .groupEvents()
-                .then((result) => {
-                    expect(result).to.deep.include({ eventName: 1 });
-                });
+            after(() => {
+                db.collection.restore();
+            });
+
+            it('expect to return the proper collection to array', () => {
+                return data
+                    .groupEvents()
+                    .then((result) => {
+                        expect(result).to.deep.include({ eventName: 1 });
+                    });
+            });
         });
     });
 });
+

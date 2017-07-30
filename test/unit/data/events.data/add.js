@@ -1,11 +1,11 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const UsersData = require('../../../../data/users.data');
+const EventsData = require('../../../../data/events.data');
 
 describe('Data tests: ', () => {
-    describe('UsersData.add(): ', () => {
-        let User = null;
+    describe('EventsData.add(): ', () => {
+        let Event = null;
         let data = null;
         let insert;
 
@@ -13,24 +13,22 @@ describe('Data tests: ', () => {
             collection: () => { },
         };
 
-        let user;
+        let event;
 
-        User = class {
+        Event = class {
         };
 
         describe('when valid model is passed as argument', () => {
             before(() => {
-                user = {
-                    username: 'testModel',
-                    email: 'test@abv.bg',
-                    city: 'testCity',
-                    firstName: 'testFirstname',
-                    lastName: 'testLastname',
-                    password: 'testPassword',
+                event = {
+                    eventName: 'testEvent',
+                    eventLocation: 'testEvent',
+                    eventDescription: 'testEvent',
+                    eventType: 'testEvent',
                 };
 
                 insert = () => {
-                    return Promise.resolve(user);
+                    return Promise.resolve(event);
                 };
 
                 sinon
@@ -39,15 +37,15 @@ describe('Data tests: ', () => {
                         return { insert };
                     });
 
-                User.toViewModel = (model) => {
+                Event.toViewModel = (model) => {
                     return model;
                 };
 
-                User.isValid = (model) => {
+                Event.isValid = (model) => {
                     return true;
                 };
 
-                data = new UsersData(db, User);
+                data = new EventsData(db, Event);
             });
 
             after(() => {
@@ -56,26 +54,24 @@ describe('Data tests: ', () => {
 
             it('expect to return the item in viewModel', () => {
                 return data
-                    .add(user)
+                    .add(event)
                     .then((model) => {
-                        expect(model).to.deep.equal(user);
+                        expect(model).to.deep.equal(event);
                     });
             });
         });
 
         describe('when invalid model is passed as argument', () => {
             before(() => {
-                user = {
-                    username: 'testModel',
-                    email: 'test',
-                    city: 'testCity',
-                    firstName: 'testFirstname',
-                    lastName: 'testLastname',
-                    password: 'testPassword',
+                event = {
+                    eventName: 'testEvent'.repeat(5),
+                    eventLocation: 'testEvent',
+                    eventDescription: 'testEvent',
+                    eventType: 'testEvent',
                 };
 
                 insert = () => {
-                    return Promise.resolve(user);
+                    return Promise.resolve(event);
                 };
 
                 sinon
@@ -84,15 +80,15 @@ describe('Data tests: ', () => {
                         return { insert };
                     });
 
-                User.toViewModel = (model) => {
+                Event.toViewModel = (model) => {
                     return model;
                 };
 
-                User.isValid = (model) => {
+                Event.isValid = (model) => {
                     return true;
                 };
 
-                data = new UsersData(db, User);
+                data = new EventsData(db, Event);
             });
 
             after(() => {
@@ -101,7 +97,7 @@ describe('Data tests: ', () => {
 
             it('expect to return null', () => {
                 return data
-                    .add(user)
+                    .add(event)
                     .then((model) => {
                         expect(model).to.deep.equal(null);
                     });

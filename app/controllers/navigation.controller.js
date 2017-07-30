@@ -1,5 +1,5 @@
-const navigationController = ({ events }) => {
-    return {
+const init = ({ events }) => {
+    const navigationController = {
         getHomePage(req, res) {
             let user = null;
             if (req.session.passport) {
@@ -39,6 +39,8 @@ const navigationController = ({ events }) => {
             return res.render('users/register');
         },
     };
+
+    return navigationController;
 };
 
-module.exports = navigationController;
+module.exports = { init };

@@ -3,50 +3,52 @@ const sinon = require('sinon');
 
 const BaseData = require('../../../../data/base/base.data');
 
-describe('BaseData.delete()', () => {
-    let ModelClass = null;
-    let data = null;
-    let deleteOne;
-    const validator = null;
+describe('Data tests: ', () => {
+    describe('BaseData.delete(): ', () => {
+        let ModelClass = null;
+        let data = null;
+        let deleteOne;
+        const validator = null;
 
-    const db = {
-        collection: () => { },
-    };
+        const db = {
+            collection: () => { },
+        };
 
-    const item = { testModel: 'testModel' };
+        const item = { testModel: 'testModel' };
 
-    ModelClass = class {
-    };
+        ModelClass = class {
+        };
 
-    describe('when filter is passed as argument', () => {
-        beforeEach(() => {
-            deleteOne = () => {
-                return Promise.resolve(item);
-            };
+        describe('when filter is passed as argument', () => {
+            before(() => {
+                deleteOne = () => {
+                    return Promise.resolve(item);
+                };
 
-            sinon
-                .stub(db, 'collection')
-                .callsFake(() => {
-                    return { deleteOne };
-                });
+                sinon
+                    .stub(db, 'collection')
+                    .callsFake(() => {
+                        return { deleteOne };
+                    });
 
-            ModelClass.toViewModel = (model) => {
-                return model;
-            };
+                ModelClass.toViewModel = (model) => {
+                    return model;
+                };
 
-            data = new BaseData(db, ModelClass, validator);
-        });
+                data = new BaseData(db, ModelClass, validator);
+            });
 
-        afterEach(() => {
-            db.collection.restore();
-        });
+            after(() => {
+                db.collection.restore();
+            });
 
-        it('expect result to contain the passed item', () => {
-            return data
-                .delete({ testModel: 'testModel' })
-                .then((result) => {
-                    expect(result).to.deep.include(item);
-                });
+            it('expect result to contain the passed item', () => {
+                return data
+                    .delete({ testModel: 'testModel' })
+                    .then((result) => {
+                        expect(result).to.deep.include(item);
+                    });
+            });
         });
     });
 });

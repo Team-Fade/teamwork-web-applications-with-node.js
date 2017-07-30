@@ -1,6 +1,6 @@
 const attach = (app, router, data) => {
     const navigationController =
-        require('../controllers/navigation.controller')(data);
+        require('../controllers/navigation.controller').init(data);
 
     router
         .get('/',
