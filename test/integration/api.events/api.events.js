@@ -2,7 +2,7 @@ const { init } = require('../../../app');
 const request = require('supertest');
 const { expect } = require('chai');
 
-describe('/chat tests,', () => {
+describe('Api routes tests,', () => {
     const connectionString = 'mongodb://localhost/nodejs-teamwork-test';
     let app = null;
     beforeEach(() => {
@@ -14,10 +14,26 @@ describe('/chat tests,', () => {
                 app = _app;
             });
     });
-    describe('GET /chat', () => {
+
+    describe('GET /api/events', () => {
         it('expect to return 200', (done) => {
             request(app)
-                .get('/chat')
+                .get('/api/events')
+                .expect(200)
+                .end((err) => {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    return done();
+                });
+        });
+    });
+
+    describe('GET /api/filter-events', () => {
+        it('expect to return 200', (done) => {
+            request(app)
+                .get('/api/filter-events')
                 .expect(200)
                 .end((err) => {
                     if (err) {

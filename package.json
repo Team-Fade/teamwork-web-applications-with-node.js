@@ -48,7 +48,7 @@
     "eslint": "^4.3.0",
     "eslint-config-google": "^0.8.1",
     "gulp-istanbul": "^1.1.2",
-    "gulp-mocha": "3",
+    "gulp-mocha": "^3.0.1",
     "istanbul": "^0.4.5",
     "json-schema-traverse": "^0.3.1",
     "mocha": "^3.4.2",
