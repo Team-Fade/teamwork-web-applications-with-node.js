@@ -13,6 +13,10 @@ describe('Home route', () => {
         return driver.get(appUrl);
     });
 
+    afterEach(() => {
+        driver.quit();
+    });
+
     it('expect body to button with text "Login"', (done) => {
         driver.findElement(
             webdriver.By.css('#login-btn'))
@@ -21,6 +25,21 @@ describe('Home route', () => {
             })
             .then((text) => {
                 expect(text).to.contain('LOGIN');
+                done();
+            });
+    });
+
+    it('expect button with text "Login" to redirect to http://localhost:3002/login', (done) => {
+        driver.findElement(
+            webdriver.By.css('#login-btn'))
+            .then((el) => {
+                return el.click();
+            })
+            .then(() => {
+                return driver.getCurrentUrl();
+            })
+            .then((currentUrl) => {
+                expect(currentUrl).to.equal('http://localhost:3002/login');
                 done();
             });
     });
@@ -52,6 +71,26 @@ describe('Home route', () => {
                 })
                 .then((text) => {
                     expect(text).to.deep.equal('BROWSE MORE');
+                    done();
+                });
+        });
+
+    it('expect button with name "Browse more" to redirect to http://localhost:3002/events/browse',
+        (done) => {
+            driver.get(appUrl)
+                .then(() => {
+                    return driver.findElement(
+                        webdriver.By.css('#browse-events-btn')
+                    );
+                })
+                .then((el) => {
+                    return el.click();
+                })
+                .then(() => {
+                    return driver.getCurrentUrl();
+                })
+                .then((currentUrl) => {
+                    expect(currentUrl).to.equal('http://localhost:3002/events/browse');
                     done();
                 });
         });
