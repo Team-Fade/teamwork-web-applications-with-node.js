@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "start": "gulp server",
-    "dev": "./node_modules/.bin/nodemon server.js"
+    "dev": "./node_modules/.bin/nodemon server.js",
+    "test": "gulp tests:unit"
   },
   "repository": {
     "type": "git",

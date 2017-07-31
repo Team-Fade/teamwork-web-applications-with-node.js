@@ -2,11 +2,7 @@ language: node_js
 node_js:
   - "7"
 install:
-  - yarn
+  - npm install
 services:
   - mongodb
-before_script:
-  - npm install -g gulp-cli
-script: 
-  - gulp tests:unit
-cache: yarn
+ 
