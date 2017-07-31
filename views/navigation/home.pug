@@ -7,11 +7,53 @@ block main
     div(class="flow-text")
         p(class="center-align grey-text text-darken-4")
             | Check out our top rated events:
-    div(class="carousel" id="home-top-events")
-        each event, index in context
-            a(class="carousel-item" href="#{index}!")
-                img(src="data:image/png;base64," + event.eventImage.data)
-                | Participants : #{event.participantsCount}
+        div(class="carousel" id="home-top-events")
+            each event, index in context
+                div(class="carousel-item modal-trigger" data-target=event._id)
+                    img(src="data:image/png;base64," + event.eventImage.data)
+                    | Name : #{event.eventName}
+                    | Participants : #{event.participantsCount}
+    each event, index in context
+        div(id=event._id class="modal modal-fixed-footer")
+            div(class="modal-content row")
+                div(class="col s12")
+                        img(src="data:image/png;base64," + event.eventImage.data class="event-image")
+                div(class="col s6")
+                    h4(class="col s12")
+                        |#{event.eventName}
+                    p
+                        |Author: #{event.author}
+                    p
+                        |Type: #{event.eventType}
+                    p
+                        |Location: #{event.eventLocation}
+                    p
+                        |Date: #{event.eventDate}
+                    p
+                        |Time: #{event.eventTime}
+                    p
+                        |Description: #{event.eventDescription}
+            div(class="modal-footer")
+                div(class="progress")
+                    div(class="indeterminate")
+                if user
+                    div(class="btn-container hidden")
+                        button(id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
+                            |Participate
+                        button(id="leave-btn" class="modal-action modal-close waves-effect waves-green btn-flat leave-btn hidden")
+                            |Leave
+                        a(href=`/events/manage/${event._id}` id="manage-btn" class="modal-action modal-close waves-effect waves-green btn-flat manage-btn hidden")
+                            |Manage 
+                        a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
+                            |Bring me back
+                else
+                    div(class="btn-container hidden")
+                        a(href="/login")
+                            |You need to be logged in to participate 
+                        a(disabled id="participate-btn" class="modal-action modal-close waves-effect waves-green btn-flat participate-btn")
+                            |Participate
+                        a(href="#!" class="modal-action modal-close waves-effect waves-green btn-flat")
+                            |Bring me back
     div(class="row center-align" id="home-buttons") 
         a(class="btn deep-orange col s12 m4 l2" href="/events/browse" id="browse-events-btn")
             |Browse More
@@ -19,3 +61,7 @@ block main
             a(class="btn deep-orange col s12 m4 l2" href="/login" id="login-btn")
                 |Login
     script(src="../../public/js/carousel.js")
+    script(src="../../public/js/modal.js")
+    script(src="../../public/js/events/view.event.js")
+    script(src="../../public/js/events/join.event.js")
+    script(src="../../public/js/events/leave.event.js")
