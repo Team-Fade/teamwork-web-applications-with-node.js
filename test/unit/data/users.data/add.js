@@ -24,9 +24,9 @@ describe('Data tests: ', () => {
                     username: 'testModel',
                     email: 'test@abv.bg',
                     city: 'testCity',
-                    firstName: 'testFirstname',
-                    lastName: 'testLastname',
-                    password: 'testPassword',
+                    firstName: 'testName',
+                    lastName: 'testName',
+                    password: 'testPass',
                 };
 
                 insert = () => {

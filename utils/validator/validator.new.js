@@ -14,16 +14,16 @@ const VALIDATOR = {
         };
 
         const validateUsername = validateUser
-            .validateUsername(user.username, 5, 15);
+            .validateUsername(user.username, 5, 10);
         const validatePassword = validateUser
-            .validateUserPassword(user.password, 5, 15);
+            .validateUserPassword(user.password, 5, 10);
 
         const validateFirstname = validateRegister
             .validateFirstname(user.firstName, 5, 15);
         const validateLastname = validateRegister
             .validateLastname(user.lastName, 5, 15);
         const validateCity = validateRegister
-            .validateCity(user.city, 5, 15);
+            .validateCity(user.city, 3, 15);
         const validateEmail = validateRegister
             .validateEmail(user.email, 5, 15);
 
@@ -73,13 +73,13 @@ const VALIDATOR = {
             message: '',
         };
         const validateEventName = validateEvent
-            .validateEventName(event.eventName, 5, 10);
+            .validateEventName(event.eventName, 5, 15);
         const validateEventLocation = validateEvent
-            .validateEventLocation(event.eventLocation, 5, 10);
+            .validateEventLocation(event.eventLocation, 3, 15);
         const validateEventDescription = validateEvent
-            .validateEventDescription(event.eventDescription, 5, 10);
+            .validateEventDescription(event.eventDescription, 5, 20);
         const validateEventType = validateEvent
-            .validateEventType(event.eventType, 5, 10);
+            .validateEventType(event.eventType, 5, 15);
 
         if (!validateEventName.isValid) {
             error.message = validateEventName.message;
@@ -120,7 +120,7 @@ const VALIDATOR = {
         const validateLastname = validateRegister
             .validateLastname(model.lastName, 5, 15);
         const validateCity = validateRegister
-            .validateCity(model.city, 5, 10);
+            .validateCity(model.city, 3, 10);
         const validateEmail = validateRegister
             .validateEmail(model.email, 5, 15);
 
@@ -185,7 +185,7 @@ const VALIDATOR = {
         const validateEventLocation = validateEvent
             .validateEventLocation(model.eventLocation, 5, 15);
         const validateEventDescription = validateEvent
-            .validateEventDescription(model.eventDescription, 5, 15);
+            .validateEventDescription(model.eventDescription, 5, 20);
         const validateEventType = validateEvent
             .validateEventType(model.eventType, 5, 15);
 
