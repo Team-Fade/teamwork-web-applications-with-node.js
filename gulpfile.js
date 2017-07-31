@@ -35,8 +35,8 @@ gulp.task('tests:unit', ['pre-test'], () => {
 });
 
 const config = {
-    connectionString: 'mongodb://localhost/nodejs-teamwork-test',
-    port: 3002,
+    connectionString: 'mongodb://172.31.32.192:27017/nodejs-teamwork-test',
+    port: 3001,
 };
 
 gulp.task('test-server:start', () => {

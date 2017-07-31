@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "gulp server",
+    "start": "nodemon server",
     "dev": "./node_modules/.bin/nodemon server.js",
     "test": "gulp tests:unit"
   },
