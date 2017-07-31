@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "./node_modules/.bin/nodemon server.js",
-    "test": "gulp tests:unit"
+    "test": "gulp tests:unit",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
