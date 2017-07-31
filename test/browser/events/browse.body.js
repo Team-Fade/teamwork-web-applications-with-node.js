@@ -3,10 +3,10 @@ const { expect } = require('chai');
 const { setupDriver } = require('../utils/setup-driver');
 const webdriver = require('selenium-webdriver');
 
-describe('Home route', () => {
+describe('Browse events route', () => {
     let driver = null;
 
-    const appUrl = 'http://localhost:3002/home';
+    const appUrl = 'http://localhost:3002/events/browse';
 
     beforeEach(() => {
         driver = setupDriver('chrome');
@@ -17,32 +17,38 @@ describe('Home route', () => {
         driver.quit();
     });
 
-    it('expect header to have name element "#navbar"', (done) => {
+    it('expect body to have search input for the event name', (done) => {
         driver.findElement(
-            webdriver.By.css('#navbar'))
+            webdriver.By.css('#eventName'))
             .then((el) => {
                 expect(el).to.not.be.undefined;
                 done();
             });
     });
 
-    it('expect header to have name element "#nav - mobile"', (done) => {
+    it('expect body to have search input for the event location', (done) => {
         driver.findElement(
-            webdriver.By.css('#nav-mobile'))
+            webdriver.By.css('#eventLocation'))
             .then((el) => {
                 expect(el).to.not.be.undefined;
                 done();
             });
     });
 
-    it('expect header to have name "Fade"', (done) => {
+    it('expect body to have search input for the event type', (done) => {
         driver.findElement(
-            webdriver.By.className('brand-logo'))
+            webdriver.By.css('#eventType'))
             .then((el) => {
-                return el.getText();
-            })
-            .then((text) => {
-                expect(text).to.contain('Fade');
+                expect(el).to.not.be.undefined;
+                done();
+            });
+    });
+
+        it('expect body to have search input for the event date', (done) => {
+        driver.findElement(
+            webdriver.By.css('#eventDate'))
+            .then((el) => {
+                expect(el).to.not.be.undefined;
                 done();
             });
     });
