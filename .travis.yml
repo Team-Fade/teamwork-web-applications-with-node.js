@@ -7,5 +7,6 @@ services:
   - mongodb
 before_script:
   - npm install -g gulp-cli
-script: gulp
+script: 
+  - gulp tests:unit
 cache: yarn
