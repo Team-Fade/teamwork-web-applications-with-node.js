@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "7"
-install: travis_wait mvn install
+install:
   - npm install
 services:
   - mongodb

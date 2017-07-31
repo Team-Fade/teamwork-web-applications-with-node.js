@@ -1,3 +1,4 @@
+/* globals */
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 const istanbul = require('gulp-istanbul');
@@ -38,7 +39,9 @@ gulp.task('tests:unit', ['pre-test'], () => {
         './test/integration/**/*.js',
     ])
         .pipe(mocha())
-        .pipe(istanbul.writeReports());
+        .pipe(istanbul.writeReports()).once('end', function() {
+                process.exit();
+        });
 });
 
 const config = {
