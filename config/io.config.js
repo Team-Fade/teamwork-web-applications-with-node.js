@@ -1,5 +1,3 @@
-/* globals io */
-
 const ioConfig = function(io) {
     let numUsers = 0;
 

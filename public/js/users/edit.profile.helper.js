@@ -1,4 +1,4 @@
-/* globals $ Materialize*/
+/* globals $ */
 
 $(() => {
     $('.material-icons').click((ev) => {

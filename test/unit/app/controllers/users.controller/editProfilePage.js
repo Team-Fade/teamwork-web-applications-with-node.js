@@ -89,11 +89,14 @@ describe('users controller', () => {
             res.locals.user.username = 'testUser';
         });
 
-        it('expect editProfilePage() to redirect to /user/profile/edit and set in session the new email', () => {
+        it(`expect editProfilePage() 
+            to redirect to /user/profile/edit and 
+            set in session the new email`, () => {
             return controller.editProfilePage(req, res)
                 .then(() => {
                     expect(res.redirectUrl).to.be.equal('/user/profile/edit');
-                    expect(req.session.passport.user.email).to.be.equal('test@abv.bg');
+                    expect(req.session.passport.user.email)
+                        .to.be.equal('test@abv.bg');
                 });
         });
     });

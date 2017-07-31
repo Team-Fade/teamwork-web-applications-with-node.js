@@ -3,8 +3,6 @@ const { imageHelper } = require('../../utils');
 const { hashPasswordHelper } = require('../../utils');
 const registerValidator =
     require('../../utils/validator/helpers/validate.register');
-const userValidator =
-    require('../../utils/validator/helpers/validate.user');
 
 const init = (data) => {
     const usersController = {

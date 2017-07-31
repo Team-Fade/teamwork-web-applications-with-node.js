@@ -1,6 +1,6 @@
-const { init } = require('../../../app');
+// const { init } = require('../../../app');
 const request = require('supertest');
-const { expect } = require('chai');
+// const { expect } = require('chai');
 
 describe('Events routes tests,', () => {
     const connectionString = 'mongodb://localhost/nodejs-teamwork-test';

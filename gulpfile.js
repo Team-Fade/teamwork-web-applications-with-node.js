@@ -1,4 +1,4 @@
-/* globals */
+/* globals process */
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 const istanbul = require('gulp-istanbul');

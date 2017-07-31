@@ -33,7 +33,9 @@ describe('users controller', () => {
             res.locals.user.username = 'testUser';
         });
 
-        it('expect getMyEventsPage() to render users/my-events with the events', () => {
+        it(`expect getMyEventsPage() 
+            to render users/my-events 
+            with the events`, () => {
             return controller.getMyEventsPage(req, res)
                 .then((result) => {
                     expect(res.viewName).to.be
@@ -45,7 +47,9 @@ describe('users controller', () => {
         });
     });
 
-    describe('if user is logged in but there are no user available events', () => {
+    describe(`if user is logged in
+             but there are 
+             no user available events`, () => {
         beforeEach(() => {
             data = {
                 events: {
@@ -74,7 +78,8 @@ describe('users controller', () => {
             res.locals.user.username = 'testUser';
         });
 
-        it('expect getMyEventsPage() to render users/my-events with empty context', () => {
+        it(`expect getMyEventsPage() to render 
+            users/my-events with empty context`, () => {
             return controller.getMyEventsPage(req, res)
                 .then((result) => {
                     expect(res.viewName).to.be

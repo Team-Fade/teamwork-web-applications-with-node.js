@@ -108,7 +108,8 @@ $(function() {
 
   // Removes the visual chat typing message
   function removeChatTyping(data) {
-    getTypingMessages(data).fadeOut(function() {
+    getTypingMessages(data).fadeOut(function(ev) {
+      // eslint-disable-next-line no-invalid-this
       $(this).remove();
     });
   }
@@ -167,15 +168,17 @@ $(function() {
   // Gets the 'X is typing' messages of a user
   function getTypingMessages(data) {
     return $('.typing.message').filter(function(i) {
+      // eslint-disable-next-line no-invalid-this
       return $(this).data('username') === data.username;
     });
   }
 
   // Gets the color of a username through our hash function
-  function getUsernameColor(username) {
+  function getUsernameColor(usernameToGetColorFor) {
     let hash = 7;
-    for (let i = 0; i < username.length; i++) {
-       hash = username.charCodeAt(i) + (hash << 5) - hash;
+    for (let i = 0; i < usernameToGetColorFor.length; i++) {
+       hash = usernameToGetColorFor
+              .charCodeAt(i) + (hash << 5) - hash;
     }
 
     const index = Math.abs(hash % COLORS.length);
