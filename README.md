@@ -8,7 +8,7 @@
 ## Description
 Event application which provides the user a genuine opportunity to participate in different events, conferences, and public chats with random strangers from all over the world.
 
-#### Demo: [Click](http://ec2-52-28-104-78.eu-central-1.compute.amazonaws.com/chat)
+#### Demo: [Click](http://ec2-52-28-104-78.eu-central-1.compute.amazonaws.com/)
 
 #### Video: [Click]()
 
