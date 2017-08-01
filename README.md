@@ -10,7 +10,7 @@ Event application which provides the user a genuine opportunity to participate i
 
 #### Demo: [Click](http://ec2-52-28-104-78.eu-central-1.compute.amazonaws.com/)
 
-#### Video: [Click]()
+#### Video: [Click](https://youtu.be/vTpc00eL640)
 
 #### Team members:
 * [Samuil_Mihaylov](http://telerikacademy.com/Users/Samuil_Mihaylov)
