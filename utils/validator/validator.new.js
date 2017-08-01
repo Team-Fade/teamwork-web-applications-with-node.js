@@ -19,9 +19,9 @@ const VALIDATOR = {
             .validateUserPassword(user.password, 5, 10);
 
         const validateFirstname = validateRegister
-            .validateFirstname(user.firstName, 5, 15);
+            .validateFirstname(user.firstName, 3, 15);
         const validateLastname = validateRegister
-            .validateLastname(user.lastName, 5, 15);
+            .validateLastname(user.lastName, 3, 15);
         const validateCity = validateRegister
             .validateCity(user.city, 3, 15);
         const validateEmail = validateRegister
@@ -116,9 +116,9 @@ const VALIDATOR = {
         const validateUsername = validateUser
             .validateUsername(model.username, 5, 15);
         const validateFirstname = validateRegister
-            .validateFirstname(model.firstName, 5, 15);
+            .validateFirstname(model.firstName, 3, 15);
         const validateLastname = validateRegister
-            .validateLastname(model.lastName, 5, 15);
+            .validateLastname(model.lastName, 3, 15);
         const validateCity = validateRegister
             .validateCity(model.city, 3, 10);
         const validateEmail = validateRegister
@@ -183,7 +183,7 @@ const VALIDATOR = {
         const validateEventName = validateEvent
             .validateEventName(model.eventName, 5, 15);
         const validateEventLocation = validateEvent
-            .validateEventLocation(model.eventLocation, 5, 15);
+            .validateEventLocation(model.eventLocation, 3, 15);
         const validateEventDescription = validateEvent
             .validateEventDescription(model.eventDescription, 5, 20);
         const validateEventType = validateEvent
